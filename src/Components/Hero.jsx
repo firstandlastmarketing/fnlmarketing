@@ -83,7 +83,7 @@ useEffect(() => {
                 </span>
                 <img
                 src={slides[currentSlide]}
-                alt={`Slideshow ${currentSlide + 1}`}
+                alt={`First and Last Marketing hero image ${currentSlide + 1} showcasing expert web design, digital marketing, and online reputation management services`}
                 className='relative z-10 rounded-full shadow-2xl w-full max-xs md:max-w-sm object-cover transition-all duration-700 ease-in-out'
                 width='400'
                 height='400'

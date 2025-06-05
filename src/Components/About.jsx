@@ -35,7 +35,7 @@ const About = () => {
                                 src={aboutImage}
                                 className="w-full h-auto object-cover aspect-[4/5]"
                                 loading="lazy"
-                                alt="First and Last Marketing Team"
+                                alt="First and Last Marketing expert team delivering custom web design, reliable hosting, online reputation management, and lead generation strategies that optimize digital growth for small businesses"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" aria-hidden="true"></div>
                         </div>

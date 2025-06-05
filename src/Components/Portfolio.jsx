@@ -3,30 +3,31 @@ import ReactPlayer from "react-player";
 import { Dialog } from "@headlessui/react";
 import { X } from "lucide-react";
 
-import screenshot1 from "../assets/screenshot1.png";
-import screenshot2 from "../assets/screenshot2.png";
-import screenshot3 from "../assets/screenshot3.png";
+import ecClinicDesktop from "../assets/ec-clinic-desktop-website.png";
+import ecClinicMobile from "../assets/ec-clinic-mobile-website.png";
+import fnlHero from "../assets/fnlmarketing-hero-section.png";
 
 const portfolioImages = [
   {
-    src: screenshot1,
-    alt: "E&C Clinic - Desktop View",
+    src: ecClinicDesktop,
+    alt: "E&C Clinic web design by First and Last Marketing - professional desktop layout optimized for patient engagement",
     title: "E&C Clinic - Desktop View",
     description: "Clean, professional layout optimized for desktop viewing.",
   },
   {
-    src: screenshot3,
-    alt: "E&C Clinic - Mobile View",
+    src: ecClinicMobile,
+    alt: "E&C Clinic mobile-optimized website - responsive healthcare web design by First and Last Marketing",
     title: "E&C Clinic - Mobile View",
     description: "Responsive design delivering optimal user experience on mobile devices.",
   },
   {
-    src: screenshot2,
-    alt: "First & Last Marketing - Hero Section",
+    src: fnlHero,
+    alt: "First and Last Marketing website hero section - bold branding and strategic web design example",
     title: "First & Last Marketing - Hero Section",
     description: "Bold, strategic design showcasing our branding power.",
   },
 ];
+
 
 const Portfolio = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -132,7 +133,11 @@ const Portfolio = () => {
             {selectedImg && (
               <img
                 src={selectedImg}
-                alt="Portfolio preview"
+                alt={
+                  portfolioImages.find((img) => img.src === selectedImg)
+                    ? `${portfolioImages.find((img) => img.src === selectedImg).title} - ${portfolioImages.find((img) => img.src === selectedImg).description} | First and Last Marketing web design, digital branding, and SEO portfolio`
+                    : "First and Last Marketing portfolio image"
+                }
                 className="w-full h-auto rounded-md"
               />
             )}

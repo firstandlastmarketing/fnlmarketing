@@ -21,7 +21,7 @@ const Header = () => {
         <a href="#home" className="flex items-center gap-2 min-w-0 whitespace-nowrap">
           <img
             src={logo}
-            alt="Logo"
+            alt="First and Last Marketing company logo - expert digital marketing, web design, and lead generation services"
             className="w-10 h-10 sm:w-11 sm:h-11 object-contain flex-shrink-0"
           />
           <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-yellow-400 truncate">
