@@ -116,13 +116,26 @@ const Services = () => {
             <Dialog.Panel className='bg-white max-w-2xl w-full p-8 rounded-xl shadow-xl relative'>
               <button
                 onClick={() => setSelectedService(null)}
-                className='absolute top-4 right-4 text-gray-500 hover:text-red-500'>
+                className='absolute top-4 right-4 text-gray-500 hover:text-red-500'
+                aria-label='Close modal'
+              >
                 <XMarkIcon className='h-6 w-6' />
               </button>
               <Dialog.Title className='text-2xl font-bold text-yellow-600 mb-4'>
-                {selectedService?.title}
+                {selectedService?.title || 'Service Details'}
               </Dialog.Title>
-              <div className='text-gray-700 space-y-4'>{selectedService?.content}</div>
+
+              {/* Render ALL service contents, but only show the selected one */}
+              {services.map((service) => (
+                <div
+                  key={service.id}
+                  className={service.id === selectedService?.id ? 'block text-gray-700 space-y-4' : 'hidden'}
+                  aria-hidden={service.id !== selectedService?.id}
+                >
+                  {service.content}
+                </div>
+              ))}
+
               <div className='mt-6'>
                 <button
                   onClick={() => {
@@ -130,12 +143,12 @@ const Services = () => {
                     setTimeout(() => {
                       const contactSection = document.querySelector('#contact');
                       contactSection?.scrollIntoView({ behavior: 'smooth' });
-                    }, 100); // Delay lets modal close first
+                    }, 100);
                   }}
-                  className='inline-block bg-yellow-600 hover:bg-yellow-700 text-white px-6 py-3 rounded-full transition'>
+                  className='inline-block bg-yellow-600 hover:bg-yellow-700 text-white px-6 py-3 rounded-full transition'
+                >
                   Get Started
                 </button>
-
               </div>
             </Dialog.Panel>
           </div>
@@ -147,7 +160,8 @@ const Services = () => {
           </h3>
           <a
             href="#contact"
-            className='bg-yellow-600 hover:bg-yellow-700 text-white px-8 py-3 rounded-full inline-block transition'>
+            className='bg-yellow-600 hover:bg-yellow-700 text-white px-8 py-3 rounded-full inline-block transition'
+          >
             Get Your Free Consultation
           </a>
         </footer>
