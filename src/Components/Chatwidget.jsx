@@ -56,7 +56,6 @@ const ChatWidget = () => {
 
   const stopDrag = () => setDragging(false);
 
-  // Mouse events
   const onMouseDown = (e) => {
     if (!widgetRef.current || ["INPUT", "TEXTAREA", "BUTTON"].includes(e.target.tagName)) return;
     startDrag(e.clientX, e.clientY);
@@ -66,7 +65,6 @@ const ChatWidget = () => {
   const onMouseMove = (e) => doDrag(e.clientX, e.clientY);
   const onMouseUp = stopDrag;
 
-  // Touch events
   const onTouchStart = (e) => {
     if (!widgetRef.current || e.touches.length !== 1) return;
     const touch = e.touches[0];
@@ -107,7 +105,17 @@ const ChatWidget = () => {
       if (next) {
         const widgetWidth = defaultSize.width;
         const widgetHeight = defaultSize.height;
-        const clamped = getClampedPosition(position.x, position.y, widgetWidth, widgetHeight);
+        const spaceBelow = window.innerHeight - position.y;
+        const spaceAbove = position.y;
+
+        let newY = position.y;
+
+        // Expand upward if not enough space below
+        if (spaceBelow < widgetHeight && spaceAbove > widgetHeight) {
+          newY = position.y - widgetHeight + 64;
+        }
+
+        const clamped = getClampedPosition(position.x, newY, widgetWidth, widgetHeight);
         setPosition(clamped);
       } else {
         updateDefaultPosition();
@@ -158,7 +166,7 @@ const ChatWidget = () => {
         background: 'linear-gradient(135deg, #FFD700, #4B0082, #1E90FF)',
         color: '#fff',
         overflow: 'hidden',
-        transition: 'width 0.3s ease, height 0.3s ease',
+        transition: 'width 0.3s ease, height 0.3s ease, top 0.3s ease',
         touchAction: 'none',
       }}
     >
@@ -173,10 +181,9 @@ const ChatWidget = () => {
               alignItems: 'center',
               borderTopLeftRadius: 16,
               borderTopRightRadius: 16,
-              touchAction: 'none',
             }}
           >
-            <h4 style={{ fontWeight: '700', fontSize: 18, margin: 0 }}>Chat with us</h4>
+            <h4 style={{ fontWeight: '700', fontSize: 18, margin: 0 }}>Chat with our team</h4>
             <button
               onClick={toggleOpen}
               style={{ background: 'transparent', border: 'none', color: '#fff', fontSize: 24, cursor: 'pointer' }}

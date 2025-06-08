@@ -1,25 +1,26 @@
-import AOS from "aos";
-import "aos/dist/aos.css";
+import React, { useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
-AOS.init({
-  once: true, // whether animation should happen only once
-  duration: 1000, // default animation duration
-});
-
-
-import React from 'react'
-import Header from './Components/Header.jsx'
-import Hero from './Components/Hero.jsx'
-import Services from './Components/Services.jsx'
-import About from './Components/About.jsx'
-import Contact from './Components/Contact.jsx'
-import Footer from './Components/Footer.jsx'
-import Portfolio from './Components/Portfolio.jsx'
-import ChatWidget from "./Components/Chatwidget.jsx";
+import Header from './Components/Header.jsx';
+import Hero from './Components/Hero.jsx';
+import Services from './Components/Services.jsx';
+import Portfolio from './Components/Portfolio.jsx';
+import About from './Components/About.jsx';
+import Contact from './Components/Contact.jsx';
+import Footer from './Components/Footer.jsx';
+import ChatWidget from './Components/Chatwidget.jsx';
 
 const App = () => {
+  useEffect(() => {
+    AOS.init({
+      once: true,
+      duration: 1000,
+    });
+  }, []);
+
   return (
-    <div>
+    <main lang="en">
       <Header />
       <Hero />
       <Services />
@@ -28,8 +29,8 @@ const App = () => {
       <Contact />
       <Footer />
       <ChatWidget />
-    </div>
-  )
-}
+    </main>
+  );
+};
 
-export default App
+export default App;

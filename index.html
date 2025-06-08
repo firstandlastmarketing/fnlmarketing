@@ -2,16 +2,21 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" href="/favicon.png" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>First and Last Marketing | Missouri Web Design & SEO Experts</title>
+
+    <!-- Canonical & Favicon -->
     <link rel="canonical" href="https://firstandlastmarketing.com/" />
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <!-- PWA Manifest -->
+<link rel="manifest" href="/manifest.webmanifest" />
 
-    <meta name="google-site-verification" content="rJSaE4YlyUCuJ_eDXLI9xCuGaF4eY1MjcZIEf5ekgAU" />
 
-    <!-- Primary Meta Tags -->
-    <title>First and Last Marketing | Missouri Digital Marketing Agency for Web Design, Hosting, and Reputation Management</title>
-    <meta name="title" content="First and Last Marketing | Convert Clicks into Clients" />
-    <meta name="description" content="First and Last Marketing helps Missouri businesses grow online with expert web design, fast and secure hosting, and online reputation management. Convert website visitors into loyal clients with our proven digital marketing strategies." />
-    <meta name="keywords" content="First and Last Marketing, web design, SEO, marketing agency, website hosting, lead generation, online reputation, small business websites, digital branding, Missouri marketing" />
+    <!-- SEO Meta -->
+    <meta name="description" content="Grow your Missouri business with expert web design, fast hosting, and reputation management. Trusted digital marketing to turn clicks into clients." />
+    <meta name="keywords" content="First and Last Marketing, Missouri web design, SEO, digital marketing agency, website hosting, online reputation, small business marketing" />
     <meta name="author" content="First and Last Marketing" />
     <meta name="robots" content="index, follow" />
 
@@ -22,15 +27,14 @@
     <meta property="og:description" content="We design lead-generating websites, host them securely, and manage your brand’s online reputation." />
     <meta property="og:image" content="https://firstandlastmarketing.com/og-preview.jpg" />
 
-    <!-- Twitter Meta -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://firstandlastmarketing.com/" />
-    <meta property="twitter:title" content="First and Last Marketing | Convert Clicks into Clients" />
-    <meta property="twitter:description" content="We design lead-generating websites, host them securely, and manage your brand’s online reputation." />
-    <meta property="twitter:image" content="https://firstandlastmarketing.com/og-preview.jpg" />
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://firstandlastmarketing.com/" />
+    <meta name="twitter:title" content="First and Last Marketing | Convert Clicks into Clients" />
+    <meta name="twitter:description" content="We design lead-generating websites, host them securely, and manage your brand’s online reputation." />
+    <meta name="twitter:image" content="https://firstandlastmarketing.com/og-preview.jpg" />
 
-    <!-- Viewport -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Schema.org JSON-LD -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -58,20 +62,26 @@
     }
     </script>
 
-    <!-- Google tag (gtag.js) -->
+    <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-J9FY6BCYT4"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
+      function gtag(){ dataLayer.push(arguments); }
       gtag('js', new Date());
-
       gtag('config', 'G-J9FY6BCYT4');
     </script>
-  </head>
-  <body>
+
+    <!-- Accessibility Hidden H1 for SEO -->
     <h1 style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">
-    First and Last Marketing - Missouri Digital Marketing Agency for Web Design, SEO, Hosting, Lead Generation, and Reputation Management
-  </h1>
+      First and Last Marketing - Missouri Digital Marketing Experts for Web Design, SEO, Hosting, Lead Generation, and Reputation Management
+    </h1>
+  </head>
+
+  <body>
+    <noscript>
+      <strong>This site works best with JavaScript enabled. Please enable JavaScript in your browser.</strong>
+    </noscript>
+
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

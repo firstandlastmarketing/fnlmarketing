@@ -10,24 +10,26 @@ import fnlHero from "../assets/fnlmarketing-hero-section.png";
 const portfolioImages = [
   {
     src: ecClinicDesktop,
-    alt: "E&C Clinic web design by First and Last Marketing - professional desktop layout optimized for patient engagement",
+    alt: "E&C Clinic website design - desktop version by First and Last Marketing, a Springfield Missouri web design agency",
     title: "E&C Clinic - Desktop View",
-    description: "Clean, professional layout optimized for desktop viewing.",
+    description:
+      "A clean, modern desktop layout designed for seamless navigation and patient trust.",
   },
   {
     src: ecClinicMobile,
-    alt: "E&C Clinic mobile-optimized website - responsive healthcare web design by First and Last Marketing",
+    alt: "Mobile responsive healthcare website design for E&C Clinic by First and Last Marketing",
     title: "E&C Clinic - Mobile View",
-    description: "Responsive design delivering optimal user experience on mobile devices.",
+    description:
+      "Fully responsive mobile layout ensuring accessibility and optimal user experience.",
   },
   {
     src: fnlHero,
-    alt: "First and Last Marketing website hero section - bold branding and strategic web design example",
+    alt: "Hero section of First and Last Marketing website showcasing strategic branding and layout",
     title: "First & Last Marketing - Hero Section",
-    description: "Bold, strategic design showcasing our branding power.",
+    description:
+      "Bold branding and UI/UX elements aligned with modern web design standards.",
   },
 ];
-
 
 const Portfolio = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -49,50 +51,64 @@ const Portfolio = () => {
       className="bg-gradient-to-r from-purple-950 via-blue-900 to-yellow-800 text-white py-20 px-6 lg:px-10 overflow-hidden"
     >
       <div className="max-w-7xl mx-auto">
-        {/* Heading */}
-        <div className="text-center mb-16" data-aos="fade-up">
-          <h2 className="text-5xl font-extrabold text-yellow-400 mb-4 drop-shadow-lg">
-            Portfolio
-          </h2>
+        <header className="text-center mb-16" data-aos="fade-up">
+          <h1 className="text-5xl font-extrabold text-yellow-400 mb-4 drop-shadow-lg">
+            Web Design Portfolio
+          </h1>
           <p className="text-gray-100 text-lg max-w-2xl mx-auto">
-            Explore our latest digital craftsmanship in web design and brand storytelling.
+            Discover our latest Springfield Missouri web design projects, crafted for small businesses and SEO success.
           </p>
-        </div>
+        </header>
 
-        {/* Featured Project */}
-        <div className="mb-20" data-aos="fade-up" data-aos-delay="100">
-          <h3 className="text-3xl font-semibold text-yellow-300 mb-6 text-center">
+        <section
+          className="mb-20"
+          data-aos="fade-up"
+          data-aos-delay="100"
+          aria-labelledby="latest-project"
+        >
+          <h2
+            id="latest-project"
+            className="text-3xl font-semibold text-yellow-300 mb-6 text-center"
+          >
             Our Latest Project
-          </h3>
-          <div className="aspect-video max-w-4xl mx-auto rounded-xl overflow-hidden shadow-2xl border-4 border-purple-700">
+          </h2>
+          <figure className="aspect-video max-w-4xl mx-auto rounded-xl overflow-hidden shadow-2xl border-4 border-purple-700">
             <ReactPlayer
               url="https://youtu.be/jKC4e1612eM"
               width="100%"
               height="100%"
               controls
+              title="E&C Clinic Web Design Video Showcase"
             />
-          </div>
-          <div className="bg-purple-950/80 mt-8 p-6 lg:p-8 rounded-lg shadow-xl max-w-4xl mx-auto">
-            <h4 className="text-2xl font-bold text-yellow-400 mb-3">
+          </figure>
+          <figcaption className="bg-purple-950/80 mt-8 p-6 lg:p-8 rounded-lg shadow-xl max-w-4xl mx-auto">
+            <h3 className="text-2xl font-bold text-yellow-400 mb-3">
               E&C Clinic Website Redesign
-            </h4>
+            </h3>
             <p className="text-gray-300 mb-2">
-              A sleek, modern, and responsive website tailored to elevate E&C Clinic's online presence, engage patients, and build trust.
+              We helped a local Missouri healthcare provider modernize its digital presence with a sleek, SEO-friendly, mobile-optimized website.
             </p>
             <p className="text-sm text-gray-400 italic">
               Industry: Healthcare / Medical
             </p>
-          </div>
-        </div>
+          </figcaption>
+        </section>
 
-        {/* Image Gallery */}
-        <div className="mb-12" data-aos="fade-up" data-aos-delay="200">
-          <h3 className="text-3xl font-semibold text-white mb-8 text-center">
+        <section
+          className="mb-12"
+          data-aos="fade-up"
+          data-aos-delay="200"
+          aria-labelledby="more-work"
+        >
+          <h2
+            id="more-work"
+            className="text-3xl font-semibold text-white mb-8 text-center"
+          >
             More From Our Work
-          </h3>
+          </h2>
           <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
             {portfolioImages.map((item, index) => (
-              <div
+              <figure
                 key={index}
                 className="group relative bg-purple-800/80 rounded-xl overflow-hidden shadow-lg cursor-pointer hover:scale-[1.02] transition-transform duration-300"
                 onClick={() => openModal(item.src)}
@@ -102,21 +118,20 @@ const Portfolio = () => {
                   alt={item.alt}
                   className="w-full h-56 object-cover transition-opacity duration-300"
                 />
-                <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
-                  <span className="text-yellow-400 font-bold text-sm">
-                    Click to Enlarge
-                  </span>
-                </div>
+                <figcaption className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center text-yellow-400 font-bold text-sm">
+                  Click to Enlarge
+                </figcaption>
                 <div className="p-4">
-                  <h4 className="text-lg font-bold text-yellow-300 mb-1">{item.title}</h4>
+                  <h3 className="text-lg font-bold text-yellow-300 mb-1">
+                    {item.title}
+                  </h3>
                   <p className="text-gray-200 text-sm">{item.description}</p>
                 </div>
-              </div>
+              </figure>
             ))}
           </div>
-        </div>
+        </section>
 
-        {/* Modal Lightbox */}
         <Dialog
           open={isOpen}
           onClose={closeModal}
@@ -135,8 +150,8 @@ const Portfolio = () => {
                 src={selectedImg}
                 alt={
                   portfolioImages.find((img) => img.src === selectedImg)
-                    ? `${portfolioImages.find((img) => img.src === selectedImg).title} - ${portfolioImages.find((img) => img.src === selectedImg).description} | First and Last Marketing web design, digital branding, and SEO portfolio`
-                    : "First and Last Marketing portfolio image"
+                    ? `${portfolioImages.find((img) => img.src === selectedImg).title} – ${portfolioImages.find((img) => img.src === selectedImg).description}`
+                    : "Website project preview by First and Last Marketing"
                 }
                 className="w-full h-auto rounded-md"
               />

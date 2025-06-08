@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import logo from '../assets/logo.png'; // Update path as needed
+import logo from '../assets/logo.png';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   const navlinks = [
@@ -15,22 +14,24 @@ const Header = () => {
   ];
 
   return (
-    <header className="bg-gradient-to-r from-purple-900 via-blue-900 to-yellow-700 sticky top-0 z-50">
+    <header className="bg-gradient-to-r from-purple-900 via-blue-900 to-yellow-700 sticky top-0 z-50 w-full shadow-md">
       <div className="max-w-screen-xl mx-auto px-4 py-3 flex items-center justify-between min-h-[72px]">
         {/* Logo & Brand */}
-        <a href="#home" className="flex items-center gap-2 min-w-0 whitespace-nowrap">
+        <a href="#home" className="flex items-center gap-2 min-w-0 whitespace-nowrap" aria-label="Go to homepage">
           <img
             src={logo}
-            alt="First and Last Marketing company logo - expert digital marketing, web design, and lead generation services"
+            alt="First and Last Marketing company logo"
+            loading="lazy"
+            decoding="async"
             className="w-10 h-10 sm:w-11 sm:h-11 object-contain flex-shrink-0"
           />
-          <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-yellow-400 truncate">
+          <span className="text-lg sm:text-xl md:text-2xl font-bold text-yellow-400 truncate">
             First & Last Marketing
-          </h1>
+          </span>
         </a>
 
         {/* Desktop Nav */}
-        <nav className="hidden [@media(min-width:901px)]:flex items-center space-x-4 xl:space-x-6 flex-grow justify-center">
+        <nav className="hidden [@media(min-width:901px)]:flex items-center space-x-4 xl:space-x-6 flex-grow justify-center" aria-label="Main navigation">
           {navlinks.map((link, index) => (
             <a
               key={index}
@@ -52,11 +53,11 @@ const Header = () => {
           </a>
         </div>
 
-        {/* Hamburger Menu Button */}
+        {/* Hamburger Button */}
         <button
           className="[@media(min-width:901px)]:hidden p-2 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 rounded"
           onClick={toggleMenu}
-          aria-label="Toggle menu"
+          aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             {isMenuOpen ? (
@@ -68,10 +69,10 @@ const Header = () => {
         </button>
       </div>
 
-      {/* Mobile Dropdown */}
+      {/* Mobile Nav */}
       {isMenuOpen && (
         <aside className="[@media(min-width:901px)]:hidden bg-gradient-to-r from-purple-900 via-blue-900 to-yellow-700 shadow-lg p-4">
-          <nav>
+          <nav aria-label="Mobile menu">
             <ul className="flex flex-col space-y-4">
               {navlinks.map((link, index) => (
                 <li key={index}>
