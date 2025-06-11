@@ -8,10 +8,13 @@ import emailjs from '@emailjs/browser';
 const Footer = () => {
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState(null);
 
   const handleNewsletterSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    setStatus(null);
+
     try {
       await emailjs.send(
         'fnlserviceid',
@@ -22,10 +25,10 @@ const Footer = () => {
         },
         '_NXkr3UnpbWQmmVNs'
       );
-      alert('Thank you for subscribing!');
+      setStatus('success');
       setEmail('');
     } catch (error) {
-      alert('Subscription failed. Please try again later.');
+      setStatus('error');
     } finally {
       setLoading(false);
     }
@@ -33,44 +36,32 @@ const Footer = () => {
 
   return (
     <footer
-      className="bg-gradient-to-br from-purple-900 via-blue-900 to-gray-900 text-white pt-16 pb-8"
+      className="bg-gradient-to-br from-purple-900 via-blue-900 to-gray-900 text-white pt-12 pb-6"
       aria-labelledby="footer-heading"
     >
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-10">
           {/* Company Info */}
           <section aria-label="Company Info" className="lg:col-span-2">
-            <h2 id="footer-heading" className="text-3xl font-bold mb-4">
+            <h2 id="footer-heading" className="text-3xl font-bold mb-3">
               First and Last Marketing
             </h2>
-            <p className="text-white/80 mb-6 max-w-md">
+            <p className="text-white/80 mb-5 max-w-md">
               Turning Clicks Into Clients — we help businesses generate, nurture, and convert leads through strategic digital marketing.
             </p>
             <nav aria-label="Social media links" className="flex flex-wrap gap-3">
-              <a href="https://www.instagram.com/firstandlastm/" aria-label="Instagram" className="social-link">
-                <FaInstagram />
-              </a>
-              <a href="https://www.facebook.com/fnlmarketting" aria-label="Facebook" className="social-link">
-                <FaFacebookF />
-              </a>
-              <a href="https://www.tiktok.com/@first.last.market" aria-label="TikTok" className="social-link">
-                <FaTiktok />
-              </a>
-              <a href="http://linkedin.com/company/first-last-marketing" aria-label="LinkedIn" className="social-link">
-                <FaLinkedinIn />
-              </a>
-              <a href="https://x.com/FirstAndLastM" aria-label="Twitter / X" className="social-link">
-                <FaTwitter />
-              </a>
-              <a href="https://www.youtube.com/@firstandlastm" aria-label="YouTube" className="social-link">
-                <FaYoutube />
-              </a>
+              <a href="https://www.instagram.com/firstandlastm/" aria-label="Instagram" className="social-link hover:text-yellow-400 transition"><FaInstagram /></a>
+              <a href="https://www.facebook.com/fnlmarketting" aria-label="Facebook" className="social-link hover:text-yellow-400 transition"><FaFacebookF /></a>
+              <a href="https://www.tiktok.com/@first.last.market" aria-label="TikTok" className="social-link hover:text-yellow-400 transition"><FaTiktok /></a>
+              <a href="http://linkedin.com/company/first-last-marketing" aria-label="LinkedIn" className="social-link hover:text-yellow-400 transition"><FaLinkedinIn /></a>
+              <a href="https://x.com/FirstAndLastM" aria-label="Twitter / X" className="social-link hover:text-yellow-400 transition"><FaTwitter /></a>
+              <a href="https://www.youtube.com/@firstandlastm" aria-label="YouTube" className="social-link hover:text-yellow-400 transition"><FaYoutube /></a>
             </nav>
           </section>
 
           {/* Quick Links */}
           <nav aria-label="Footer Navigation" className="text-white/80">
-            <h3 className="text-xl font-semibold mb-4">Quick Links</h3>
+            <h3 className="text-xl font-semibold mb-3">Quick Links</h3>
             <ul className="space-y-2">
               <li><a href="#home" className="hover:text-white">Home</a></li>
               <li><a href="#about" className="hover:text-white">About</a></li>
@@ -79,13 +70,17 @@ const Footer = () => {
             </ul>
           </nav>
 
-          {/* Services */}
+          {/* Services - Two Columns */}
           <section aria-label="Core Services" className="text-white/80">
-            <h3 className="text-xl font-semibold mb-4">Services</h3>
-            <ul className="space-y-2">
+            <h3 className="text-xl font-semibold mb-3">Services</h3>
+            <ul className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
               <li>Web Design & Development</li>
               <li>Web Hosting</li>
               <li>Online Reputation Management</li>
+              <li>Database Reactivation</li>
+              <li>Email & SMS Automation</li>
+              <li>Live Chat & AI Bots</li>
+              <li>Social Post Schedulers</li>
             </ul>
           </section>
         </div>
@@ -93,13 +88,13 @@ const Footer = () => {
         {/* Newsletter Signup */}
         <section
           aria-label="Newsletter Signup"
-          className="bg-white/10 rounded-xl p-6 mb-12"
+          className="bg-white/10 rounded-xl p-6 mb-10"
         >
           <h3 className="text-2xl font-bold mb-2">Subscribe to Our Newsletter</h3>
           <p className="text-white/70 mb-4">
             Stay ahead with expert marketing insights, growth strategies, and special offers.
           </p>
-          <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row w-full lg:w-2/3" role="form">
+          <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row w-full lg:w-2/3" role="form" aria-live="polite">
             <label htmlFor="newsletter-email" className="sr-only">Email address</label>
             <input
               id="newsletter-email"
@@ -120,18 +115,21 @@ const Footer = () => {
               {loading ? 'Sending...' : 'Subscribe'}
             </button>
           </form>
+          {status === 'success' && <p className="text-green-400 mt-2">Thank you for subscribing!</p>}
+          {status === 'error' && <p className="text-red-400 mt-2">Subscription failed. Please try again later.</p>}
         </section>
 
         {/* Contact Info & Legal */}
-        <div className="border-t border-white/10 pt-6 flex flex-col md:flex-row justify-between items-center">
-          <address className="not-italic text-white/70 text-sm mb-4 md:mb-0">
-            <div className="flex items-center mb-1"><MdLocationOn className="mr-2" /> Springfield, Missouri</div>
-            <div className="flex items-center mb-1"><MdPhone className="mr-2" /> +1 (573) 202-0088</div>
-            <div className="flex items-center"><MdEmail className="mr-2" /> fnlmarketting@gmail.com</div>
+        <div className="border-t border-white/10 pt-4 flex flex-col md:flex-row justify-between items-center text-sm text-white/70">
+          <address className="not-italic mb-4 md:mb-0 text-center md:text-left">
+            <div className="flex items-center justify-center md:justify-start mb-1"><MdLocationOn className="mr-2" /> Springfield, Missouri</div>
+            <div className="flex items-center justify-center md:justify-start mb-1"><MdPhone className="mr-2" /> +1 (573) 202-0088</div>
+            <div className="flex items-center justify-center md:justify-start"><MdEmail className="mr-2" /> fnlmarketting@gmail.com</div>
           </address>
-          <ul className="flex space-x-6 text-white/70 text-sm">
+          <ul className="flex flex-wrap justify-center md:justify-end space-x-6 text-center">
             <li><a href="/privacy-policy" className="hover:text-white">Privacy Policy</a></li>
             <li><a href="/terms-of-use" className="hover:text-white">Terms of Use</a></li>
+            <li className="mt-2 md:mt-0">&copy; {new Date().getFullYear()} First and Last Marketing</li>
           </ul>
         </div>
       </div>

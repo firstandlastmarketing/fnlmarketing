@@ -8,10 +8,19 @@
     <title>First and Last Marketing | Missouri Web Design & SEO Experts</title>
 
     <!-- Canonical & Favicon -->
-    <link rel="canonical" href="https://firstandlastmarketing.com/" />
-    <link rel="icon" href="/favicon.png" type="image/png" />
+    <link rel="canonical" href="https://www.firstandlastmarketing.com/" />
+        <!-- Favicons for SEO, Search, and Browsers -->
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/favicon-512x512.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 
-    <!-- ✅ PWA Manifest & Theme -->
+
+
+    <!-- PWA Manifest & Theme -->
     <link rel="manifest" href="/manifest.webmanifest" />
     <meta name="theme-color" content="#0d0d0d" />
     <meta name="mobile-web-app-capable" content="yes" />
@@ -20,49 +29,156 @@
     <meta name="apple-mobile-web-app-title" content="FNL Marketing" />
 
     <!-- SEO Meta -->
-    <meta name="description" content="Grow your Missouri business with expert web design, fast hosting, and reputation management. Trusted digital marketing to turn clicks into clients." />
-    <meta name="keywords" content="First and Last Marketing, Missouri web design, SEO, digital marketing agency, website hosting, online reputation, small business marketing" />
+    <meta name="description" content="Grow your business with Missouri’s top-rated agency for SEO, web design, lead generation, hosting, and AI-powered chatbot systems. Convert more clicks into clients." />
+    <meta name="keywords" content="Missouri web design, First and Last Marketing, digital marketing agency, SEO, web hosting, lead generation, chatbot platform, email sms marketing" />
     <meta name="author" content="First and Last Marketing" />
     <meta name="robots" content="index, follow" />
 
     <!-- Open Graph / Facebook -->
+     <meta property="og:site_name" content="First and Last Marketing" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://firstandlastmarketing.com/" />
+    <meta property="og:url" content="https://www.firstandlastmarketing.com/" />
     <meta property="og:title" content="First and Last Marketing | Convert Clicks into Clients" />
-    <meta property="og:description" content="We design lead-generating websites, host them securely, and manage your brand’s online reputation." />
-    <meta property="og:image" content="https://firstandlastmarketing.com/og-preview.jpg" />
+    <meta property="og:description" content="Websites that perform. SEO that ranks. Hosting that loads fast. Missouri’s expert marketing team is here to grow your business." />
+    <meta property="og:image" content="https://www.firstandlastmarketing.com/og-preview.jpg" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="https://firstandlastmarketing.com/" />
+    <meta name="twitter:url" content="https://www.firstandlastmarketing.com/" />
     <meta name="twitter:title" content="First and Last Marketing | Convert Clicks into Clients" />
-    <meta name="twitter:description" content="We design lead-generating websites, host them securely, and manage your brand’s online reputation." />
-    <meta name="twitter:image" content="https://firstandlastmarketing.com/og-preview.jpg" />
+    <meta name="twitter:description" content="Websites that perform. SEO that ranks. Hosting that loads fast. Missouri’s expert marketing team is here to grow your business." />
+    <meta name="twitter:image" content="https://www.firstandlastmarketing.com/og-preview.jpg" />
 
-    <!-- Schema.org JSON-LD -->
+    <!-- JSON-LD Schema -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      "name": "First and Last Marketing",
-      "description": "We turn website visitors into loyal clients with expert web design, fast hosting, and trusted online reputation strategies. Missouri-based. Serving nationwide.",
-      "url": "https://firstandlastmarketing.com/",
-      "logo": "https://firstandlastmarketing.com/logo.png",
-      "image": "https://firstandlastmarketing.com/og-preview.jpg",
-      "email": "fnlmarketting@gmail.com",
-      "telephone": "+1-573-202-0088",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Missouri",
-        "addressCountry": "US"
-      },
-      "sameAs": [
-        "https://www.instagram.com/firstandlastm",
-        "https://www.facebook.com/fnlmarketting",
-        "https://www.linkedin.com/company/first-last-marketing",
-        "https://www.tiktok.com/@first.last.market",
-        "https://x.com/FirstAndLastM",
-        "https://www.youtube.com/@firstandlastm"
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://www.firstandlastmarketing.com/#organization",
+          "name": "First and Last Marketing",
+          "url": "https://www.firstandlastmarketing.com/",
+          "logo": "https://www.firstandlastmarketing.com/logo.png",
+          "email": "fnlmarketting@gmail.com",
+          "sameAs": [
+            "https://www.instagram.com/firstandlastm",
+            "https://www.facebook.com/fnlmarketting",
+            "https://www.linkedin.com/company/first-last-marketing",
+            "https://www.tiktok.com/@first.last.market",
+            "https://x.com/FirstAndLastM",
+            "https://www.youtube.com/@firstandlastm"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://www.firstandlastmarketing.com/#website",
+          "url": "https://www.firstandlastmarketing.com/",
+          "name": "First and Last Marketing",
+          "publisher": {
+            "@id": "https://www.firstandlastmarketing.com/#organization"
+          }
+        },
+        {
+          "@type": "LocalBusiness",
+          "@id": "https://www.firstandlastmarketing.com/#localbusiness",
+          "name": "First and Last Marketing",
+          "image": "https://www.firstandlastmarketing.com/og-preview.jpg",
+          "url": "https://www.firstandlastmarketing.com/",
+          "telephone": "+1-573-202-0088",
+          "email": "fnlmarketting@gmail.com",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Springfield",
+            "addressRegion": "MO",
+            "postalCode": "65801",
+            "addressCountry": "US"
+          },
+          "priceRange": "$$",
+          "description": "We help businesses turn clicks into clients with expert website design, SEO, hosting, and lead systems.",
+          "sameAs": [
+            "https://www.instagram.com/firstandlastm",
+            "https://www.facebook.com/fnlmarketting",
+            "https://www.linkedin.com/company/first-last-marketing",
+            "https://www.tiktok.com/@first.last.market",
+            "https://x.com/FirstAndLastM",
+            "https://www.youtube.com/@firstandlastm"
+          ]
+        },
+        {
+          "@type": "ProfessionalService",
+          "name": "First and Last Marketing",
+          "serviceType": "Digital Marketing",
+          "url": "https://www.firstandlastmarketing.com/",
+          "provider": {
+            "@id": "https://www.firstandlastmarketing.com/#organization"
+          },
+          "areaServed": {
+            "@type": "Place",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Springfield",
+              "addressRegion": "MO",
+              "addressCountry": "US"
+            }
+          }
+        },
+        {
+          "@type": "Service",
+          "name": "Web Design & Development",
+          "serviceType": "Web Design",
+          "provider": {
+            "@id": "https://www.firstandlastmarketing.com/#organization"
+          }
+        },
+        {
+          "@type": "Service",
+          "name": "Fast & Secure Web Hosting",
+          "serviceType": "Hosting",
+          "provider": {
+            "@id": "https://www.firstandlastmarketing.com/#organization"
+          }
+        },
+        {
+          "@type": "Service",
+          "name": "Online Reputation Management",
+          "serviceType": "Reputation Management",
+          "provider": {
+            "@id": "https://www.firstandlastmarketing.com/#organization"
+          }
+        },
+        {
+          "@type": "Service",
+          "name": "Database Reactivation Campaigns",
+          "serviceType": "Customer Retargeting",
+          "provider": {
+            "@id": "https://www.firstandlastmarketing.com/#organization"
+          }
+        },
+        {
+          "@type": "Service",
+          "name": "Email & SMS Marketing Automation",
+          "serviceType": "Marketing Automation",
+          "provider": {
+            "@id": "https://www.firstandlastmarketing.com/#organization"
+          }
+        },
+        {
+          "@type": "Service",
+          "name": "Live Chat & AI Chatbot Platforms",
+          "serviceType": "Chatbot and Lead Generation",
+          "provider": {
+            "@id": "https://www.firstandlastmarketing.com/#organization"
+          }
+        },
+        {
+          "@type": "Service",
+          "name": "Social Media Post Schedulers",
+          "serviceType": "Social Media Management",
+          "provider": {
+            "@id": "https://www.firstandlastmarketing.com/#organization"
+          }
+        }
       ]
     }
     </script>
@@ -75,17 +191,19 @@
       gtag('js', new Date());
       gtag('config', 'G-J9FY6BCYT4');
     </script>
-
-    <!-- Accessibility Hidden H1 for SEO -->
-    <h1 style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">
-      First and Last Marketing - Missouri Digital Marketing Experts for Web Design, SEO, Hosting, Lead Generation, and Reputation Management
-    </h1>
   </head>
 
   <body>
     <noscript>
       <strong>This site works best with JavaScript enabled. Please enable JavaScript in your browser.</strong>
     </noscript>
+
+    <!-- Accessibility Hidden H1 for SEO -->
+    <main>
+    <h1 class="sr-only">
+      First and Last Marketing – Web Design, Hosting, SEO, Lead Generation, and Marketing Automation in Missouri
+    </h1>
+    </main>
 
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>

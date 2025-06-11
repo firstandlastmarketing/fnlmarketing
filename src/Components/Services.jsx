@@ -1,5 +1,6 @@
+// src/components/Services.jsx
 import React, { useState } from 'react';
-import { FaGlobe, FaServer, FaStar } from 'react-icons/fa';
+import { FaGlobe, FaServer, FaStar, FaDatabase, FaEnvelopeOpenText, FaComments, FaClock } from 'react-icons/fa';
 import { Dialog } from '@headlessui/react';
 import { XMarkIcon } from '@heroicons/react/24/solid';
 
@@ -14,9 +15,7 @@ const Services = () => {
       desc: 'Modern, responsive websites that convert visitors and grow your brand.',
       content: (
         <>
-          <p>
-            At First & Last Marketing, we craft digital experiences that convert. We specialize in:
-          </p>
+          <p>At First & Last Marketing, we craft digital experiences that convert. We specialize in:</p>
           <ul className="list-disc ml-5 my-4 space-y-1">
             <li><strong>Custom Designs</strong> – Built for your brand, not templates.</li>
             <li><strong>Responsive Layouts</strong> – Mobile-first, fast, and fluid.</li>
@@ -62,6 +61,82 @@ const Services = () => {
             <li><strong>Google Profile Optimization</strong> – Be seen and trusted.</li>
           </ul>
           <p>Turn happy clients into loyal advocates across the web.</p>
+        </>
+      )
+    },
+    {
+      id: 'database-reactivation',
+      icon: <FaDatabase className="text-4xl text-green-700" aria-hidden="true" />,
+      title: 'Database Reactivation Campaigns',
+      desc: 'Wake up dormant leads using automated campaigns that re-engage and convert.',
+      content: (
+        <>
+          <p>Have a list of leads that never converted or old clients who went quiet? Our database reactivation strategy helps you reignite relationships and turn forgotten contacts into active customers.</p>
+          <ul className="list-disc ml-5 my-4 space-y-1">
+            <li><strong>Multi-Channel Outreach</strong> – Email, SMS, and calling to re-engage leads.</li>
+            <li><strong>Behavior-Triggered Flows</strong> – Custom follow-ups based on engagement.</li>
+            <li><strong>Low Cost, High ROI</strong> – Leverage your existing contacts without ad spend.</li>
+            <li><strong>CRM Integration</strong> – Works with the tools you already use.</li>
+            <li><strong>Real-Time Analytics</strong> – Know who’s opening, clicking, and converting.</li>
+          </ul>
+          <p>This is one of the fastest ways to generate revenue with zero new ad dollars.</p>
+        </>
+      )
+    },
+    {
+      id: 'email-sms-automation',
+      icon: <FaEnvelopeOpenText className="text-4xl text-red-500" aria-hidden="true" />,
+      title: 'Email & SMS Marketing Automation',
+      desc: 'Automate your marketing with targeted messages that nurture and convert.',
+      content: (
+        <>
+          <p>Let automation do the heavy lifting. Our platform helps you reach the right person at the right time with the right message.</p>
+          <ul className="list-disc ml-5 my-4 space-y-1">
+            <li><strong>Drip Campaigns</strong> – Nurture leads with sequenced emails and texts.</li>
+            <li><strong>Segmentation</strong> – Send personalized messages based on behavior.</li>
+            <li><strong>2-Way SMS</strong> – Start real conversations directly with customers.</li>
+            <li><strong>Appointment Reminders</strong> – Reduce no-shows and boost attendance.</li>
+            <li><strong>Analytics</strong> – See what’s working and optimize easily.</li>
+          </ul>
+          <p>Convert more leads while saving hours each week with fully automated messaging.</p>
+        </>
+      )
+    },
+    {
+      id: 'ai-chatbots',
+      icon: <FaComments className="text-4xl text-teal-600" aria-hidden="true" />,
+      title: 'Live Chat & AI Chatbot Platforms',
+      desc: 'Engage visitors instantly and qualify leads with human-like chatbots or live support.',
+      content: (
+        <>
+          <p>Don't let potential customers bounce. Our chat systems increase conversions and delight visitors with instant communication.</p>
+          <ul className="list-disc ml-5 my-4 space-y-1">
+            <li><strong>AI Chatbots</strong> – 24/7 support, lead capture, and FAQs.</li>
+            <li><strong>Live Agent Handoff</strong> – Seamlessly transition from bot to human.</li>
+            <li><strong>Custom Branding</strong> – Match your site’s look and feel.</li>
+            <li><strong>Real-Time Notifications</strong> – Stay on top of new chats.</li>
+            <li><strong>Mobile-Friendly UI</strong> – Chat easily on any device.</li>
+          </ul>
+          <p>Keep visitors engaged and make sure no question goes unanswered—even after hours.</p>
+        </>
+      )
+    },
+    {
+      id: 'social-schedulers',
+      icon: <FaClock className="text-4xl text-orange-500" aria-hidden="true" />,
+      title: 'Social Media Post Schedulers',
+      desc: 'Stay consistent online with automated post scheduling and analytics.',
+      content: (
+        <>
+          <p>Posting consistently builds brand awareness and trust. Our scheduling tools make it effortless.</p>
+          <ul className="list-disc ml-5 my-4 space-y-1">
+            <li><strong>Cross-Platform Publishing</strong> – Schedule across Instagram, Facebook, LinkedIn, and more.</li>
+            <li><strong>AI Captions & Hashtags</strong> – Maximize reach and engagement.</li>
+            <li><strong>Calendar View</strong> – Visualize your content strategy.</li>
+            <li><strong>Performance Analytics</strong> – Track what’s working and refine strategy.</li>
+            <li><strong>Team Collaboration</strong> – Approvals, drafts, and workflows made easy.</li>
+          </ul>
+          <p>Spend less time posting and more time growing your business with data-backed consistency.</p>
         </>
       )
     }

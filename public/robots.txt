@@ -1,4 +1,4 @@
 User-agent: *
-Allow: /
+Disallow:
 
-Sitemap: https://firstandlastmarketing.com/sitemap.xml
+Sitemap: https://www.firstandlastmarketing.com/sitemap.xml
