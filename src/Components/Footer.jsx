@@ -124,7 +124,7 @@ const Footer = () => {
           <address className="not-italic mb-4 md:mb-0 text-center md:text-left">
             <div className="flex items-center justify-center md:justify-start mb-1"><MdLocationOn className="mr-2" /> Springfield, Missouri</div>
             <div className="flex items-center justify-center md:justify-start mb-1"><MdPhone className="mr-2" /> +1 (573) 202-0088</div>
-            <div className="flex items-center justify-center md:justify-start"><MdEmail className="mr-2" /> fnlmarketting@gmail.com</div>
+            <div className="flex items-center justify-center md:justify-start"><MdEmail className="mr-2" /> info@firstandlastmarketing.com</div>
           </address>
           <ul className="flex flex-wrap justify-center md:justify-end space-x-6 text-center">
             <li><a href="/privacy-policy" className="hover:text-white">Privacy Policy</a></li>

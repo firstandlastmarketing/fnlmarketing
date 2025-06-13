@@ -29,7 +29,7 @@ const Contact = () => {
       title: "Email",
       content: (
         <p className="text-gray-700">
-          <a href="mailto:fnlmarketting@gmail.com" className="hover:text-gold-600">fnlmarketting@gmail.com</a>
+          <a href="mailto:info@firstandlastmarketing.com" className="hover:text-gold-600">info@firstandlastmarketing.com</a>
         </p>
       ),
     },
