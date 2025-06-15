@@ -2,7 +2,7 @@ import { Dialog } from '@headlessui/react';
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-export default function PromoPopUp() {
+export default function Promo() {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {

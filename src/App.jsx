@@ -10,7 +10,7 @@ import About from './Components/About.jsx';
 import Contact from './Components/Contact.jsx';
 import Footer from './Components/Footer.jsx';
 import ChatWidget from './Components/Chatwidget.jsx';
-import PromoPopUp from './Components/PromoPopUp.jsx';
+import Promo from './Components/Promo.jsx';
 
 const App = () => {
   useEffect(() => {
@@ -28,7 +28,7 @@ const App = () => {
       <Portfolio />
       <About />
       <Contact />
-      <PromoPopUp />
+      <Promo />
       <Footer />
       <ChatWidget />
     </main>
