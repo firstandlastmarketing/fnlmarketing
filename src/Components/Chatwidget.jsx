@@ -73,7 +73,6 @@ const ChatWidget = () => {
 
   const onTouchMove = (e) => {
     if (e.touches.length !== 1) return;
-    e.preventDefault();
     const touch = e.touches[0];
     doDrag(touch.clientX, touch.clientY);
   };
@@ -167,7 +166,7 @@ const ChatWidget = () => {
         background: 'linear-gradient(135deg, #FFD700, #4B0082, #1E90FF)',
         color: '#fff',
         overflow: 'hidden',
-        transition: 'width 0.3s ease, height 0.3s ease, top 0.3s ease',
+        transition: 'width 0.3s ease',
         touchAction: 'none',
       }}
     >
