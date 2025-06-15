@@ -73,6 +73,7 @@ const ChatWidget = () => {
 
   const onTouchMove = (e) => {
     if (e.touches.length !== 1) return;
+    e.preventDefault();
     const touch = e.touches[0];
     doDrag(touch.clientX, touch.clientY);
   };
