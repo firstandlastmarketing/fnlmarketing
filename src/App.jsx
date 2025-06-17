@@ -11,6 +11,7 @@ import Contact from './Components/Contact.jsx';
 import Footer from './Components/Footer.jsx';
 import ChatWidget from './Components/Chatwidget.jsx';
 import Promo from './Components/Promo.jsx';
+import ReviewWidget from './Components/ReviewWidget.jsx';
 
 const App = () => {
   useEffect(() => {
@@ -24,6 +25,7 @@ const App = () => {
     <main lang="en">
       <Header />
       <Hero />
+      <ReviewWidget />
       <Services />
       <Portfolio />
       <About />
