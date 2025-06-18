@@ -1,52 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset 
-  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-  xmlns:xhtml="http://www.w3.org/1999/xhtml">
-
-  <!-- Root Page -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <!--  Root Page  -->
   <url>
     <loc>https://www.firstandlastmarketing.com/</loc>
     <lastmod>2025-06-17</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
-
-  <!-- Anchor Sections -->
+  
+  <!--  Anchor Sections  -->
   <url>
     <loc>https://www.firstandlastmarketing.com/#about</loc>
     <lastmod>2025-06-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
-
   <url>
     <loc>https://www.firstandlastmarketing.com/#services</loc>
     <lastmod>2025-06-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
-
   <url>
     <loc>https://www.firstandlastmarketing.com/#portfolio</loc>
     <lastmod>2025-06-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
-
   <url>
     <loc>https://www.firstandlastmarketing.com/#contact</loc>
     <lastmod>2025-06-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-
   <url>
     <loc>https://www.firstandlastmarketing.com/#chat</loc>
     <lastmod>2025-06-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
-
   <url>
     <loc>https://www.firstandlastmarketing.com/#newsletter</loc>
     <lastmod>2025-06-17</lastmod>
@@ -54,14 +46,13 @@
     <priority>0.5</priority>
   </url>
 
-  <!-- Static Pages -->
+  <!--  Static Pages  -->
   <url>
     <loc>https://www.firstandlastmarketing.com/privacy-policy</loc>
     <lastmod>2025-06-17</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
-
   <url>
     <loc>https://www.firstandlastmarketing.com/terms-of-use</loc>
     <lastmod>2025-06-17</lastmod>
@@ -69,7 +60,7 @@
     <priority>0.6</priority>
   </url>
 
-  <!-- Blog Listing Page -->
+  <!--  Blog Listing Page  -->
   <url>
     <loc>https://www.firstandlastmarketing.com/blog</loc>
     <lastmod>2025-06-17</lastmod>
@@ -77,75 +68,65 @@
     <priority>0.85</priority>
   </url>
 
-  <!-- Individual Blog Posts -->
+  <!--  Individual Blog Posts  -->
   <url>
-    <loc>https://www.firstandlastmarketing.com/blog/ultimate-guide-to-digital-marketing-2025</loc>
+    <loc>https://www.firstandlastmarketing.com/blog/ultimate-guide-digital-marketing-2025</loc>
     <lastmod>2025-06-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-
   <url>
     <loc>https://www.firstandlastmarketing.com/blog/top-seo-trends-2025-saas</loc>
     <lastmod>2025-06-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-
   <url>
-    <loc>https://www.firstandlastmarketing.com/blog/seo-content-strategy-saas</loc>
+    <loc>https://www.firstandlastmarketing.com/blog/seo-content-strategy-saas-2025</loc>
     <lastmod>2025-06-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-
   <url>
-    <loc>https://www.firstandlastmarketing.com/blog/marketing-automation-tools-2025</loc>
+    <loc>https://www.firstandlastmarketing.com/blog/top-marketing-automation-tools-2025</loc>
     <lastmod>2025-06-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-
   <url>
-    <loc>https://www.firstandlastmarketing.com/blog/ai-in-marketing-future</loc>
+    <loc>https://www.firstandlastmarketing.com/blog/reputation-management-saas</loc>
     <lastmod>2025-06-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-
+  <url>
+    <loc>https://www.firstandlastmarketing.com/blog/turn-visitors-into-leads</loc>
+    <lastmod>2025-06-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.firstandlastmarketing.com/blog/chat-automation-human-touch</loc>
+    <lastmod>2025-06-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.firstandlastmarketing.com/blog/landing-page-mistakes-2025</loc>
+    <lastmod>2025-06-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.firstandlastmarketing.com/blog/ai-in-marketing-2025</loc>
+    <lastmod>2025-06-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
   <url>
     <loc>https://www.firstandlastmarketing.com/blog/web-design-trends-2025</loc>
     <lastmod>2025-06-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-
-  <url>
-    <loc>https://www.firstandlastmarketing.com/blog/lead-generation-seo</loc>
-    <lastmod>2025-06-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://www.firstandlastmarketing.com/blog/conversion-optimization-tips</loc>
-    <lastmod>2025-06-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://www.firstandlastmarketing.com/blog/data-driven-marketing-saas</loc>
-    <lastmod>2025-06-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://www.firstandlastmarketing.com/blog/customer-experience-strategies</loc>
-    <lastmod>2025-06-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
 </urlset>
