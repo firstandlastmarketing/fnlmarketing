@@ -4,6 +4,8 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { blogPosts } from './blogData';
 import BlogNavBar from './BlogNavBar';
 
+
+
 const useQuery = () => new URLSearchParams(useLocation().search);
 
 const Blog = () => {
@@ -91,6 +93,17 @@ const Blog = () => {
         />
         <meta name="keywords" content={allTags.join(', ')} />
         <meta name="author" content="First and Last Marketing" />
+
+        
+        <title>Blog | First and Last Marketing</title>
+        <meta name="description" content="Explore expert articles on SEO, automation, web design, and SaaS marketing trends from First and Last Marketing." />
+        <meta property="og:title" content="Blog | First and Last Marketing" />
+        <meta property="og:description" content="Explore expert articles on SEO, automation, web design, and SaaS marketing trends." />
+        <meta property="og:url" content="https://www.firstandlastmarketing.com/blog" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://www.firstandlastmarketing.com/og-images/blog-preview.png" />
+        <meta name="twitter:card" content="summary_large_image" />
+
       </Helmet>
 
       <BlogNavBar />

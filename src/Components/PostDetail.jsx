@@ -4,6 +4,8 @@ import { Helmet } from 'react-helmet-async';
 import { blogPosts } from './blogData';
 import BlogNavBar from "./BlogNavBar";
 
+
+
 const PostDetail = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
@@ -62,7 +64,12 @@ const PostDetail = () => {
   const encodedTitle = encodeURIComponent(post.title);
   const encodedUrl = encodeURIComponent(shareUrl);
 
+  const ogImageSlug = slug.replace(/[^a-z0-9\-]/gi, '');
+const ogImageUrl = `https://www.firstandlastmarketing.com/og-images/post-${ogImageSlug}.png`;
+
+
   return (
+    
     <div className="bg-white min-h-screen text-gray-900">
       <Helmet>
         <title>{post.title} | First and Last Marketing</title>
@@ -92,6 +99,17 @@ const PostDetail = () => {
             url: shareUrl,
           })}
         </script>
+
+            
+        <title>{post.title} | First and Last Marketing</title>
+        <meta name="description" content={post.summary} />
+        <meta property="og:title" content={post.title} />
+        <meta property="og:description" content={post.summary} />
+        <meta property="og:url" content={`https://www.firstandlastmarketing.com/blog/${slug}`} />
+        <meta property="og:type" content="article" />
+        <meta property="og:image" content={ogImageUrl} />
+        <meta name="twitter:card" content="summary_large_image" />
+
       </Helmet>
 
       <BlogNavBar />
