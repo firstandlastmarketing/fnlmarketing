@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import logo from '../assets/logo.png';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -31,7 +32,7 @@ const Header = () => {
         </a>
 
         {/* Desktop Nav */}
-        <nav className="hidden [@media(min-width:901px)]:flex items-center space-x-4 xl:space-x-6 flex-grow justify-center" aria-label="Main navigation">
+        <nav className="hidden [@media(min-width:940px)]:flex items-center space-x-4 xl:space-x-6 flex-grow justify-center" aria-label="Main navigation">
           {navlinks.map((link, index) => (
             <a
               key={index}
@@ -41,10 +42,18 @@ const Header = () => {
               {link.label}
             </a>
           ))}
+
+          {/* Add Blog Link here with React Router */}
+          <Link
+            to="/blog"
+            className="text-sm xl:text-base text-white hover:text-yellow-400 transition-colors duration-200 whitespace-nowrap"
+          >
+            Blog
+          </Link>
         </nav>
 
         {/* CTA Button */}
-        <div className="hidden [@media(min-width:901px)]:block flex-shrink-0 ml-4">
+        <div className="hidden [@media(min-width:940px)]:block flex-shrink-0 ml-4">
           <a
             href="#contact"
             className="bg-yellow-500 hover:bg-yellow-600 text-sm xl:text-base text-white px-4 xl:px-6 py-2 rounded-full transition duration-200 whitespace-nowrap"
@@ -55,7 +64,7 @@ const Header = () => {
 
         {/* Hamburger Button */}
         <button
-          className="[@media(min-width:901px)]:hidden p-2 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 rounded"
+          className="[@media(min-width:940px)]:hidden p-2 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 rounded"
           onClick={toggleMenu}
           aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
         >
@@ -71,7 +80,7 @@ const Header = () => {
 
       {/* Mobile Nav */}
       {isMenuOpen && (
-        <aside className="[@media(min-width:901px)]:hidden bg-gradient-to-r from-purple-900 via-blue-900 to-yellow-700 shadow-lg p-4">
+        <aside className="[@media(min-width:940px)]:hidden bg-gradient-to-r from-purple-900 via-blue-900 to-yellow-700 shadow-lg p-4">
           <nav aria-label="Mobile menu">
             <ul className="flex flex-col space-y-4">
               {navlinks.map((link, index) => (
@@ -85,6 +94,17 @@ const Header = () => {
                   </a>
                 </li>
               ))}
+              {/* Add Blog link here for mobile */}
+              <li>
+                <Link
+                  to="/blog"
+                  className="block text-white hover:text-yellow-400 transition py-2"
+                  onClick={toggleMenu}
+                >
+                  Blog
+                </Link>
+              </li>
+
               <li>
                 <a
                   href="#contact"

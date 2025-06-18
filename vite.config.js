@@ -51,5 +51,22 @@ export default defineConfig({
   server: {
     host: '0.0.0.0',
     port: 5173
-  }
+  },
+  
+  build: {
+  rollupOptions: {
+    output: {
+      manualChunks(id) {
+        if (id.includes('node_modules')) {
+          if (id.includes('react') || id.includes('react-dom')) return 'vendor_react';
+          if (id.includes('aos')) return 'vendor_aos';
+          if (id.includes('react-router')) return 'vendor_router';
+        }
+      }
+    }
+  },
+  // Optional: raise the chunk size limit warning
+  chunkSizeWarningLimit: 1000
+}
+
 });

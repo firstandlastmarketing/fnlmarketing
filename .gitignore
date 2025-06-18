@@ -14,7 +14,10 @@ dist-ssr/
 *.local
 
 # Environment files
-
+.env
+.env.local
+.env.production
+.env.development
 
 # System files
 .DS_Store       # macOS
