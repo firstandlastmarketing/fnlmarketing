@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
-// Import components
+// Components
 import Header from './Components/Header.jsx';
 import Hero from './Components/Hero.jsx';
 import Services from './Components/Services.jsx';
@@ -15,15 +15,11 @@ import ChatWidget from './Components/Chatwidget.jsx';
 import Promo from './Components/Promo.jsx';
 import ReviewWidget from './Components/ReviewWidget.jsx';
 
-// Import legal pages
-
-import { lazy, Suspense } from 'react';
-
+// Lazy-loaded pages
 const Blog = lazy(() => import('./Components/Blog.jsx'));
 const PostDetail = lazy(() => import('./Components/PostDetail.jsx'));
 const PrivacyPolicy = lazy(() => import('./Components/PrivacyPolicy.jsx'));
 const TermsOfUse = lazy(() => import('./Components/TermsOfUse.jsx'));
-
 
 const ScrollToSection = () => {
   useEffect(() => {
@@ -34,7 +30,7 @@ const ScrollToSection = () => {
         setTimeout(() => {
           el.scrollIntoView({ behavior: 'smooth' });
           sessionStorage.removeItem('scrollTo');
-        }, 300); // slight delay to allow DOM to fully render
+        }, 300);
       }
     }
   }, []);
@@ -71,14 +67,40 @@ const App = () => {
             </>
           }
         />
-        {/* Blog and Post Detail */}
-        <Suspense fallback={<div>Loading...</div>}>
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/blog/:slug" element={<PostDetail />} />
-          {/* Legal Pages */}
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="/terms-of-use" element={<TermsOfUse />} />
-        </Suspense>
+
+        {/* Lazy-loaded Routes: wrap the element itself with <Suspense> */}
+        <Route
+          path="/blog"
+          element={
+            <Suspense fallback={<div>Loading...</div>}>
+              <Blog />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/blog/:slug"
+          element={
+            <Suspense fallback={<div>Loading...</div>}>
+              <PostDetail />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/privacy-policy"
+          element={
+            <Suspense fallback={<div>Loading...</div>}>
+              <PrivacyPolicy />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/terms-of-use"
+          element={
+            <Suspense fallback={<div>Loading...</div>}>
+              <TermsOfUse />
+            </Suspense>
+          }
+        />
       </Routes>
     </main>
   );

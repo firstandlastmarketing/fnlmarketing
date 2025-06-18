@@ -11,19 +11,26 @@ lerna-debug.log*
 node_modules/
 dist/
 dist-ssr/
+.vite/
 *.local
+.cache/
+.temp/
 
-# Environment files
+# Vercel build artifacts
+.vercel/
+
+# Environment variables
 .env
+.env.*.local
 .env.local
 .env.production
 .env.development
 
-# System files
+# OS system files
 .DS_Store       # macOS
 Thumbs.db       # Windows
 
-# Editor directories and project files
+# Editor/IDE project files
 .vscode/
 !.vscode/extensions.json
 .idea/
@@ -33,7 +40,16 @@ Thumbs.db       # Windows
 *.sln
 *.sw?
 
-# Optional: Lock files (uncomment if you don’t want to track them)
+# Optional: Uncomment to ignore lock files if managing manually
 # package-lock.json
 # yarn.lock
 # pnpm-lock.yaml
+
+# Misc
+coverage/
+*.tgz
+*.zip
+*.bak
+*.tmp
+*.orig
+*.rej
