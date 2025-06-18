@@ -22,5 +22,6 @@
       "source": "/sitemap.xml",
       "destination": "/sitemap.xml"
     }
-  ]
+  ],
+  "buildCommand": "npm install --legacy-peer-deps && npm run build"
 }
