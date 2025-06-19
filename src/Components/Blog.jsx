@@ -1,10 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Helmet } from 'react-helmet-async';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { blogPosts } from './blogData';
 import BlogNavBar from './BlogNavBar';
 import PromoBanner from './PromoBanner';
-
 
 const useQuery = () => new URLSearchParams(useLocation().search);
 
@@ -73,112 +71,79 @@ const Blog = () => {
 
   return (
     <div className="min-h-screen bg-white text-gray-800">
-      <Helmet>
-        <title>
-          {selectedTag
-            ? `${selectedTag} Articles | First and Last Marketing Blog`
-            : 'Digital Marketing Blog | First and Last Marketing'}
-        </title>
-        <meta
-          name="description"
-          content={
-            selectedTag
-              ? `Explore ${selectedTag} articles and trends from our expert digital marketing team.`
-              : 'Discover SEO trends, digital strategies, and SaaS marketing tactics on First and Last Marketing’s official blog.'
-          }
-        />
-        <link
-          rel="canonical"
-          href={`https://firstandlastmarketing.com/blog${selectedTag ? `?tag=${selectedTag}` : ''}`}
-        />
-        <meta name="keywords" content={allTags.join(', ')} />
-        <meta name="author" content="First and Last Marketing" />
-
-        
-        <title>Blog | First and Last Marketing</title>
-        <meta name="description" content="Explore expert articles on SEO, automation, web design, and SaaS marketing trends from First and Last Marketing." />
-        <meta property="og:title" content="Blog | First and Last Marketing" />
-        <meta property="og:description" content="Explore expert articles on SEO, automation, web design, and SaaS marketing trends." />
-        <meta property="og:url" content="https://www.firstandlastmarketing.com/blog" />
-        <meta property="og:type" content="website" />
-        <meta property="og:image" content="https://www.firstandlastmarketing.com/og-images/blog-preview.png" />
-        <meta name="twitter:card" content="summary_large_image" />
-
-      </Helmet>
-
       <BlogNavBar />
 
       <section ref={topRef} className="max-w-7xl mx-auto px-6 pt-[90px] pb-16">
         <h1 className="text-3xl md:text-4xl font-extrabold text-center text-indigo-700 mb-3 leading-snug tracking-tight">
-        First and Last Marketing Blog
-      </h1>
-      <p className="text-center text-base md:text-lg max-w-2xl mx-auto mb-6 text-gray-600 leading-relaxed">
-        <span className="font-semibold text-gray-800">Turning Clicks Into Clients</span> — Explore expert digital marketing insights, SaaS growth hacks, and SEO strategies to scale your business with confidence.
-      </p>
-      <div className="space-y-2 sm:space-y-4 mb-4 sm:mb-6">
-        {/* Search */}
-        <div className="mb-4 flex justify-center">
-          <input
-            type="text"
-            placeholder="Search posts..."
-            className="w-full md:w-1/2 px-3 py-2 border rounded-md shadow-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none text-sm"
-            value={searchQuery}
-            onChange={(e) => {
-              setSearchQuery(e.target.value);
-              setCurrentPage(1);
-            }}
-            aria-label="Search blog posts"
-          />
-        </div>
+          First and Last Marketing Blog
+        </h1>
+        <p className="text-center text-base md:text-lg max-w-2xl mx-auto mb-6 text-gray-600 leading-relaxed">
+          <span className="font-semibold text-gray-800">Turning Clicks Into Clients</span> — Explore expert digital marketing insights, SaaS growth hacks, and SEO strategies to scale your business with confidence.
+        </p>
+        <div className="space-y-2 sm:space-y-4 mb-4 sm:mb-6">
+          {/* Search */}
+          <div className="mb-4 flex justify-center">
+            <input
+              type="text"
+              placeholder="Search posts..."
+              className="w-full md:w-1/2 px-3 py-2 border rounded-md shadow-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none text-sm"
+              value={searchQuery}
+              onChange={(e) => {
+                setSearchQuery(e.target.value);
+                setCurrentPage(1);
+              }}
+              aria-label="Search blog posts"
+            />
+          </div>
 
-        {/* Tag Filters */}
-        <div className="flex flex-wrap justify-center gap-1 sm:gap-2 mb-3 sm:mb-4 px-1 sm:px-2 max-h-[120px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
-          <button
-            onClick={() => {
-              setSelectedTag(null);
-              setCurrentPage(1);
-            }}
-            className={`px-3 py-1 rounded-full text-xs md:text-sm border font-medium transition ${
-              selectedTag === null
-                ? 'bg-yellow-300 text-gray-900 border-yellow-400 shadow-sm'
-                : 'text-gray-700 hover:text-indigo-700 hover:border-indigo-500 hover:shadow-sm'
-            }`}
-            aria-pressed={selectedTag === null}
-          >
-            All Topics
-          </button>
-          {allTags.map((tag) => (
+          {/* Tag Filters */}
+          <div className="flex flex-wrap justify-center gap-1 sm:gap-2 mb-3 sm:mb-4 px-1 sm:px-2 max-h-[120px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
             <button
-              key={tag}
               onClick={() => {
-                setSelectedTag(tag);
+                setSelectedTag(null);
                 setCurrentPage(1);
               }}
               className={`px-3 py-1 rounded-full text-xs md:text-sm border font-medium transition ${
-                selectedTag === tag
+                selectedTag === null
                   ? 'bg-yellow-300 text-gray-900 border-yellow-400 shadow-sm'
                   : 'text-gray-700 hover:text-indigo-700 hover:border-indigo-500 hover:shadow-sm'
               }`}
-              aria-pressed={selectedTag === tag}
+              aria-pressed={selectedTag === null}
             >
-              {tag}
+              All Topics
             </button>
-          ))}
-        </div>
+            {allTags.map((tag) => (
+              <button
+                key={tag}
+                onClick={() => {
+                  setSelectedTag(tag);
+                  setCurrentPage(1);
+                }}
+                className={`px-3 py-1 rounded-full text-xs md:text-sm border font-medium transition ${
+                  selectedTag === tag
+                    ? 'bg-yellow-300 text-gray-900 border-yellow-400 shadow-sm'
+                    : 'text-gray-700 hover:text-indigo-700 hover:border-indigo-500 hover:shadow-sm'
+                }`}
+                aria-pressed={selectedTag === tag}
+              >
+                {tag}
+              </button>
+            ))}
+          </div>
 
-        {/* Featured Tags */}
-        <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-5 sm:mb-8 text-xs sm:text-sm px-1 sm:px-2">
-          {featuredTags.map((tag) => (
-            <Link
-              key={tag}
-              to={`/blog?tag=${encodeURIComponent(tag)}`}
-              className="text-indigo-600 hover:underline"
-            >
-              <span className="font-medium">Explore:</span> <strong>{tag}</strong>
-            </Link>
-          ))}
+          {/* Featured Tags */}
+          <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-5 sm:mb-8 text-xs sm:text-sm px-1 sm:px-2">
+            {featuredTags.map((tag) => (
+              <Link
+                key={tag}
+                to={`/blog?tag=${encodeURIComponent(tag)}`}
+                className="text-indigo-600 hover:underline"
+              >
+                <span className="font-medium">Explore:</span> <strong>{tag}</strong>
+              </Link>
+            ))}
+          </div>
         </div>
-      </div>
 
         {/* Blog Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">

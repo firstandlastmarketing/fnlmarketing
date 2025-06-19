@@ -1,10 +1,8 @@
 import React, { useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
 import { blogPosts } from './blogData';
 import BlogNavBar from "./BlogNavBar";
 import PromoBanner from './PromoBanner';
-
 
 const PostDetail = () => {
   const { slug } = useParams();
@@ -64,54 +62,8 @@ const PostDetail = () => {
   const encodedTitle = encodeURIComponent(post.title);
   const encodedUrl = encodeURIComponent(shareUrl);
 
-  const ogImageSlug = slug.replace(/[^a-z0-9\-]/gi, '');
-const ogImageUrl = `https://www.firstandlastmarketing.com/og-images/post-${ogImageSlug}.png`;
-
-
   return (
-    
     <div className="bg-white min-h-screen text-gray-900">
-      <Helmet>
-        <title>{post.title} | First and Last Marketing</title>
-        <meta name="description" content={post.summary || 'Read expert insights from our blog.'} />
-        <link rel="canonical" href={shareUrl} />
-        <meta name="author" content={post.author} />
-        <script type="application/ld+json">
-          {JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'BlogPosting',
-            headline: post.title,
-            description: post.summary,
-            image: post.image,
-            author: {
-              '@type': 'Organization',
-              name: post.author,
-            },
-            publisher: {
-              '@type': 'Organization',
-              name: 'First and Last Marketing',
-              logo: {
-                '@type': 'ImageObject',
-                url: 'https://firstandlastmarketing.com/logo.png',
-              },
-            },
-            datePublished: post.date,
-            url: shareUrl,
-          })}
-        </script>
-
-            
-        <title>{post.title} | First and Last Marketing</title>
-        <meta name="description" content={post.summary} />
-        <meta property="og:title" content={post.title} />
-        <meta property="og:description" content={post.summary} />
-        <meta property="og:url" content={`https://www.firstandlastmarketing.com/blog/${slug}`} />
-        <meta property="og:type" content="article" />
-        <meta property="og:image" content={ogImageUrl} />
-        <meta name="twitter:card" content="summary_large_image" />
-
-      </Helmet>
-
       <BlogNavBar />
 
       {/* Sticky Top Prev/Next Navigation Bar */}
@@ -137,14 +89,12 @@ const ogImageUrl = `https://www.firstandlastmarketing.com/og-images/post-${ogIma
       </div>
 
       <div className="max-w-4xl mx-auto px-6 pt-24 sm:pt-28 pb-12">
-        {/* Breadcrumb */}
         <nav className="text-sm text-gray-500 mb-4">
           <Link to="/" className="hover:underline">Home</Link> &rsaquo;{' '}
           <Link to="/blog" className="hover:underline">Blog</Link> &rsaquo;{' '}
           <span className="text-gray-700">{post.title}</span>
         </nav>
 
-        {/* Hero Image with Caption */}
         <figure className="w-full rounded-xl overflow-hidden mb-8 shadow-sm">
           <div className="aspect-[21/9]">
             <img
@@ -159,7 +109,6 @@ const ogImageUrl = `https://www.firstandlastmarketing.com/og-images/post-${ogIma
           </figcaption>
         </figure>
 
-        {/* Compact Title & Metadata */}
         <div className="space-y-2 sm:space-y-4 mb-6 text-center">
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-indigo-800 leading-tight">
             {post.title}
@@ -180,13 +129,11 @@ const ogImageUrl = `https://www.firstandlastmarketing.com/og-images/post-${ogIma
           </div>
         </div>
 
-        {/* Content */}
         <div
           className="prose max-w-none prose-indigo prose-lg"
           dangerouslySetInnerHTML={{ __html: post.content }}
         />
 
-        {/* Tags */}
         <div className="mt-8 flex flex-wrap gap-2">
           {post.tags.map((tag) => (
             <Link
@@ -199,7 +146,6 @@ const ogImageUrl = `https://www.firstandlastmarketing.com/og-images/post-${ogIma
           ))}
         </div>
 
-        {/* Share Section */}
         <div className="mt-10 border-t pt-6">
           <h3 className="text-lg font-semibold mb-3">Share this post:</h3>
           <div className="flex flex-wrap gap-4 text-sm">
@@ -209,7 +155,6 @@ const ogImageUrl = `https://www.firstandlastmarketing.com/og-images/post-${ogIma
           </div>
         </div>
 
-        {/* Prev / Next */}
         <div className="mt-12 border-t pt-8 flex flex-col sm:flex-row justify-between gap-4 text-sm">
           {prevPost ? (
             <Link
@@ -237,7 +182,6 @@ const ogImageUrl = `https://www.firstandlastmarketing.com/og-images/post-${ogIma
           ) : <div />}
         </div>
 
-        {/* Related Posts */}
         {relatedPosts.length > 0 && (
           <div className="mt-16 border-t pt-10">
             <h3 className="text-xl font-semibold mb-6">Related Posts</h3>
