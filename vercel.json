@@ -20,10 +20,21 @@
         {
           "type": "header",
           "key": "User-Agent",
-          "value": "(?i)(facebookexternalhit|twitterbot|linkedinbot|embedly|quora|slackbot)"
+          "value": "(?i)(facebookexternalhit|twitterbot|linkedinbot|embedly|quora|slackbot|googlebot|bingbot)"
         }
       ],
       "destination": "/prerenders/:slug.html"
+    },
+    {
+      "source": "/blog",
+      "has": [
+        {
+          "type": "header",
+          "key": "User-Agent",
+          "value": "(?i)(facebookexternalhit|twitterbot|linkedinbot|embedly|quora|slackbot|googlebot|bingbot)"
+        }
+      ],
+      "destination": "/prerenders/blog.html"
     },
     {
       "source": "/blog/:slug",

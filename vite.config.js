@@ -9,6 +9,13 @@ export default defineConfig({
     tailwindcss(),
     VitePWA({
       registerType: 'autoUpdate',
+      includeAssets: [
+        'favicon.ico',
+        'apple-touch-icon.png',
+        'favicon-192x192.png',
+        'favicon-512x512.png',
+        'maskable-icon.png'
+      ],
       manifest: {
         name: "First and Last Marketing",
         short_name: "FNL Marketing",
@@ -20,14 +27,20 @@ export default defineConfig({
         lang: "en",
         icons: [
           {
-            src: "/favicon.png",
+            src: "/favicon-192x192.png",
             sizes: "192x192",
             type: "image/png"
           },
           {
-            src: "/favicon.png",
+            src: "/favicon-512x512.png",
             sizes: "512x512",
             type: "image/png"
+          },
+          {
+            src: "/maskable-icon.png",
+            sizes: "512x512",
+            type: "image/png",
+            purpose: "maskable"
           }
         ]
       },
@@ -40,11 +53,11 @@ export default defineConfig({
               cacheName: 'fnl-cache',
               expiration: {
                 maxEntries: 50,
-                maxAgeSeconds: 60 * 60 * 24 * 30, // 30 Days
-              },
-            },
+                maxAgeSeconds: 60 * 60 * 24 * 30 // 30 Days
+              }
+            }
           }
-        ],
+        ]
       }
     })
   ],
@@ -52,21 +65,18 @@ export default defineConfig({
     host: '0.0.0.0',
     port: 5173
   },
-  
   build: {
-  rollupOptions: {
-    output: {
-      manualChunks(id) {
-        if (id.includes('node_modules')) {
-          if (id.includes('react') || id.includes('react-dom')) return 'vendor_react';
-          if (id.includes('aos')) return 'vendor_aos';
-          if (id.includes('react-router')) return 'vendor_router';
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('react') || id.includes('react-dom')) return 'vendor_react';
+            if (id.includes('aos')) return 'vendor_aos';
+            if (id.includes('react-router')) return 'vendor_router';
+          }
         }
       }
-    }
-  },
-  // Optional: raise the chunk size limit warning
-  chunkSizeWarningLimit: 1000
-}
-
+    },
+    chunkSizeWarningLimit: 1000
+  }
 });
