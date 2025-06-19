@@ -14,20 +14,30 @@
     }
   ],
   "rewrites": [
-    {
-      "source": "/blog/:slug",
-      "destination": "blog/slug.html"
-    },
-    {
-      "source": "/blog",
-      "destination": "/blog.html"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
-  ],
-  
+  {
+    "source": "/blog/:slug",
+    "has": [
+      {
+        "type": "header",
+        "key": "User-Agent",
+        "value": "(?i)(facebookexternalhit|twitterbot|linkedinbot|embedly|quora|slackbot)"
+      }
+    ],
+    "destination": "/blog/:slug.html"
+  },
+  {
+    "source": "/blog/:slug",
+    "destination": "/index.html"
+  },
+  {
+    "source": "/blog",
+    "destination": "/index.html"
+  },
+  {
+    "source": "/(.*)",
+    "destination": "/index.html"
+  }
+],
   "installCommand": "npm install --legacy-peer-deps",
   "buildCommand": "npm run build"
 }
