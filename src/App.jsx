@@ -12,8 +12,8 @@ import About from './Components/About.jsx';
 import Contact from './Components/Contact.jsx';
 import Footer from './Components/Footer.jsx';
 import ChatWidget from './Components/Chatwidget.jsx';
-import Promo from './Components/Promo.jsx';
 import ReviewWidget from './Components/ReviewWidget.jsx';
+import PromoBanner from './Components/PromoBanner.jsx';
 
 // Lazy-loaded pages
 const Blog = lazy(() => import('./Components/Blog.jsx'));
@@ -61,7 +61,7 @@ const App = () => {
               <Portfolio />
               <About />
               <Contact />
-              <Promo />
+              <PromoBanner />
               <Footer />
               <ChatWidget />
             </>

@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { blogPosts } from './blogData';
 import BlogNavBar from './BlogNavBar';
-
+import PromoBanner from './PromoBanner';
 
 
 const useQuery = () => new URLSearchParams(useLocation().search);
@@ -230,6 +230,7 @@ const Blog = () => {
           </div>
         )}
       </section>
+      <PromoBanner />
     </div>
   );
 };

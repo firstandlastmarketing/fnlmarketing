@@ -3,7 +3,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { blogPosts } from './blogData';
 import BlogNavBar from "./BlogNavBar";
-
+import PromoBanner from './PromoBanner';
 
 
 const PostDetail = () => {
@@ -256,6 +256,7 @@ const ogImageUrl = `https://www.firstandlastmarketing.com/og-images/post-${ogIma
           </div>
         )}
       </div>
+      <PromoBanner />
     </div>
   );
 };
