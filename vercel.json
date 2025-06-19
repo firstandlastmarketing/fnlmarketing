@@ -16,31 +16,18 @@
   "rewrites": [
     {
       "source": "/blog/:slug",
-      "destination": "/index.html"
+      "destination": "blog/:slug.html"
     },
     {
       "source": "/blog",
-      "destination": "/index"
+      "destination": "/:blog.html"
     },
     {
       "source": "/(.*)",
       "destination": "/index.html"
     }
   ],
-  "redirects": [
-    {
-      "source": "/blog/:slug",
-      "has": [
-        {
-          "type": "header",
-          "key": "User-Agent",
-          "value": "(facebookexternalhit|twitterbot|linkedinbot|embedly|quora link preview|slackbot)"
-        }
-      ],
-      "destination": "/blog/:slug",
-      "permanent": false
-    }
-  ],
+  
   "installCommand": "npm install --legacy-peer-deps",
   "buildCommand": "npm run build"
 }
