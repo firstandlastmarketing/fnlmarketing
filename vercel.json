@@ -16,18 +16,7 @@
   "rewrites": [
     {
       "source": "/blog/:slug",
-      "has": [
-        {
-          "type": "header",
-          "key": "User-Agent",
-          "value": "^(?!.*(facebookexternalhit|twitterbot|linkedinbot|embedly|quora link preview|slackbot)).*$"
-        }
-      ],
       "destination": "/index.html"
-    },
-    {
-      "source": "/blog/:slug",
-      "destination": "/blog/:slug.html"
     },
     {
       "source": "/blog",
@@ -36,6 +25,20 @@
     {
       "source": "/(.*)",
       "destination": "/index.html"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/blog/:slug",
+      "has": [
+        {
+          "type": "header",
+          "key": "User-Agent",
+          "value": "(facebookexternalhit|twitterbot|linkedinbot|embedly|quora link preview|slackbot)"
+        }
+      ],
+      "destination": "/blog/:slug.html",
+      "permanent": false
     }
   ],
   "installCommand": "npm install --legacy-peer-deps",
