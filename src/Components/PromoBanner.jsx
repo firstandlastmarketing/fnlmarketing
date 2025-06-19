@@ -1,29 +1,34 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { HiSpeakerphone } from 'react-icons/hi';
-import PromoFormModal from './PromoFormModal'; // ✅ Make sure the path is correct
+import PromoFormModal from './PromoFormModal';
 
 export default function PromoBanner() {
   const [isVisible, setIsVisible] = useState(false);
   const [hasClosed, setHasClosed] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   const [hasAutoExpanded, setHasAutoExpanded] = useState(false);
-  const [showPromoForm, setShowPromoForm] = useState(false); // ✅ New state to manage form modal
+  const [showPromoForm, setShowPromoForm] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       if (!hasClosed) {
         setIsVisible(true);
-        // Auto-expand on desktop only once per load
-        if (window.innerWidth >= 768 && !hasAutoExpanded) {
-          setIsExpanded(true);
-          setHasAutoExpanded(true);
+        setIsExpanded(true);
+        setHasAutoExpanded(true);
+
+        // Auto-close after 4s only on mobile
+        if (window.innerWidth < 768) {
+          setTimeout(() => {
+            setIsExpanded(false);
+            setHasClosed(true);
+          }, 4000);
         }
       }
     }, 2000);
 
     return () => clearTimeout(timer);
-  }, [hasClosed, hasAutoExpanded]);
+  }, [hasClosed]);
 
   const handleClose = () => {
     setIsExpanded(false);
@@ -33,7 +38,7 @@ export default function PromoBanner() {
   const handleCTA = () => {
     setIsExpanded(false);
     setHasClosed(true);
-    setShowPromoForm(true); // ✅ Open the form modal instead of scrolling
+    setShowPromoForm(true);
   };
 
   const widgetVariants = {
@@ -50,7 +55,7 @@ export default function PromoBanner() {
 
   return (
     <>
-      {/* Widget button — always visible */}
+      {/* Always-visible widget button */}
       <motion.div
         variants={widgetVariants}
         animate="idle"
@@ -60,7 +65,7 @@ export default function PromoBanner() {
           <button
             onClick={() => {
               setIsExpanded(true);
-              setHasClosed(false); // Allow expansion
+              setHasClosed(false);
             }}
             className="flex items-center gap-2 bg-gradient-to-r from-purple-600 to-yellow-400 text-white px-4 py-2 rounded-full shadow-lg text-sm font-semibold"
           >
@@ -70,7 +75,7 @@ export default function PromoBanner() {
         )}
       </motion.div>
 
-      {/* Expanded promo content */}
+      {/* Promo card */}
       <AnimatePresence>
         {isExpanded && (
           <motion.div
@@ -84,7 +89,7 @@ export default function PromoBanner() {
                 <div className="bg-white rounded-[1rem] p-4 space-y-2 text-sm">
                   <div className="flex justify-between items-center">
                     <h3 className="text-md font-bold text-gray-800">
-                      🎉 $100 Website
+                      🎉 Stop Renting. Own Your Website.
                     </h3>
                     <button
                       onClick={handleClose}
@@ -95,7 +100,12 @@ export default function PromoBanner() {
                     </button>
                   </div>
                   <p className="text-gray-600 text-sm">
-                    No templates. No fluff. Just clean websites that convert.
+                    Most sites are rented — you're paying forever for something you don’t own.
+                    Let First and Last Marketing build you a blazing-fast, fully custom website
+                    that’s 100% yours. No subscriptions. No cookie cutters. Just results.
+                  </p>
+                  <p className="text-red-500 text-xs font-medium">
+                    Don’t waste $4,000 on templated fluff. Get it done right for $100.
                   </p>
                   <button
                     onClick={handleCTA}
@@ -113,7 +123,7 @@ export default function PromoBanner() {
         )}
       </AnimatePresence>
 
-      {/* Promo Form Modal (Fully Self-contained) */}
+      {/* Modal form */}
       <PromoFormModal
         isOpen={showPromoForm}
         onClose={() => setShowPromoForm(false)}
