@@ -13,28 +13,30 @@
       ]
     }
   ],
+  
   "rewrites": [
     {
-      "source": "/robots.txt",
-      "destination": "/robots.txt"
-    },
-    {
-      "source": "/sitemap.xml",
-      "destination": "/sitemap.xml"
-    },
-    {
-      "source": "/blog",
-      "destination": "/blog.html"
+      "source": "/blog/:slug",
+      "has": [
+        {
+          "type": "header",
+          "key": "User-Agent",
+          "value": "(?i)(facebookexternalhit|twitterbot|linkedinbot|embedly|quora link preview|slackbot)"
+        }
+      ],
+      "destination": "/blog/:slug.html"
     },
     {
       "source": "/blog/:slug",
-      "destination": "/blog/:slug.html"
+      "destination": "/index.html"
+    },
+    {
+      "source": "/blog",
+      "destination": "/index.html"
     },
     {
       "source": "/(.*)",
       "destination": "/index.html"
     }
-  ],
-  "installCommand": "npm install --legacy-peer-deps",
-  "buildCommand": "npm install --legacy-peer-deps && npm run build"
+  ]
 }
