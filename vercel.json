@@ -20,7 +20,7 @@
     },
     {
       "source": "/blog",
-      "destination": "/index.html"
+      "destination": "/index"
     },
     {
       "source": "/(.*)",
@@ -37,7 +37,7 @@
           "value": "(facebookexternalhit|twitterbot|linkedinbot|embedly|quora link preview|slackbot)"
         }
       ],
-      "destination": "/blog/:slug.html",
+      "destination": "/blog/:slug",
       "permanent": false
     }
   ],
