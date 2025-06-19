@@ -20,14 +20,14 @@
         {
           "type": "header",
           "key": "User-Agent",
-          "value": "(?i)(facebookexternalhit|twitterbot|linkedinbot|embedly|quora link preview|slackbot)"
+          "value": "^(?!.*(facebookexternalhit|twitterbot|linkedinbot|embedly|quora link preview|slackbot)).*$"
         }
       ],
-      "destination": "/blog/:slug.html"
+      "destination": "/index.html"
     },
     {
       "source": "/blog/:slug",
-      "destination": "/index.html"
+      "destination": "/blog/:slug.html"
     },
     {
       "source": "/blog",
