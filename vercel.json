@@ -15,26 +15,44 @@
   ],
   "rewrites": [
     {
-      "source": "/blog/:slug",
-      "has": [
-        {
-          "type": "header",
-          "key": "User-Agent",
-          "value": "(?i)(facebookexternalhit|twitterbot|linkedinbot|embedly|quora|slackbot|pinterest|discord|telegram|whatsapp|googlebot|bingbot)"
-        }
-      ],
-      "destination": "/prerenders/:slug.html"
+    "source": "/blog/ultimate-guide-digital-marketing-2025",
+    "destination": "/prerenders/ultimate-guide-digital-marketing-2025.html"
     },
     {
-      "source": "/blog",
-      "has": [
-        {
-          "type": "header",
-          "key": "User-Agent",
-          "value": "(?i)(facebookexternalhit|twitterbot|linkedinbot|embedly|quora|slackbot|pinterest|discord|telegram|whatsapp|googlebot|bingbot)"
-        }
-      ],
-      "destination": "/prerenders/blog.html"
+      "source": "/blog/top-seo-trends-2025-saas",
+      "destination": "/prerenders/top-seo-trends-2025-saas.html"
+    },
+    {
+      "source": "/blog/seo-content-strategy-saas-2025",
+      "destination": "/prerenders/seo-content-strategy-saas-2025.html"
+    },
+    {
+      "source": "/blog/top-marketing-automation-tools-2025",
+      "destination": "/prerenders/top-marketing-automation-tools-2025.html"
+    },
+    {
+      "source": "/blog/reputation-management-saas",
+      "destination": "/prerenders/reputation-management-saas.html"
+    },
+    {
+      "source": "/blog/turn-visitors-into-leads",
+      "destination": "/prerenders/turn-visitors-into-leads.html"
+    },
+    {
+      "source": "/blog/chat-automation-human-touch",
+      "destination": "/prerenders/chat-automation-human-touch.html"
+    },
+    {
+      "source": "/blog/landing-page-mistakes-2025",
+      "destination": "/prerenders/landing-page-mistakes-2025.html"
+    },
+    {
+      "source": "/blog/ai-in-marketing-2025",
+      "destination": "/prerenders/ai-in-marketing-2025.html"
+    },
+    {
+      "source": "/blog/web-design-trends-2025",
+      "destination": "/prerenders/web-design-trends-2025.html"
     },
     {
       "source": "/blog/:slug",
