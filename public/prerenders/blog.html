@@ -27,8 +27,18 @@
   <meta name="twitter:title" content="Digital Marketing Blog | First and Last Marketing" />
   <meta name="twitter:description" content="Explore expert articles on SEO, automation, web design, and SaaS marketing trends from First and Last Marketing." />
   <meta name="twitter:image" content="https://www.firstandlastmarketing.com/og-images/blog-preview.png" />
+
+  <script>
+    // Redirect real users, but not bots (social preview bots or Googlebot)
+    const ua = navigator.userAgent;
+    const isBot = /bot|crawler|spider|crawling/i.test(ua);
+
+    if (!isBot) {
+      window.location.href = '/blog';
+    }
+  </script>
 </head>
 <body>
-  <p>This is a static OG preview page for /blog.</p>
+  <p>If you are seeing this, you are likely a crawler or bot. This page helps social media show blog previews correctly.</p>
 </body>
 </html>

@@ -15,6 +15,10 @@
   ],
   "rewrites": [
     {
+      "source": "/blog",
+      "destination": "/prerenders/blog.html"
+    },
+    {
     "source": "/blog/ultimate-guide-digital-marketing-2025",
     "destination": "/prerenders/ultimate-guide-digital-marketing-2025.html"
     },
