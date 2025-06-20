@@ -20,7 +20,7 @@
         {
           "type": "header",
           "key": "User-Agent",
-          "value": "(?i)(facebookexternalhit|twitterbot|linkedinbot|embedly|quora|slackbot|googlebot|bingbot)"
+          "value": "(?i)(facebookexternalhit|twitterbot|linkedinbot|embedly|quora|slackbot|pinterest|discord|telegram|whatsapp|googlebot|bingbot)"
         }
       ],
       "destination": "/prerenders/:slug.html"
@@ -31,7 +31,7 @@
         {
           "type": "header",
           "key": "User-Agent",
-          "value": "(?i)(facebookexternalhit|twitterbot|linkedinbot|embedly|quora|slackbot|googlebot|bingbot)"
+          "value": "(?i)(facebookexternalhit|twitterbot|linkedinbot|embedly|quora|slackbot|pinterest|discord|telegram|whatsapp|googlebot|bingbot)"
         }
       ],
       "destination": "/prerenders/blog.html"
