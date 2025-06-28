@@ -1,0 +1,224 @@
+{
+  "headers": [
+    {
+      "source": "/robots.txt",
+      "headers": [
+        { "key": "Content-Type", "value": "text/plain; charset=utf-8" }
+      ]
+    },
+    {
+      "source": "/sitemap.xml",
+      "headers": [
+        { "key": "Content-Type", "value": "application/xml; charset=utf-8" }
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/blog",
+      "has": [
+        {
+          "type": "header",
+          "key": "user-agent",
+          "value": "(?i)bot|crawler|facebook|messenger|twitter|linkedin|embedly|discord|slack|whatsapp|googlebot|bingbot|pinterest|applebot|telegram|quora|skypeuripreview"
+        }
+      ],
+      "destination": "/prerenders/blog.html"
+    },
+    {
+      "source": "/blog",
+      "destination": "/index.html"
+    },
+
+    {
+      "source": "/pricing",
+      "has": [
+        {
+          "type": "header",
+          "key": "user-agent",
+          "value": "(?i)bot|crawler|facebook|messenger|twitter|linkedin|embedly|discord|slack|whatsapp|googlebot|bingbot|pinterest|applebot|telegram|quora|skypeuripreview"
+        }
+      ],
+      "destination": "/prerenders/pricing.html"
+    },
+    {
+      "source": "/pricing",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/blog/ultimate-guide-digital-marketing-2025",
+      "has": [
+        {
+          "type": "header",
+          "key": "user-agent",
+          "value": "(?i)bot|crawler|facebook|messenger|twitter|linkedin|embedly|discord|slack|whatsapp|googlebot|bingbot|pinterest|applebot|telegram|quora|skypeuripreview"
+        }
+      ],
+      "destination": "/prerenders/ultimate-guide-digital-marketing-2025.html"
+    },
+    {
+      "source": "/blog/ultimate-guide-digital-marketing-2025",
+      "destination": "/index.html"
+    },
+
+    {
+      "source": "/blog/top-seo-trends-2025-saas",
+      "has": [
+        {
+          "type": "header",
+          "key": "user-agent",
+          "value": "(?i)bot|crawler|facebook|messenger|twitter|linkedin|embedly|discord|slack|whatsapp|googlebot|bingbot|pinterest|applebot|telegram|quora|skypeuripreview"
+        }
+      ],
+      "destination": "/prerenders/top-seo-trends-2025-saas.html"
+    },
+    {
+      "source": "/blog/top-seo-trends-2025-saas",
+      "destination": "/index.html"
+    },
+
+    {
+      "source": "/blog/seo-content-strategy-saas-2025",
+      "has": [
+        {
+          "type": "header",
+          "key": "user-agent",
+          "value": "(?i)bot|crawler|facebook|messenger|twitter|linkedin|embedly|discord|slack|whatsapp|googlebot|bingbot|pinterest|applebot|telegram|quora|skypeuripreview"
+        }
+      ],
+      "destination": "/prerenders/seo-content-strategy-saas-2025.html"
+    },
+    {
+      "source": "/blog/seo-content-strategy-saas-2025",
+      "destination": "/index.html"
+    },
+
+    {
+      "source": "/blog/top-marketing-automation-tools-2025",
+      "has": [
+        {
+          "type": "header",
+          "key": "user-agent",
+          "value": "(?i)bot|crawler|facebook|messenger|twitter|linkedin|embedly|discord|slack|whatsapp|googlebot|bingbot|pinterest|applebot|telegram|quora|skypeuripreview"
+        }
+      ],
+      "destination": "/prerenders/top-marketing-automation-tools-2025.html"
+    },
+    {
+      "source": "/blog/top-marketing-automation-tools-2025",
+      "destination": "/index.html"
+    },
+
+    {
+      "source": "/blog/reputation-management-saas",
+      "has": [
+        {
+          "type": "header",
+          "key": "user-agent",
+          "value": "(?i)bot|crawler|facebook|messenger|twitter|linkedin|embedly|discord|slack|whatsapp|googlebot|bingbot|pinterest|applebot|telegram|quora|skypeuripreview"
+        }
+      ],
+      "destination": "/prerenders/reputation-management-saas.html"
+    },
+    {
+      "source": "/blog/reputation-management-saas",
+      "destination": "/index.html"
+    },
+
+    {
+      "source": "/blog/turn-visitors-into-leads",
+      "has": [
+        {
+          "type": "header",
+          "key": "user-agent",
+          "value": "(?i)bot|crawler|facebook|messenger|twitter|linkedin|embedly|discord|slack|whatsapp|googlebot|bingbot|pinterest|applebot|telegram|quora|skypeuripreview"
+        }
+      ],
+      "destination": "/prerenders/turn-visitors-into-leads.html"
+    },
+    {
+      "source": "/blog/turn-visitors-into-leads",
+      "destination": "/index.html"
+    },
+
+    {
+      "source": "/blog/chat-automation-human-touch",
+      "has": [
+        {
+          "type": "header",
+          "key": "user-agent",
+          "value": "(?i)bot|crawler|facebook|messenger|twitter|linkedin|embedly|discord|slack|whatsapp|googlebot|bingbot|pinterest|applebot|telegram|quora|skypeuripreview"
+        }
+      ],
+      "destination": "/prerenders/chat-automation-human-touch.html"
+    },
+    {
+      "source": "/blog/chat-automation-human-touch",
+      "destination": "/index.html"
+    },
+
+    {
+      "source": "/blog/landing-page-mistakes-2025",
+      "has": [
+        {
+          "type": "header",
+          "key": "user-agent",
+          "value": "(?i)bot|crawler|facebook|messenger|twitter|linkedin|embedly|discord|slack|whatsapp|googlebot|bingbot|pinterest|applebot|telegram|quora|skypeuripreview"
+        }
+      ],
+      "destination": "/prerenders/landing-page-mistakes-2025.html"
+    },
+    {
+      "source": "/blog/landing-page-mistakes-2025",
+      "destination": "/index.html"
+    },
+
+    {
+      "source": "/blog/ai-in-marketing-2025",
+      "has": [
+        {
+          "type": "header",
+          "key": "user-agent",
+          "value": "(?i)bot|crawler|facebook|messenger|twitter|linkedin|embedly|discord|slack|whatsapp|googlebot|bingbot|pinterest|applebot|telegram|quora|skypeuripreview"
+        }
+      ],
+      "destination": "/prerenders/ai-in-marketing-2025.html"
+    },
+    {
+      "source": "/blog/ai-in-marketing-2025",
+      "destination": "/index.html"
+    },
+
+    {
+      "source": "/blog/web-design-trends-2025",
+      "has": [
+        {
+          "type": "header",
+          "key": "user-agent",
+          "value": "(?i)bot|crawler|facebook|messenger|twitter|linkedin|embedly|discord|slack|whatsapp|googlebot|bingbot|pinterest|applebot|telegram|quora|skypeuripreview"
+        }
+      ],
+      "destination": "/prerenders/web-design-trends-2025.html"
+    },
+    {
+      "source": "/blog/web-design-trends-2025",
+      "destination": "/index.html"
+    },
+    {
+  "source": "/(og-images|screenshots|prerenders)/(.*)",
+  "destination": "/$1/$2"
+},
+{
+  "source": "/(logo\\.png|og-preview\\.jpg|favicon-.*|robots\\.txt|sitemap\\.xml|apple-touch-icon\\.png|.*\\.webmanifest)",
+  "destination": "/$1"
+},
+
+{
+  "source": "/((?!.*\\.(?:png|jpg|jpeg|svg|webp|ico|gif|css|js|json|txt|map|woff|woff2)).*)",
+  "destination": "/index.html"
+}
+
+  ],
+  "installCommand": "npm install --legacy-peer-deps",
+  "buildCommand": "npm run build"
+}

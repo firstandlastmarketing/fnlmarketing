@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+html {
+     scroll-behavior: smooth
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    text-shadow:
+      0 0 6px #fcd34d,
+      0 0 12px #fcd34d,
+      0 0 18px #fcd34d,
+      0 0 24px rgba(252, 211, 77, 0.6);
+  }
+  50% {
+    text-shadow:
+      0 0 2px #fcd34d,
+      0 0 6px #fcd34d,
+      0 0 10px rgba(252, 211, 77, 0.3);
+  }
+}
+
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-glow-pulse {
+  animation: glowPulse 1.8s ease-in-out infinite;
+}

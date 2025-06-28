@@ -1,0 +1,55 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Runtime data and dependencies
+node_modules/
+dist/
+dist-ssr/
+.vite/
+*.local
+.cache/
+.temp/
+
+# Vercel build artifacts
+.vercel/
+
+# Environment variables
+.env
+.env.*.local
+.env.local
+.env.production
+.env.development
+
+# OS system files
+.DS_Store       # macOS
+Thumbs.db       # Windows
+
+# Editor/IDE project files
+.vscode/
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Optional: Uncomment to ignore lock files if managing manually
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+
+# Misc
+coverage/
+*.tgz
+*.zip
+*.bak
+*.tmp
+*.orig
+*.rej
