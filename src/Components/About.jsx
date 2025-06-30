@@ -13,28 +13,30 @@ import aboutImage from "../assets/aboutImage.png";
 import ExplorePricingCTA from './ExplorePricingCTA';
 
 const About = () => {
-  const stats = [
-    {
-      value: "10+",
-      label: "Years of Experience",
-      icon: <FaAward className="text-purple-600" />,
-    },
-    {
-      value: "50+",
-      label: "Happy Clients",
-      icon: <FaHeart className="text-purple-600" />,
-    },
-    {
-      value: "100+",
-      label: "Websites Built",
-      icon: <FaGlobe className="text-purple-600" />,
-    },
-    {
-      value: "99.9%",
-      label: "Hosting Uptime",
-      icon: <FaServer className="text-purple-600" />,
-    },
-  ];
+
+const stats = [
+  {
+    value: "100+",
+    label: "Automation Features",
+    icon: <FaRobot className="text-purple-600" />,
+  },
+  {
+    value: "24/7",
+    label: "Lead Capture",
+    icon: <FaBolt className="text-purple-600" />,
+  },
+  {
+    value: "10+",
+    label: "Years Combined Exp.",
+    icon: <FaAward className="text-purple-600" />,
+  },
+  {
+    value: "99.9%",
+    label: "Uptime Guarantee",
+    icon: <FaServer className="text-purple-600" />,
+  },
+];
+
 
   const keyServices = [
     {

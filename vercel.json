@@ -1,4 +1,10 @@
 {
+  "version": 2,
+  "functions": {
+    "ai-chat-backend/server.js": {
+      "memory": 1024
+    }
+  },
   "headers": [
     {
       "source": "/robots.txt",
@@ -14,6 +20,10 @@
     }
   ],
   "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/ai-chat-backend/server.js"
+    },
     {
       "source": "/blog",
       "has": [

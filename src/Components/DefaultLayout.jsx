@@ -1,7 +1,6 @@
 import React from 'react';
 import Header from './Header.jsx';
 import Footer from './Footer.jsx';
-import ChatWidget from './Chatwidget.jsx';
 import PromoBanner from './PromoBanner.jsx';
 
 const DefaultLayout = ({ children }) => {
@@ -11,7 +10,6 @@ const DefaultLayout = ({ children }) => {
       <PromoBanner />
       {children}
       <Footer />
-      <ChatWidget />
     </>
   );
 };
