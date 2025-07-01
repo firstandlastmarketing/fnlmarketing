@@ -4,27 +4,27 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 
 // Core Components
-import Header from "./Components/Header.jsx";
-import Hero from "./Components/Hero.jsx";
-import Services from "./Components/Services.jsx";
-import Portfolio from "./Components/Portfolio.jsx";
-import About from "./Components/About.jsx";
-import Contact from "./Components/Contact.jsx";
-import Footer from "./Components/Footer.jsx";
-import ReviewWidget from "./Components/ReviewWidget.jsx";
-import PromoBanner from "./Components/PromoBanner.jsx";
-import ScrollToTop from "./Components/ScrollToTop.jsx";
-
-// AI Chat Assistant (✅ renamed if you updated file name from ChatWidget to AIChatAssistant)
-import AIChatAssistant from "./Components/AIChatAssistant.jsx";
+import Header from "./Components/layout/Header.jsx";
+import Hero from "./Components/pages/Hero.jsx";
+import Services from "./Components/pages/Services.jsx";
+import Portfolio from "./Components/pages/Portfolio.jsx";
+import About from "./Components/pages/About.jsx";
+import Contact from "./Components/pages/Contact.jsx";
+import Footer from "./Components/layout/Footer.jsx";
+import ReviewWidget from "./Components/marketing/ReviewWidget.jsx";
+import PromoBanner from "./Components/layout/PromoBanner.jsx";
+import ScrollToTop from "./Components/layout/ScrollToTop.jsx";
+import DefaultLayout from "./Components/layout/DefaultLayout.jsx";
+// AI Chat Assistant
+import AIChatAssistant from "./Components/ai/AIChatAssistant.jsx";
 
 // Lazy-loaded Pages
-const Blog = lazy(() => import("./Components/Blog.jsx"));
-const PostDetail = lazy(() => import("./Components/PostDetail.jsx"));
-const PrivacyPolicy = lazy(() => import("./Components/PrivacyPolicy.jsx"));
-const TermsOfUse = lazy(() => import("./Components/TermsOfUse.jsx"));
-const Pricing = lazy(() => import("./Components/Pricing.jsx"));
-const ContractorLandingPage = lazy(() => import("./Components/ContractorLandingPage.jsx"));
+const Blog = lazy(() => import("./Components/blog/Blog.jsx"));
+const PostDetail = lazy(() => import("./Components/blog/PostDetail.jsx"));
+const PrivacyPolicy = lazy(() => import("./Components/pages/PrivacyPolicy.jsx"));
+const TermsOfUse = lazy(() => import("./Components/pages/TermsOfUse.jsx"));
+const Pricing = lazy(() => import("./Components/pages/Pricing.jsx"));
+const ContractorLandingPage = lazy(() => import("./Components/pages/ContractorLandingPage.jsx"));
 
 // Scroll helper (scroll to an ID stored in sessionStorage)
 const ScrollToSection = () => {
@@ -51,24 +51,66 @@ const App = () => {
   return (
     <main lang="en" className="bg-white text-gray-900">
       <Routes>
-        {/* Home Page - Full Scrollable SPA */}
+        {/* Home Page */}
         <Route
           path="/"
           element={
-            <>
-              <ScrollToTop />
-              <ScrollToSection />
-              <Header />
+            <DefaultLayout>
               <Hero />
-              <ReviewWidget />
+            </DefaultLayout>
+          }
+        />
+
+        {/* Services Page */}
+        <Route
+          path="/services"
+          element={
+            <DefaultLayout>
               <Services />
+            </DefaultLayout>
+          }
+        />
+
+        {/* Portfolio Page */}
+        <Route
+          path="/portfolio"
+          element={
+            <DefaultLayout>
               <Portfolio />
+            </DefaultLayout>
+          }
+        />
+
+        {/* About Page */}
+        <Route
+          path="/about"
+          element={
+            <DefaultLayout>
               <About />
+            </DefaultLayout>
+          }
+        />
+
+        {/* Contact Page */}
+        <Route
+          path="/contact"
+          element={
+            <DefaultLayout>
               <Contact />
-              <PromoBanner />
-              <Footer />
-              <AIChatAssistant /> {/* ⬅️ Make sure this matches your file name */}
-            </>
+            </DefaultLayout>
+          }
+        />
+
+        {/* Pricing Page */}
+        <Route
+          path="/pricing"
+          element={
+            <Suspense fallback={<div className="p-6 text-center">Loading pricing...</div>}>
+              <ScrollToTop />
+              <DefaultLayout>
+                <Pricing />
+              </DefaultLayout>
+            </Suspense>
           }
         />
 
@@ -80,6 +122,7 @@ const App = () => {
               <ScrollToTop />
               <Blog />
               <Footer />
+              <AIChatAssistant />
             </Suspense>
           }
         />
@@ -93,18 +136,7 @@ const App = () => {
               <Header />
               <PostDetail />
               <Footer />
-            </Suspense>
-          }
-        />
-
-        {/* Pricing Page */}
-        <Route
-          path="/pricing"
-          element={
-            <Suspense fallback={<div className="p-6 text-center">Loading pricing...</div>}>
-              <ScrollToTop />
-              <Pricing />
-              <Footer />
+              <AIChatAssistant />
             </Suspense>
           }
         />

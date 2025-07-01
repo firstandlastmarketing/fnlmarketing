@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { blogPosts } from './blogData';
 import BlogNavBar from './BlogNavBar';
-import PromoBanner from './PromoBanner';
+import PromoBanner from '../layout/PromoBanner.jsx';
 
 const PostDetail = () => {
   const { slug } = useParams();

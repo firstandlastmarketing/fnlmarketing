@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 
-import ContractorPricingModal from './ContractorPricingModal'; // Assuming this component exists
+import ContractorPricingModal from '../modals/ContractorPricingModal.jsx';
 
 // ICONS
 // CORRECT
@@ -10,17 +10,17 @@ import { ArrowRightIcon, CheckCircleIcon, XCircleIcon, ChevronLeftIcon, ChevronR
 import { WrenchScrewdriverIcon, UsersIcon, ChatBubbleLeftRightIcon, ChartBarIcon, ServerStackIcon, SparklesIcon, ShieldCheckIcon, PhoneIcon, BuildingStorefrontIcon, UserGroupIcon } from '@heroicons/react/24/outline';
 
 // LOGO - Ensure you have a version of your logo that works on dark backgrounds (e.g., white or monochrome)
-import logo from '../assets/logo.png'; 
+import logo from '../../assets/logo.png'; 
 
 // ===[ SLIDESHOW IMAGES (ALL 8) ]==============================================
-import hvacImage from '../assets/landing_page_slides/first-last-marketing-web-design-springfield-mo-hvac-company-website-screenshot.png';
-import plumbingImage from '../assets/landing_page_slides/first-last-marketing-web-design-springfield-mo-plumbing-service-website-screenshot.png';
-import electricalImage from '../assets/landing_page_slides/first-last-marketing-web-design-springfield-mo-electrical-website-screenshot.png';
-import roofingImage from '../assets/landing_page_slides/first-last-marketing-web-design-springfield-mo-roofing-company-website-screenshot.png';
-import pestControlImage from '../assets/landing_page_slides/first-last-marketing-web-design-springfield-mo-pest-control-website-screenshot.png';
-import landscapingImage from '../assets/landing_page_slides/first-last-marketing-web-design-springfield-mo-landscaping-website-screenshot.png';
-import cleaningImage from '../assets/landing_page_slides/first-last-marketing-web-design-springfield-mo-cleaning-service-website-screenshot.png';
-import remodelingImage from '../assets/landing_page_slides/first-last-marketing-web-design-springfield-mo-home-remodeling-website-screenshot.png';
+import hvacImage from '../../assets/landing_page_slides/first-last-marketing-web-design-springfield-mo-hvac-company-website-screenshot.png';
+import plumbingImage from '../../assets/landing_page_slides/first-last-marketing-web-design-springfield-mo-plumbing-service-website-screenshot.png';
+import electricalImage from '../../assets/landing_page_slides/first-last-marketing-web-design-springfield-mo-electrical-website-screenshot.png';
+import roofingImage from '../../assets/landing_page_slides/first-last-marketing-web-design-springfield-mo-roofing-company-website-screenshot.png';
+import pestControlImage from '../../assets/landing_page_slides/first-last-marketing-web-design-springfield-mo-pest-control-website-screenshot.png';
+import landscapingImage from '../../assets/landing_page_slides/first-last-marketing-web-design-springfield-mo-landscaping-website-screenshot.png';
+import cleaningImage from '../../assets/landing_page_slides/first-last-marketing-web-design-springfield-mo-cleaning-service-website-screenshot.png';
+import remodelingImage from '../../assets/landing_page_slides/first-last-marketing-web-design-springfield-mo-home-remodeling-website-screenshot.png';
 
 //===[ DATA STRUCTURES ]=========================================================
 const slides = [

@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { FaClock, FaMapMarkerAlt, FaPhoneAlt, FaEnvelope } from 'react-icons/fa';
-import contactImg from '../assets/contactImg.png';
+import contactImg from '../../assets/contactImg.png';
 import emailjs from '@emailjs/browser';
 
 const Contact = () => {
@@ -11,30 +11,30 @@ const Contact = () => {
 
   const contactItems = [
     {
-      icon: <FaMapMarkerAlt className="text-gold-600 text-xl" />,
+      icon: <FaMapMarkerAlt className="text-yellow-600 text-xl" />,
       title: "Our Location",
       content: <p className="text-gray-700">Springfield, Missouri</p>,
     },
     {
-      icon: <FaPhoneAlt className="text-gold-600 text-xl" />,
+      icon: <FaPhoneAlt className="text-yellow-600 text-xl" />,
       title: "Phone Number",
       content: (
         <p className="text-gray-700">
-          <a href="tel:+15732020088" className="hover:text-gold-600">+1 (573) 202-0088</a>
+          <a href="tel:+15732020088" className="hover:text-yellow-600">+1 (573) 202-0088</a>
         </p>
       ),
     },
     {
-      icon: <FaEnvelope className="text-gold-600 text-xl" />,
+      icon: <FaEnvelope className="text-yellow-600 text-xl" />,
       title: "Email",
       content: (
         <p className="text-gray-700">
-          <a href="mailto:contact@firstandlastmarketing.com" className="hover:text-gold-600">contact@firstandlastmarketing.com</a>
+          <a href="mailto:contact@firstandlastmarketing.com" className="hover:text-yellow-600">contact@firstandlastmarketing.com</a>
         </p>
       ),
     },
     {
-      icon: <FaClock className="text-gold-600 text-xl" />,
+      icon: <FaClock className="text-yellow-600 text-xl" />,
       title: "Working Hours",
       content: (
         <p className="text-gray-700">
@@ -97,9 +97,9 @@ const Contact = () => {
       </div>
       <div className="container mx-auto px-4">
         <header className="text-center mb-16 relative">
-          <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 w-24 h-24 rounded-full bg-gold-300 opacity-30 z-0" />
+          <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 w-24 h-24 rounded-full bg-yellow-300 opacity-30 z-0" />
           <h1 className="text-4xl font-bold text-white mb-4 relative z-10">
-            Contact <span className="text-gold-300">First and Last Marketing</span>
+            Contact <span className="text-yellow-300">First and Last Marketing</span>
           </h1>
           <p className="text-lg text-gray-200 max-w-2xl mx-auto relative z-10">
             Ready to grow your brand online? Get in touch for web design, hosting, or reputation services.
@@ -114,7 +114,7 @@ const Contact = () => {
               <address className="space-y-6 not-italic">
                 {contactItems.map((item, index) => (
                   <article key={index} className="flex items-start">
-                    <figure className="bg-gold-100 p-3 rounded-full mr-4 flex-shrink-0">{item.icon}</figure>
+                    <figure className="bg-yellow-100 p-3 rounded-full mr-4 flex-shrink-0">{item.icon}</figure>
                     <div>
                       <h3 className="font-medium text-gray-800 mb-1">{item.title}</h3>
                       {item.content}
@@ -192,7 +192,7 @@ const Contact = () => {
                           checked={selectedServices.includes(service)}
                           onChange={() => handleCheckboxChange(service)}
                           disabled={loading}
-                          className="w-5 h-5 text-gold-600 border-gray-300 rounded focus:ring-gold-400"
+                          className="w-5 h-5 text-yellow-600 border-gray-300 rounded focus:ring-yellow-400"
                         />
                         <span>{service}</span>
                       </label>

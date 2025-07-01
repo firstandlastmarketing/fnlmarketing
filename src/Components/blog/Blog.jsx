@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { blogPosts } from './blogData';
-import BlogNavBar from './BlogNavBar';
-import PromoBanner from './PromoBanner';
+import { blogPosts } from './blogData.js';
+import BlogNavBar from './BlogNavBar.jsx';
+import PromoBanner from '../layout/PromoBanner.jsx';
 import { Helmet } from 'react-helmet-async';
 
 const useQuery = () => new URLSearchParams(useLocation().search);

@@ -1,8 +1,8 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Send, Bot, XCircle, User, Sparkles } from "lucide-react";
-import chatSound from "../assets/chat-open.mp3";
-import ChatLeadCaptureForm from "./ChatLeadCaptureForm";
+import chatSound from "../../assets/chat-open.mp3";
+import ChatLeadCaptureForm from "../marketing/ChatLeadCaptureForm.jsx";
 import ReactMarkdown from "react-markdown";
 
 // ===> ENHANCEMENT: A new, animated "typing" indicator component.

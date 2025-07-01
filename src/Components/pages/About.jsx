@@ -9,8 +9,8 @@ import {
   FaRobot,
   FaBolt,
 } from "react-icons/fa";
-import aboutImage from "../assets/aboutImage.png";
-import ExplorePricingCTA from './ExplorePricingCTA';
+import aboutImage from "../../assets/aboutImage.png";
+import ExplorePricingCTA from '../marketing/ExplorePricingCTA.jsx';
 
 const About = () => {
 

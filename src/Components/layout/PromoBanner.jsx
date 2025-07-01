@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { HiSpeakerphone } from 'react-icons/hi';
-import PromoFormModal from './PromoFormModal';
+import PromoFormModal from '../modals/PromoFormModal.jsx';
 
 export default function PromoBanner() {
   const [isVisible, setIsVisible] = useState(false);

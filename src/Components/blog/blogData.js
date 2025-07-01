@@ -1,13 +1,13 @@
-import img1 from '../assets/blog/the-ultimate-guide-to-digital-marketing-in-2025.png';
-import img2 from '../assets/blog/top-12-seo-trends-in-2025-every-saas-business-must-know.png';
-import img3 from '../assets/blog/how-to-build-an-seo-content-strategy-for-saas-in-2025.png';
-import img4 from '../assets/blog/marketing-automation-tools-you-should-be-using-this-year.png';
-import img5 from '../assets/blog/the-role-of-reputation-management-in-saas-conversions.png';
-import img6 from '../assets/blog/how-to-turn-website-visitors-into-qualified-leads.png';
-import img7 from '../assets/blog/how-to-use-chat-automation-without-losing-the-human-touch.png';
-import img8 from '../assets/blog/the-top-5-landing-page-mistakes-and-how-to-fix-them.png';
-import img9 from '../assets/blog/ai-in-marketing-whats-working-in-mid-2025.png';
-import img10 from '../assets/blog/web-design-trends-in-2025-that-drive-engagement.png';
+import img1 from '../../assets/blog/the-ultimate-guide-to-digital-marketing-in-2025.png';
+import img2 from '../../assets/blog/top-12-seo-trends-in-2025-every-saas-business-must-know.png';
+import img3 from '../../assets/blog/how-to-build-an-seo-content-strategy-for-saas-in-2025.png';
+import img4 from '../../assets/blog/marketing-automation-tools-you-should-be-using-this-year.png';
+import img5 from '../../assets/blog/the-role-of-reputation-management-in-saas-conversions.png';
+import img6 from '../../assets/blog/how-to-turn-website-visitors-into-qualified-leads.png';
+import img7 from '../../assets/blog/how-to-use-chat-automation-without-losing-the-human-touch.png';
+import img8 from '../../assets/blog/the-top-5-landing-page-mistakes-and-how-to-fix-them.png';
+import img9 from '../../assets/blog/ai-in-marketing-whats-working-in-mid-2025.png';
+import img10 from '../../assets/blog/web-design-trends-in-2025-that-drive-engagement.png';
 
 
 

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import logo from "../assets/logo.png";
+import logo from "../../assets/logo.png";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -30,12 +30,12 @@ const Header = () => {
   };
 
   const navlinks = [
-    { href: "#home", label: "Home" },
-    { href: "#services", label: "Services" },
+    { to: "/", label: "Home" },
+    { to: "/services", label: "Services" },
     { to: "/pricing", label: "Pricing" },
-    { href: "#portfolio", label: "Portfolio" },
-    { href: "#about", label: "About Us" },
-    { href: "#contact", label: "Contact" },
+    { to: "/portfolio", label: "Portfolio" },
+    { to: "/about", label: "About Us" },
+    { to: "/contact", label: "Contact" },
     { to: "/blog", label: "Blog" },
   ];
 
@@ -49,8 +49,8 @@ const Header = () => {
           {/* Header bar */}
           <div className="relative max-w-screen-xl mx-auto px-4 py-3 flex items-center justify-between min-h-[72px] z-10 overflow-x-hidden">
             {/* Logo */}
-            <a
-              onClick={() => handleAnchorNav("#home")}
+            <Link
+              to="/"
               className="flex items-center gap-2 min-w-0 whitespace-nowrap cursor-pointer overflow-x-hidden"
               aria-label="Go to homepage"
             >
@@ -64,36 +64,26 @@ const Header = () => {
               <span className="text-lg sm:text-xl md:text-2xl font-bold text-yellow-400 truncate max-w-[160px] sm:max-w-[220px] md:max-w-[300px]">
                 First & Last Marketing
               </span>
-            </a>
+            </Link>
 
             {/* Desktop Nav */}
             <nav
               className="hidden [@media(min-width:975px)]:flex items-center space-x-4 xl:space-x-6 flex-grow justify-center"
               aria-label="Main navigation"
             >
-              {navlinks.map((link, index) =>
-                link.to ? (
-                  <Link
-                    key={index}
-                    to={link.to}
-                    className={`text-sm xl:text-base ${
-                      link.label === "Pricing"
-                        ? "text-white hover:text-yellow-400 animate-glow-pulse font-semibold"
-                        : "text-white hover:text-yellow-400"
-                    } transition-colors duration-200 whitespace-nowrap`}
-                  >
-                    {link.label}
-                  </Link>
-                ) : (
-                  <button
-                    key={index}
-                    onClick={() => handleAnchorNav(link.href)}
-                    className="text-sm xl:text-base text-white hover:text-yellow-400 transition-colors duration-200 whitespace-nowrap bg-transparent border-none cursor-pointer"
-                  >
-                    {link.label}
-                  </button>
-                )
-              )}
+              {navlinks.map((link, index) => (
+                <Link
+                  key={index}
+                  to={link.to}
+                  className={`text-sm xl:text-base ${
+                    link.label === "Pricing"
+                      ? "text-white hover:text-yellow-400 animate-glow-pulse font-semibold"
+                      : "text-white hover:text-yellow-400"
+                  } transition-colors duration-200 whitespace-nowrap`}
+                >
+                  {link.label}
+                </Link>
+              ))}
             </nav>
 
             {/* Desktop CTA */}
@@ -143,26 +133,17 @@ const Header = () => {
                 <ul className="flex flex-col space-y-4">
                   {navlinks.map((link, index) => (
                     <li key={index}>
-                      {link.to ? (
-                        <Link
-                          to={link.to}
-                          className={`block py-2 transition ${
-                            link.label === "Pricing"
-                              ? "text-white hover:text-yellow-400 font-semibold animate-glow-pulse"
-                              : "text-white hover:text-yellow-400"
-                          }`}
-                          onClick={toggleMenu}
-                        >
-                          {link.label}
-                        </Link>
-                      ) : (
-                        <button
-                          onClick={() => handleAnchorNav(link.href)}
-                          className="block w-full text-left text-white hover:text-yellow-400 transition py-2 bg-transparent border-none"
-                        >
-                          {link.label}
-                        </button>
-                      )}
+                      <Link
+                        to={link.to}
+                        className={`block py-2 transition ${
+                          link.label === "Pricing"
+                            ? "text-white hover:text-yellow-400 font-semibold animate-glow-pulse"
+                            : "text-white hover:text-yellow-400"
+                        }`}
+                        onClick={toggleMenu}
+                      >
+                        {link.label}
+                      </Link>
                     </li>
                   ))}
                   <li>

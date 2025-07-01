@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { FaBars, FaTimes, FaHome } from 'react-icons/fa';
-import logo from '../assets/logo.png';
+import logo from '../../assets/logo.png'; // Use ../../assets/logo.png if you're in src/Components/blog/
 
 const BlogNavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
