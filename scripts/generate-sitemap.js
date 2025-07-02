@@ -1,63 +1,83 @@
-// Using modern ES Module 'import' syntax
 import fs from 'fs';
 import path from 'path';
 
-// --- START OF CONFIGURATION ---
+// --- Configuration ---
+const YOUR_DOMAIN = 'https://www.firstandlastmarketing.com';
+const BUILD_DIR = 'dist'; // The directory where your build output is located
 
-// 1. Import your blog data using the ES Module syntax.
-// Make sure the path is correct relative to the root of your project.
-import { posts as blogPosts } from '../src/Components/blog/blogData.js';
+const findHtmlFiles = (dir, fileList = []) => {
+    const files = fs.readdirSync(dir);
 
-// 2. Define the base URL of your live website.
-const baseUrl = 'https://www.firstandlastmarketing.com';
+    files.forEach(file => {
+        const filePath = path.join(dir, file);
+        const stat = fs.statSync(filePath);
 
-// 3. List all your static pages.
-const staticPages = [
-  '/',
-  '/services',
-  '/portfolio',
-  '/about',
-  '/contact',
-  '/pricing',
-  '/blog',
-  '/privacy-policy',
-  '/terms-of-use',
-  '/contractors',
-];
+        if (stat.isDirectory()) {
+            // Recursively search in subdirectories
+            findHtmlFiles(filePath, fileList);
+        } else if (path.extname(file) === '.html') {
+            // Only add HTML files to the list
+            fileList.push(filePath);
+        }
+    });
 
-// --- END OF CONFIGURATION ---
+    return fileList;
+};
 
-// Main function to generate the sitemap
-async function generateSitemap() {
-  console.log('Generating sitemap...');
+const generateSitemap = () => {
+    console.log('Generating sitemap...');
+    
+    const buildPath = path.resolve(process.cwd(), BUILD_DIR);
+    const htmlFiles = findHtmlFiles(buildPath);
 
-  const dynamicBlogUrls = blogPosts.map(post => `/blog/${post.slug}`);
-  const allPages = [...staticPages, ...dynamicBlogUrls];
-
-  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+    const sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  ${allPages.map(page => {
-    let priority = 0.8;
-    if (page === '/') priority = 1.0;
-    else if (page.startsWith('/blog/')) priority = 0.9;
-    return `
-    <url>
-      <loc>${baseUrl}${page}</loc>
-      <lastmod>${new Date().toISOString()}</lastmod>
-      <changefreq>weekly</changefreq>
-      <priority>${priority}</priority>
-    </url>
-    `;
-  }).join('')}
+${htmlFiles
+    .map(filePath => {
+        // Convert local file path to a public URL
+        let relativePath = path.relative(buildPath, filePath);
+        
+        // Handle Windows-style backslashes
+        relativePath = relativePath.replace(/\\/g, '/');
+
+        // Handle index.html -> root URL
+        if (path.basename(relativePath) === 'index.html') {
+            relativePath = path.dirname(relativePath);
+            // Handle the root index.html file
+            if (relativePath === '.') {
+                relativePath = '';
+            }
+        }
+        
+        // Remove .html extension
+        relativePath = relativePath.replace(/\.html$/, '');
+
+        // Reconstruct the full URL
+        const url = `${YOUR_DOMAIN}/${relativePath}`;
+
+        // Exclude prerendered files that are just duplicates of main routes
+        if (url.includes('/prerenders/')) {
+            return '';
+        }
+
+        return `  <url>
+    <loc>${url}</loc>
+    <lastmod>${new Date().toISOString()}</lastmod>
+    <priority>0.8</priority>
+  </url>`;
+    })
+    .join('\n')}
 </urlset>`;
 
-  // Define the path to the 'public' directory from the project root.
-  const sitemapPath = path.resolve('./public', 'sitemap.xml');
-  fs.writeFileSync(sitemapPath, sitemap, 'utf8');
+    const sitemapPath = path.join(buildPath, 'sitemap.xml');
+    fs.writeFileSync(sitemapPath, sitemapContent.trim());
 
-  console.log(`✅ Sitemap generated successfully with ${allPages.length} pages!`);
-  console.log(`   File located at: ${sitemapPath}`);
+    console.log(`Sitemap successfully generated at ${sitemapPath}`);
+};
+
+try {
+    generateSitemap();
+} catch (error) {
+    console.error('Error generating sitemap:', error);
+    process.exit(1);
 }
-
-// Execute the function
-generateSitemap();
