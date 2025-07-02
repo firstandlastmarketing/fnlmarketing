@@ -1,15 +1,19 @@
 import express from "express";
 import axios from "axios";
+import crypto from "crypto"; // Using crypto for modern UUID generation
 const router = express.Router();
 
-// Import all necessary data from the updated businessData.js
+// Import the FULL enriched data objects. This is crucial for the new prompt.
 import {
+  brandPersona,
+  about,
   services,
   pricing,
   promo,
   contact,
   siteLinks,
   addonServices,
+  generalFaqs
 } from "./businessData.js";
 
 const sessionMemory = new Map();
@@ -42,110 +46,100 @@ async function logToGA4({ sessionId, userInput }) {
 }
 
 /**
- * Builds the master system prompt that defines the AI's behavior, knowledge, and rules.
- * This is the "brain" of the chatbot.
+ * ** THE 2025 UPGRADE: buildSystemPrompt() **
+ * This is the new "brain" of Jacob, completely redesigned for natural, intelligent conversation.
+ * It teaches Jacob *how* to think and behave, not just what to say.
  */
 function buildSystemPrompt() {
-  const keyInfo = {
-    companyName: "First and Last Marketing",
-    location: contact.location,
-    phone: contact.phone,
-    email: contact.email,
-    pricingPage: siteLinks.staticRoutes.find(route => route.to === '/pricing')?.to || "/pricing",
-  };
-
-  // Create concise lists of services for the AI's knowledge base.
-  const serviceList = services.map(s => `- ${s.name}`).join("\n");
-  const addonServiceList = addonServices.services.map(s => `- ${s.name}`).join("\n");
-  
-  // Dynamically generate promotion details to ensure the AI is always up-to-date.
-  const promotionDetails = `
-- Headline: ${promo.headline}
-- Offer: ${promo.message}
-- Price: $${promo.pricing.promoWebsiteBuild}
-- Call to Action: "${promo.offerCTA}"
-  `.trim();
-
-  // Dynamically generate a list of specific landing pages for better navigation guidance.
-  const landingPages = siteLinks.staticRoutes
-    .filter(route => route.to !== '/pricing' && route.to !== '/blog')
-    .map(route => `- ${route.label}: ${route.to}`)
-    .join("\n");
-
-  // This returns the final prompt object for the API call.
+  // We use the full JSON objects to give the AI deep context.
   return {
     role: "system",
     content: `
-You are Jacob, a top-performing, professional assistant for First and Last Marketing. Your single most important rule is to be 100% accurate by using ONLY the information provided in the KNOWLEDGE BASE below.
+You are "Jacob," an expert digital marketing consultant and friendly assistant for First and Last Marketing. Your goal is to be indistinguishable from a top-performing, human team member. Your personality is the key: professional, humble, trustworthy, and incredibly helpful.
 
 ---
-### CORE DIRECTIVES - YOU MUST FOLLOW THESE
-1.  **STICK TO THE SCRIPT:** You MUST answer questions using ONLY the data in the 'KNOWLEDGE BASE'. Do not invent, assume, or use any external knowledge. If the answer is not in the data, state: "I don't have that specific information, but our team can clarify. Would you like me to send them your question?"
-2.  **FORM TRIGGER:** If the user shows clear interest in starting a project, asks for a form, or uses phrases like "I'm ready", "let's do it", or "send me the form", you MUST respond with the exact, single-line text: FORM_TRIGGER_SIGNAL and nothing else. This is a critical instruction.
-3.  **BE FACTUAL & CONCISE:** For company details, use the exact values. Our company name is ${keyInfo.companyName}, located in **${keyInfo.location}**. Keep answers to 2-4 sentences and always suggest a helpful next step with a link, like "[View Pricing](${keyInfo.pricingPage})".
-4.  **USE MARKDOWN:** Format your responses with Markdown for clarity (e.g., **bold**, *italics*, and bullet points using '-').
-5.  **NEVER SAY YOU'RE AN AI:** You are Jacob, part of the First and Last team.
----
-### ==> CONVERSATION STYLE - THIS IS CRITICAL <==
-6.  **BE CONCISE:** Your answers MUST be short and to the point (2-3 sentences MAXIMUM). This is your most important style rule.
-7.  **ANSWER FIRST, THEN LINK:** Directly answer the user's question first. THEN, offer a single, relevant next step (e.g., "You can see all the details on our [pricing page](/pricing).").
-8.  **NO SIGNATURES:** DO NOT use a closing or signature (e.g., "Best, Jacob"). DO NOT repeat contact information unless the user explicitly asks for it.
-9.  **AVOID LONG LISTS:** If asked about "services," name 2-3 popular ones (like Web Design, SEO, and AI Chatbots) and then provide a link to the full list. Do not list everything.
-10.  **BE A HELPFUL GUIDE:** If a user's request is vague, ask a clarifying question. For example, if they say "tell me about marketing," you should ask "Are you interested in a specific area, like SEO or Email Automation?"
----
-### KNOWLEDGE BASE
+### 👑 YOUR GUIDING PRINCIPLES (Non-Negotiable) 👑
 
-**1. Company Information:**
-- Name: ${keyInfo.companyName}
-- Location: ${keyInfo.location}
-- Phone: ${keyInfo.phone}
-- Email: ${keyInfo.email}
-- Website: https://www.firstandlastmarketing.com
+**1. THE LAW OF CONCISENESS: This is your most important rule.**
+   - You **MUST** keep your answers short and to the point (1-3 sentences).
+   - Never overwhelm the user with information they didn't ask for. Your default is to be brief.
 
-**2. Current Promotions:**
-${promotionDetails}
+**2. THE CONSULTATIVE METHOD: Listen -> Clarify -> Recommend.**
+   - **Listen:** First, understand the user's true intent. What problem are they trying to solve?
+   - **Clarify:** If a query is vague (e.g., "tell me about websites"), you **MUST** ask a clarifying question.
+     - Good Example: "Of course. To point you in the right direction, are you looking to build a brand new site, or improve an existing one?"
+     - Bad Example: Listing all our website packages.
+   - **Recommend:** Only after you understand their need, provide a **single, concise** recommendation.
 
-**3. Services We Offer:**
-We offer primary services and individual add-ons.
-Primary Services:
-${serviceList}
-Add-on Services:
-${addonServiceList}
+**3. THE LAYERED INFORMATION STRATEGY: Give information in small, digestible pieces.**
+   - Start with a high-level summary or benefit.
+   - **DO NOT** list all features, prices, or details at once.
+   - Wait for the user to ask for more details ("Tell me more," "What features does that include?").
+   - This makes the conversation feel natural, not like a data dump.
 
-**4. Pricing Summary:**
-- Website packages start at $${pricing.websites.tiers[0].price}.
-- Blog packages start at $${pricing.blogs.tiers[0].price}.
-- For a full breakdown of all packages and add-on services, direct users to the pricing page: [View our Packages](${keyInfo.pricingPage})
+**4. THE HUMAN TOUCH: Handle simple social interactions naturally.**
+   - If a user says "hello" or "thanks," respond politely and briefly.
+   - Example: "Hello! How can I help you today?" or "You're very welcome! Was there anything else?"
+   - This makes you feel like a real person, not a cold machine.
 
-**5. Specific Landing Pages:**
-We have pages for specific industries:
-${landingPages}
+**5. THE FORM TRIGGER: Your tool for conversion.**
+   - When a user shows clear intent to buy ("I want that," "Let's do it," "I'm ready to start"), or agrees to a quote, you MUST respond with the exact text: \`FORM_TRIGGER_SIGNAL\` and nothing else.
+   - This is the critical handoff to our team.
 
 ---
-Now, begin the conversation professionally.
+### 🧠 YOUR KNOWLEDGE BASE (Your Single Source of Truth) 🧠
+You must base all your answers on this data. Use the 'salesAngle' and 'benefits' to frame your recommendations.
+
+**// Persona & Voice Guidelines**
+${JSON.stringify(brandPersona, null, 2)}
+
+**// Company Background & Mission**
+${JSON.stringify(about, null, 2)}
+
+**// Core Service Offerings (Your Main Catalog)**
+${JSON.stringify(services, null, 2)}
+
+**// Pricing Packages (Emphasize 'bestFor' and 'salesAngle')**
+${JSON.stringify(pricing, null, 2)}
+
+**// Add-On Services (Explain setup vs. monthly fees clearly)**
+${JSON.stringify(addonServices, null, 2)}
+
+**// Current Promotional Offer (Use for urgency)**
+${JSON.stringify(promo, null, 2)}
+
+**// General FAQs & Contact Info**
+${JSON.stringify(generalFaqs, null, 2)}
+${JSON.stringify(contact, null, 2)}
+---
+
+Now, begin the conversation. Greet the user and ask how you can help.
     `.trim(),
   };
 }
 
+
 /**
- * Detects a specific, high-priority user intent. This is simplified to focus only on lead capture.
+ * Detects specific, high-priority user intent to ensure critical actions are taken.
+ * This acts as a reliable safety net for lead capture.
  * @param {string} input - The user's message.
  * @returns {string|null} - The detected intent name or null.
  */
 const detectIntent = (input) => {
-  const lowered = input.toLowerCase().trim();
+  const lowered = input.toLowerCase().trim().replace(/[.,!?'"]/g, ''); // Clean the input
   const leadCaptureKeywords = [
-    "i’m ready", "i want this", "get started", "sign up", "interested", 
-    "let's do it", "send me the form", "capture form", "project kickoff",
-    "fill out a form", "start a project", "claim for $100"
+    "im ready", "i want this", "lets get started", "sign me up", "i am interested",
+    "lets do it", "send me the form", "i need the form", "project kickoff",
+    "fill out a form", "start a project", "claim for 100", "i want to buy", "lets proceed"
   ];
-  
+
   if (leadCaptureKeywords.some(p => lowered.includes(p))) {
     return "lead_capture";
   }
-  
+
   return null;
 };
+
 
 /**
  * The main chat API endpoint.
@@ -157,45 +151,54 @@ router.post("/", async (req, res) => {
   }
 
   // Manage session history
-  const sessionKey = sessionId || crypto.randomUUID(); // Use crypto for modern UUID generation
+  const sessionKey = sessionId || crypto.randomUUID();
   const session = sessionMemory.get(sessionKey) || { messages: [], lastActive: Date.now() };
   session.messages.push(message);
-  
+
   logToGA4({ sessionId: sessionKey, userInput: message.content });
 
-  // Check for the high-priority lead capture intent
+  // Safety Net: Check for the high-priority lead capture intent first.
   const intent = detectIntent(message.content);
-
-  // If the intent is to capture a lead, send the trigger signal and STOP.
-  // This is the critical fix for the "Form Amnesia" bug.
   if (intent === "lead_capture") {
-    const reply = "FORM_TRIGGER_SIGNAL";
-    return res.json({ reply });
+    // Directly trigger the form, bypassing the AI for reliability.
+    return res.json({ reply: "FORM_TRIGGER_SIGNAL" });
   }
 
-  // If no specific intent is matched, proceed with a standard AI response.
+  // If no high-priority intent, proceed with the intelligent AI response.
   const systemPrompt = buildSystemPrompt();
-  const payloadMessages = [systemPrompt, ...session.messages];
+
+  // We cap the history to keep the payload efficient and focused.
+  const maxHistory = 10;
+  const recentMessages = session.messages.slice(-maxHistory);
+  const payloadMessages = [systemPrompt, ...recentMessages];
 
   try {
     const response = await axios.post(
       "https://openrouter.ai/api/v1/chat/completions",
       {
-        // A reliable and powerful free model from OpenRouter
-        model: "mistralai/mistral-7b-instruct:free",
+        model: "mistralai/mistral-7b-instruct:free", // As requested, using this model
         messages: payloadMessages,
+        // Adding parameters to guide the model towards better, more concise behavior
+        temperature: 0.5, // Lower temperature makes it more focused and less likely to ramble.
+        max_tokens: 150,  // Hard limit on response length to enforce conciseness.
+        "response_format": { "type": "text" }, // Explicitly ask for text format.
       },
       {
         headers: {
           Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
           "Content-Type": "application/json",
-          "HTTP-Referer": "https://www.firstandlastmarketing.com", // Recommended for OpenRouter
-          "X-Title": "First and Last Marketing", // Recommended for OpenRouter
+          "HTTP-Referer": "https://www.firstandlastmarketing.com",
+          "X-Title": "First and Last Marketing",
         },
       }
     );
 
-    const reply = response.data.choices[0].message.content;
+    let reply = response.data.choices[0].message.content;
+
+    // Post-processing check: If the AI itself generates the trigger signal, ensure it's clean.
+    if (reply.includes("FORM_TRIGGER_SIGNAL")) {
+      reply = "FORM_TRIGGER_SIGNAL";
+    }
 
     // Add the AI's response to the session history
     session.messages.push({ role: "assistant", content: reply });
@@ -204,26 +207,24 @@ router.post("/", async (req, res) => {
     res.json({ reply });
   } catch (error) {
     console.error("Jacob AI Error:", error.response?.data || error.message);
-    res.status(500).json({ error: "Jacob failed to respond. Please try again." });
+    res.status(500).json({ error: "Jacob is currently unavailable. Please try again shortly." });
   }
 });
 
 /**
- * Memory Cleaner: Periodically removes old, inactive chat sessions to prevent memory leaks.
+ * Memory Cleaner: Periodically removes old, inactive chat sessions.
  */
 setInterval(() => {
   const now = Date.now();
   let cleanedCount = 0;
-
   for (const [key, session] of sessionMemory.entries()) {
     if (now - session.lastActive > SESSION_TIMEOUT_MS) {
       sessionMemory.delete(key);
       cleanedCount++;
     }
   }
-
   if (cleanedCount > 0) {
-    console.log(`🧹 Cleaned ${cleanedCount} expired chat sessions from memory.`);
+    // console.log(`🧹 Cleaned ${cleanedCount} expired chat sessions from memory.`);
   }
 }, 1000 * 60 * 15); // Runs every 15 minutes
 

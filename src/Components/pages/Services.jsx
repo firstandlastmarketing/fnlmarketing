@@ -1,17 +1,17 @@
 // src/components/Services.jsx
-
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react"; // FIX: Added useRef
 import { motion, AnimatePresence } from "framer-motion";
 import { Dialog } from "@headlessui/react";
 import { Link, useNavigate } from "react-router-dom";
 import useEmblaCarousel from 'embla-carousel-react';
+import { TypeAnimation } from "react-type-animation";
 import {
-  X, CheckCircle, ChevronDown, Zap, Target, LineChart, Globe, Server, Star, Database, Mail, MessageSquare, Clock, PenSquare
+  X, CheckCircle, ChevronDown, ChevronLeft, ChevronRight, Globe, Server, Star, Database, Mail, MessageSquare, Clock, PenSquare // FIX: Added ChevronLeft/Right
 } from "lucide-react";
 import ExplorePricingCTA from "../marketing/ExplorePricingCTA.jsx";
 import PricingQuoteModal from "../modals/PricingQuoteModal.jsx";
 
-// --- HELPER COMPONENTS ---
+// --- HELPER COMPONENTS (Unchanged) ---
 const FaqItem = ({ question, answer }) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
@@ -33,8 +33,9 @@ const FaqItem = ({ question, answer }) => {
   );
 };
 
-// --- RESTORED & ENHANCED SERVICE DATA ---
+// --- RESTORED & ENHANCED SERVICE DATA (Unchanged) ---
 const servicesData = [
+  // ... all your servicesData objects are here, unchanged
   {
     id: "web-design",
     icon: Globe,
@@ -164,75 +165,199 @@ const servicesData = [
   },
 ];
 
+// --- FIX: Correctly handling image paths for Vite/CRA bundler ---
+// The component is in src/components/Pages, images are in src/assets.
+// The relative path is `../../assets/services_slides/`.
+// We use `new URL(path, import.meta.url).href` to make sure the bundler finds and includes the images correctly.
 const slideData = [
-  { imgSrc: "/src/assets/services_slides/web-design-result.png", title: "Web Design", result: "60% Increase in Demo Requests" },
-  { imgSrc: "/src/assets/services_slides/web-hosting-result.png", title: "Secure Hosting", result: "80% Faster Load Times" },
-  { imgSrc: "/src/assets/services_slides/reputation-management-result.png", title: "Reputation Management", result: "From 3.2 to 4.8 Stars" },
-  { imgSrc: "/src/assets/services_slides/database-reactivation-result.png", title: "Database Reactivation", result: "Generated $42k in 1 Month" },
-  { imgSrc: "/src/assets/services_slides/email-sms-automation-result.png", title: "Automation", result: "28% Increase in Sales" },
-  { imgSrc: "/src/assets/services_slides/ai-chatbots-result.png", title: "AI Chatbots", result: "3x More Leads Captured" },
-  { imgSrc: "/src/assets/services_slides/social-schedulers-result.png", title: "Social Scheduling", result: "60% Higher Engagement" },
-  { imgSrc: "/src/assets/services_slides/blog-development-result.png", title: "Blog Strategy", result: "150% More Organic Traffic" },
+  { imgSrc: new URL('../../assets/services_slides/web-design-result.png', import.meta.url).href, title: "Web Design", result: "60% Increase in Demo Requests" },
+  { imgSrc: new URL('../../assets/services_slides/web-hosting-result.png', import.meta.url).href, title: "Secure Hosting", result: "80% Faster Load Times" },
+  { imgSrc: new URL('../../assets/services_slides/reputation-management-result.png', import.meta.url).href, title: "Reputation Management", result: "From 3.2 to 4.8 Stars" },
+  { imgSrc: new URL('../../assets/services_slides/database-reactivation-result.png', import.meta.url).href, title: "Database Reactivation", result: "Generated $42k in 1 Month" },
+  { imgSrc: new URL('../../assets/services_slides/email-sms-automation-result.png', import.meta.url).href, title: "Automation", result: "28% Increase in Sales" },
+  { imgSrc: new URL('../../assets/services_slides/ai-chatbots-result.png', import.meta.url).href, title: "AI Chatbots", result: "3x More Leads Captured" },
+  { imgSrc: new URL('../../assets/services_slides/social-schedulers-result.png', import.meta.url).href, title: "Social Scheduling", result: "60% Higher Engagement" },
+  { imgSrc: new URL('../../assets/services_slides/blog-development-result.png', import.meta.url).href, title: "Blog Strategy", result: "150% More Organic Traffic" },
 ];
+
+const achievementStats = [
+    { value: '3X', label: 'Higher Engagement' },
+    { value: '+50%', label: 'Conversion Lift' },
+    { value: '2X', label: 'Faster Go-to-Market' },
+    { value: '99.9%', label: 'Service Reliability' },
+];
+
 
 const Services = () => {
   const [selectedService, setSelectedService] = useState(null);
   const [showQuoteModal, setShowQuoteModal] = useState(false);
   const [emblaRef] = useEmblaCarousel({ loop: true });
   const navigate = useNavigate();
+  const [activeIndex, setActiveIndex] = useState(0);
+  
+  // NEW: Ref to hold the timer interval ID
+  const timerRef = useRef(null);
+
+  // NEW: Functions for manual slide navigation
+  const nextSlide = () => {
+    setActiveIndex((prevIndex) => (prevIndex + 1) % slideData.length);
+  };
+
+  const prevSlide = () => {
+    setActiveIndex((prevIndex) => (prevIndex - 1 + slideData.length) % slideData.length);
+  };
+  
+  // FIX: Updated useEffect to handle resetting the timer on manual navigation
+  useEffect(() => {
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+    }
+    timerRef.current = setInterval(() => {
+      nextSlide();
+    }, 5000); // Change slide every 5 seconds
+
+    return () => clearInterval(timerRef.current); // Cleanup on component unmount
+  }, [activeIndex]); // Re-run effect when activeIndex changes to reset the timer
+
+
 
   return (
-    <div className="relative isolate text-white py-12 sm:py-16 overflow-x-hidden">
-      {/* FIX: Self-contained background to ensure correct rendering */}
+     <div className="relative isolate text-white py-8 sm:py-8 overflow-x-hidden">
       <div className="absolute inset-0 -z-10" aria-hidden="true">
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-900 via-blue-900 to-gray-900" />
+        <div className="absolute inset-0 bg-gradient-to-r from-purple-900 via-blue-900 to-yellow-900" />
         <div className="absolute inset-0 bg-black/40" />
       </div>
 
-      <section className="px-4 mb-16 sm:mb-24">
-        <div className="max-w-7xl mx-auto text-center">
-          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: "easeOut" }}
-            className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white drop-shadow-lg mb-4">
-            Solutions That Drive Growth
-          </motion.h1>
-          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-            className="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto mb-8">
-            From stunning websites to intelligent automation, our services are engineered to turn your vision into measurable results.
-          </motion.p>
+      <section className="bg-transparent">
+  {/* -- COMPACT HERO TEXT ABOVE SLIDESHOW -- */}
+  <div className="text-center max-w-xl sm:max-w-2xl lg:max-w-3xl mx-auto px-4 sm:px-6 mb-2 sm:mb-3">
+    <motion.h1
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+className="text-2xl sm:text-3xl md:text-4xl font-black text-white drop-shadow"
+    >
+      Solutions That{" "}
+      <TypeAnimation
+        sequence={[
+          'Drive Growth', 2000,
+          'Convert Leads', 2000,
+          'Elevate Brands', 2000,
+          'Drive Growth', 2000
+        ]}
+        wrapper="span"
+        speed={50}
+        repeat={Infinity}
+        className="text-yellow-400"
+      />
+    </motion.h1>
+    <motion.p
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+      className="text-xs text-gray-300 max-w-md mx-auto my-2"
+    >
+      From stunning websites to intelligent automation, our services are engineered to turn your vision into measurable results.
+    </motion.p>
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+      className="flex flex-col sm:flex-row items-center justify-center gap-2"
+    >
+      <button
+        // onClick={() => setShowQuoteModal(true)}
+        className="w-full sm:w-auto bg-yellow-400 text-purple-900 font-bold py-1.5 px-3 text-xs sm:text-sm rounded-full shadow hover:bg-yellow-500 transition-all"
+      >
+        Get Started
+      </button>
+      <button
+        // onClick={() => navigate('/pricing')}
+        className="w-full sm:w-auto bg-white/10 text-white font-medium text-xs sm:text-sm py-1.5 px-3 rounded-full border border-white/20 hover:bg-white/20 transition-all backdrop-blur"
+      >
+        View Services
+      </button>
+    </motion.div>
+  </div>
 
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <button onClick={() => setShowQuoteModal(true)} className="w-full sm:w-auto bg-yellow-400 text-purple-900 font-bold py-3 px-6 rounded-full shadow-lg hover:bg-yellow-500 transition-all focus:outline-none focus:ring-4 focus:ring-yellow-300/50">
-              Get Started
-            </button>
-            <button onClick={() => navigate('/pricing')} className="w-full sm:w-auto bg-white/10 text-white font-semibold py-3 px-6 rounded-full border border-white/20 hover:bg-white/20 transition-all">
-              View Pricing
-            </button>
-            <button onClick={() => navigate('/portfolio')} className="w-full sm:w-auto text-gray-200 font-semibold hover:text-white transition-all">
-              Explore Portfolio
-            </button>
+  {/* -- SLIDESHOW BELOW -- */}
+  <div className="relative w-full mx-auto max-w-4xl aspect-[16/9] overflow-hidden rounded-lg shadow-xl">
+    <AnimatePresence initial={false}>
+      <motion.div
+        key={activeIndex}
+        className="absolute inset-0 w-full h-full"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 1, ease: 'easeInOut' }}
+      >
+        <img
+          src={slideData[activeIndex].imgSrc}
+          alt={slideData[activeIndex].title}
+          className="w-full h-full object-cover"
+        />
+      </motion.div>
+    </AnimatePresence>
+
+    {/* Caption */}
+    <div className="absolute top-2 left-2 sm:top-3 sm:left-3 z-30">
+      <AnimatePresence>
+        <motion.p
+          key={activeIndex}
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 10 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="bg-black/40 text-white text-[10px] sm:text-xs font-semibold py-0.5 px-2 rounded-full backdrop-blur-sm"
+        >
+          {slideData[activeIndex].title}
+        </motion.p>
+      </AnimatePresence>
+    </div>
+
+    {/* Dark Overlay */}
+    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent" />
+
+    {/* Navigation Buttons (INSIDE SLIDE FRAME) */}
+    <div className="absolute inset-0 z-20 flex items-center justify-between px-2">
+      <button
+        onClick={prevSlide}
+        aria-label="Previous slide"
+        className="bg-black/30 text-white p-1 rounded-full hover:bg-black/50 transition focus:outline-none"
+      >
+        <ChevronLeft className="w-5 h-5" />
+      </button>
+      <button
+        onClick={nextSlide}
+        aria-label="Next slide"
+        className="bg-black/30 text-white p-1 rounded-full hover:bg-black/50 transition focus:outline-none"
+      >
+        <ChevronRight className="w-5 h-5" />
+      </button>
+    </div>
+  </div>
+
+  {/* -- ACHIEVEMENT STATS -- */}
+  <div className="max-w-3xl mx-auto px-4 sm:px-6 -mt-6 sm:-mt-8">
+    <div className="bg-gray-800/60 backdrop-blur-lg border border-white/10 rounded-lg shadow-2xl p-3 sm:p-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-y-4 gap-x-2 text-center">
+        {achievementStats.map((stat) => (
+          <motion.div
+            key={stat.label}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            viewport={{ once: true }}
+          >
+            <p className="text-xl sm:text-2xl font-bold text-yellow-400">{stat.value}</p>
+            <p className="mt-0.5 text-[11px] sm:text-xs text-gray-300">{stat.label}</p>
           </motion.div>
-        </div>
-      </section>
-
-      <section className="mb-16 sm:mb-24">
-          <div className="overflow-hidden" ref={emblaRef}>
-              <div className="flex">
-                  {slideData.map((slide, index) => (
-                      <div className="flex-grow-0 flex-shrink-0 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 p-2" key={index}>
-                          <div className="relative rounded-xl overflow-hidden aspect-[4/3] bg-white/5 border border-white/10 p-4 flex flex-col justify-end">
-                              <img src={slide.imgSrc} alt={slide.title} className="absolute inset-0 w-full h-full object-cover" />
-                              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-                              <div className="relative z-10 text-white">
-                                <p className="text-sm font-semibold text-yellow-400">{slide.title}</p>
-                                <p className="text-lg font-bold">{slide.result}</p>
-                              </div>
-                          </div>
-                      </div>
-                  ))}
-              </div>
-          </div>
-      </section>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+      {/* --- END OF HERO SECTION FIX --- */}
 
       <section id="our-services" className="py-16 sm:py-24 px-4">
         <header className="text-center mb-16">

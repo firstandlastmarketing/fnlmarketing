@@ -160,7 +160,7 @@ const Portfolio = () => {
 
         {/* --- NEW: CLIENT TESTIMONIALS SECTION (ACTION REQUIRED) --- */}
         <section aria-labelledby="testimonials-heading" className="mb-20 md:mb-28" data-aos="fade-up">
-            <h2 id="testimonials-heading" className="text-3xl font-bold text-center text-white mb-10">What Our Clients Say</h2>
+            <h2 id="testimonials-heading" className="text-3xl font-bold text-center text-white mb-10">Imagine Your Customers <span className="text-yellow-400">Raving About You...</span></h2>
             <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
                 {/* WHAT TO DO: Replace this placeholder with a real client testimonial */}
                 <figure className="bg-purple-950/60 rounded-lg p-6 flex flex-col">

@@ -1,248 +1,205 @@
 import React, { useState, useRef } from 'react';
 import { FaClock, FaMapMarkerAlt, FaPhoneAlt, FaEnvelope } from 'react-icons/fa';
+import { motion } from 'framer-motion';
+
+// ===[ YOUR COMPONENT & ASSET IMPORTS ]===
+// Imports remain the same, functions will not be broken.
 import contactImg from '../../assets/contactImg.png';
 import emailjs from '@emailjs/browser';
 
+// ===[ ANIMATION VARIANTS ]===
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1, delayChildren: 0.2 },
+  },
+};
+
+const fadeInUp = {
+  hidden: { y: 30, opacity: 0 },
+  show: { y: 0, opacity: 1, transition: { duration: 0.6, ease: "easeOut" } },
+};
+
 const Contact = () => {
+  // All state and logic are preserved. No changes needed here.
   const formRef = useRef(null);
   const [formStatus, setFormStatus] = useState(null);
   const [loading, setLoading] = useState(false);
   const [selectedServices, setSelectedServices] = useState([]);
 
+  // Data is preserved, but icon styling will be handled directly in the JSX.
   const contactItems = [
-    {
-      icon: <FaMapMarkerAlt className="text-yellow-600 text-xl" />,
-      title: "Our Location",
-      content: <p className="text-gray-700">Springfield, Missouri</p>,
-    },
-    {
-      icon: <FaPhoneAlt className="text-yellow-600 text-xl" />,
-      title: "Phone Number",
-      content: (
-        <p className="text-gray-700">
-          <a href="tel:+15732020088" className="hover:text-yellow-600">+1 (573) 202-0088</a>
-        </p>
-      ),
-    },
-    {
-      icon: <FaEnvelope className="text-yellow-600 text-xl" />,
-      title: "Email",
-      content: (
-        <p className="text-gray-700">
-          <a href="mailto:contact@firstandlastmarketing.com" className="hover:text-yellow-600">contact@firstandlastmarketing.com</a>
-        </p>
-      ),
-    },
-    {
-      icon: <FaClock className="text-yellow-600 text-xl" />,
-      title: "Working Hours",
-      content: (
-        <p className="text-gray-700">
-          Sunday - Thursday: 8am - 8pm<br />
-          Friday: 8am - 4pm<br />
-          Saturday: Closed
-        </p>
-      ),
-    },
+    { icon: FaMapMarkerAlt, title: "Our Location", content: <p>Springfield, Missouri</p> },
+    { icon: FaPhoneAlt, title: "Phone Number", content: <a href="tel:+15732020088" className="hover:text-yellow-400 transition-colors">+1 (573) 202-0088</a> },
+    { icon: FaEnvelope, title: "Email", content: <a href="mailto:contact@firstandlastmarketing.com" className="hover:text-yellow-400 transition-colors">contact@firstandlastmarketing.com</a> },
+    { icon: FaClock, title: "Working Hours", content: <>Sunday - Thursday: 8am - 8pm<br />Friday: 8am - 4pm<br />Saturday: Closed</> },
   ];
 
-  const services = [
-    "Web Design & Development",
-    "Web Hosting",
-    "Online Reputation Management",
-    "Database Reactivation Campaigns",
-    "Email & SMS Marketing Automation",
-    "Live Chat & AI Chatbot Platforms",
-    "Social Media Post Schedulers",
-  ];
+  const services = [ "Web Design & Development", "Web Hosting", "Online Reputation Management", "Database Reactivation Campaigns", "Email & SMS Marketing Automation", "Live Chat & AI Chatbot Platforms", "Social Media Post Schedulers" ];
 
   const handleCheckboxChange = (service) => {
-    setSelectedServices((prev) =>
-      prev.includes(service)
-        ? prev.filter((s) => s !== service)
-        : [...prev, service]
-    );
+    setSelectedServices((prev) => prev.includes(service) ? prev.filter((s) => s !== service) : [...prev, service]);
   };
 
-  const handleSubmit = (e) => {
+  // This is the CORRECTED function for Vite projects.
+const handleSubmit = (e) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
 
-    // Inject selected services as comma-separated string into hidden input
     const servicesInput = formRef.current.querySelector('input[name="services"]');
     servicesInput.value = selectedServices.join(', ');
 
+    // THE FIX: Using import.meta.env to access the VITE_ variables
     emailjs
-      .sendForm('fnlserviceid', 'fnltemplateid', formRef.current, '_NXkr3UnpbWQmmVNs')
+      .sendForm(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID, 
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID, 
+        formRef.current, 
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      )
       .then(() => {
-        setFormStatus({ success: true, message: "Message sent successfully!" });
+        setFormStatus({ success: true, message: "Message sent successfully! We'll be in touch soon." });
         formRef.current.reset();
         setSelectedServices([]);
-      })
-      .catch(() => {
-        setFormStatus({ success: false, message: "Failed to send message. Please try again later." });
+      }, (error) => { // Enhanced error handling to see EmailJS specific errors
+        setFormStatus({ success: false, message: `Failed to send message: ${error.text}. Please try again.` });
+        console.error("EmailJS Error:", error);
       })
       .finally(() => setLoading(false));
   };
 
   return (
-    <article
-      id="contact"
-      className="relative pt-4 pb-30 overflow-hidden"
-    >
-      {/* Background overlay, only dims the gradient */}
-      <div className="absolute inset-0 -z-10">
-        <div className="w-full h-full bg-gradient-to-r from-purple-900 via-blue-900 to-yellow-700" />
-        <div className="absolute inset-0 bg-black/40" />
+    <article id="contact" className="relative text-white isolate overflow-hidden">
+      {/* BRANDING MATCH: Signature dark gradient background */}
+      <div className="absolute inset-0 -z-10" aria-hidden="true">
+        <div className="absolute inset-0 bg-gradient-to-r from-purple-900 via-blue-900 to-yellow-700" />
+        <div className="absolute inset-0 bg-black/60" />
       </div>
-      <div className="container mx-auto px-4">
-        <header className="text-center mb-16 relative">
-          <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 w-24 h-24 rounded-full bg-yellow-300 opacity-30 z-0" />
-          <h1 className="text-4xl font-bold text-white mb-4 relative z-10">
-            Contact <span className="text-yellow-300">First and Last Marketing</span>
-          </h1>
-          <p className="text-lg text-gray-200 max-w-2xl mx-auto relative z-10">
-            Ready to grow your brand online? Get in touch for web design, hosting, or reputation services.
-          </p>
-        </header>
 
-        <main className="flex flex-col lg:flex-row gap-12">
-          {/* Contact Info */}
-          <aside className="lg:w-2/5">
-            <section className="bg-white rounded-2xl shadow-xl p-8 h-full" aria-labelledby="contact-info-title">
-              <h2 id="contact-info-title" className="text-2xl font-bold text-gray-800 mb-6">Get In Touch</h2>
+      <div className="container mx-auto px-4 py-20 sm:py-28">
+        <motion.header 
+            initial={{ opacity: 0, y: -30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="text-center mb-16 md:mb-20"
+        >
+          <h1 className="text-4xl md:text-5xl font-extrabold mb-4 [text-wrap:balance]">
+            Let's Build <span className="text-yellow-400">Your Future</span>, Together
+          </h1>
+          <p className="text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            Ready to grow your brand? Have a question? We're here to help. Reach out and let's start the conversation about your project.
+          </p>
+        </motion.header>
+
+        <main className="flex flex-col lg:flex-row gap-12 lg:gap-16">
+          {/* ENHANCED Contact Info Section */}
+          <motion.aside 
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="lg:w-2/5"
+          >
+            <div className="bg-white/5 rounded-2xl shadow-2xl p-8 h-full border border-white/10 backdrop-blur-lg">
+              <h2 className="text-3xl font-bold text-white mb-8">Get In Touch</h2>
               <address className="space-y-6 not-italic">
                 {contactItems.map((item, index) => (
-                  <article key={index} className="flex items-start">
-                    <figure className="bg-yellow-100 p-3 rounded-full mr-4 flex-shrink-0">{item.icon}</figure>
-                    <div>
-                      <h3 className="font-medium text-gray-800 mb-1">{item.title}</h3>
-                      {item.content}
+                  <div key={index} className="flex items-start">
+                    <div className="flex-shrink-0 bg-yellow-400/10 p-3 rounded-full mr-5 border border-yellow-400/20">
+                        <item.icon className="text-yellow-400 text-xl" />
                     </div>
-                  </article>
+                    <div>
+                      <h3 className="font-bold text-white text-lg mb-1">{item.title}</h3>
+                      <div className="text-gray-300">{item.content}</div>
+                    </div>
+                  </div>
                 ))}
               </address>
               <figure className="mt-8 rounded-xl overflow-hidden shadow-md">
-                <img
-                  src={contactImg}
-                  className="w-full h-48 object-cover hover:scale-105 transition-transform duration-500"
-                  width="400"
-                  height="200"
-                  loading="lazy"
-                  alt="Team assisting clients online"
-                />
+                <img src={contactImg} className="w-full h-48 object-cover" loading="lazy" alt="Team collaborating online" />
               </figure>
-            </section>
-          </aside>
+            </div>
+          </motion.aside>
 
-          {/* Contact Form */}
-          <section className="lg:w-3/5">
-            <div className="bg-white rounded-2xl shadow-xl p-8 h-full" aria-labelledby="contact-form-title">
-              <h2 id="contact-form-title" className="text-2xl font-bold text-gray-800 mb-6">Send Us a Message</h2>
+          {/* ENHANCED Contact Form Section */}
+          <motion.section 
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.3 }}
+            className="lg:w-3/5"
+          >
+            <div className="bg-white/5 rounded-2xl shadow-2xl p-8 sm:p-10 h-full border border-white/10 backdrop-blur-lg">
+              <h2 className="text-3xl font-bold text-white mb-8">Send Us a Message</h2>
               <form ref={formRef} onSubmit={handleSubmit} className="space-y-6" noValidate>
                 <input type="hidden" name="form_name" value="Contact Form Submission" />
                 <input type="hidden" name="services" />
 
-                <fieldset className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="name" className="block text-gray-700 font-medium mb-2">Full Name</label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      required
-                      disabled={loading}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold-400 focus:border-transparent"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="phone" className="block text-gray-700 font-medium mb-2">Phone Number</label>
-                    <input
-                      type="tel"
-                      id="phone"
-                      name="phone"
-                      required
-                      disabled={loading}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold-400 focus:border-transparent"
-                    />
-                  </div>
-                </fieldset>
-
-                <div>
-                  <label htmlFor="email" className="block text-gray-700 font-medium mb-2">Email Address</label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    required
-                    disabled={loading}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold-400 focus:border-transparent"
-                  />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {/* Re-styled input fields */}
+                    <div>
+                        <label htmlFor="name" className="block text-gray-200 font-medium mb-2">Full Name</label>
+                        <input type="text" id="name" name="name" required disabled={loading} className="w-full px-4 py-3 bg-black/20 rounded-lg border-2 border-white/20 focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 outline-none transition" />
+                    </div>
+                    <div>
+                        <label htmlFor="phone" className="block text-gray-200 font-medium mb-2">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" required disabled={loading} className="w-full px-4 py-3 bg-black/20 rounded-lg border-2 border-white/20 focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 outline-none transition" />
+                    </div>
                 </div>
-
-                <fieldset>
-                  <legend className="block text-gray-700 font-medium mb-2">Services You're Interested In</legend>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {services.map((service, index) => (
-                      <label key={index} className="flex items-center space-x-3 text-gray-700">
-                        <input
-                          type="checkbox"
-                          name="services[]"
-                          value={service}
-                          checked={selectedServices.includes(service)}
-                          onChange={() => handleCheckboxChange(service)}
-                          disabled={loading}
-                          className="w-5 h-5 text-yellow-600 border-gray-300 rounded focus:ring-yellow-400"
-                        />
+                <div>
+                  <label htmlFor="email" className="block text-gray-200 font-medium mb-2">Email Address</label>
+                  <input type="email" id="email" name="email" required disabled={loading} className="w-full px-4 py-3 bg-black/20 rounded-lg border-2 border-white/20 focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 outline-none transition" />
+                </div>
+                <div>
+                  <legend className="block text-gray-200 font-medium mb-4">What service(s) are you interested in?</legend>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4">
+                    {services.map((service) => (
+                      <label key={service} className="flex items-center space-x-3 text-gray-200 cursor-pointer">
+                        <input type="checkbox" name="services_checkbox" value={service} checked={selectedServices.includes(service)} onChange={() => handleCheckboxChange(service)} disabled={loading} className="w-5 h-5 bg-black/20 border-2 border-white/30 rounded text-yellow-400 focus:ring-yellow-400 focus:ring-offset-gray-900 shrink-0" />
                         <span>{service}</span>
                       </label>
                     ))}
                   </div>
-                </fieldset>
-
-                <div>
-                  <label htmlFor="message" className="block text-gray-700 font-medium mb-2">Your Message</label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    required
-                    disabled={loading}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold-400 focus:border-transparent"
-                  ></textarea>
                 </div>
-
                 <div>
-                  <button
-                    type="submit"
-                    className={`bg-yellow-600 hover:bg-yellow-700 text-white font-semibold px-6 py-3 rounded-full shadow-md transition duration-300 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
-                    disabled={loading}
-                  >
+                  <label htmlFor="message" className="block text-gray-200 font-medium mb-2">Your Message</label>
+                  <textarea id="message" name="message" required disabled={loading} rows="4" className="w-full px-4 py-3 bg-black/20 rounded-lg border-2 border-white/20 focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 outline-none transition"></textarea>
+                </div>
+                <div>
+                  <button type="submit" className={`w-full sm:w-auto bg-yellow-400 hover:bg-yellow-500 text-purple-900 font-bold px-8 py-3.5 rounded-full shadow-lg shadow-yellow-500/20 transition-all duration-300 transform hover:scale-105 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`} disabled={loading}>
                     {loading ? "Sending..." : "Send Message"}
                   </button>
                 </div>
               </form>
-
               {formStatus && (
-                <p className={`mt-4 font-semibold ${formStatus.success ? "text-green-600" : "text-red-600"}`} role="alert">
+                <div className={`mt-6 p-4 rounded-lg font-semibold text-center ${formStatus.success ? "bg-green-500/20 text-green-300" : "bg-red-500/20 text-red-300"}`} role="alert">
                   {formStatus.message}
-                </p>
+                </div>
               )}
             </div>
-          </section>
+          </motion.section>
         </main>
-
-        <figure className="mt-16 bg-white rounded-2xl shadow-xl overflow-hidden">
+        
+        <motion.figure 
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.7 }}
+            className="mt-20 sm:mt-28 bg-white/5 rounded-2xl shadow-xl overflow-hidden p-2 border border-white/10"
+        >
           <iframe
-            src="https://www.openstreetmap.org/export/embed.html?bbox=-93.3276%2C37.1783%2C-93.2892%2C37.2051&layer=mapnik&marker=37.1917%2C-93.3084"
+            src="https://www.openstreetmap.org/export/embed.html?bbox=-93.3276%2C37.1783%2C-93.2892%2C37.2051&layer=mapnik&marker=37.1917%2C-93.3084&theme=dark"
             width="100%"
             height="450"
             loading="lazy"
             title="First and Last Marketing Location Map"
-            className="rounded-2xl"
+            className="rounded-xl filter invert hue-rotate-180 brightness-95 contrast-125"
             style={{ border: 0 }}
-            aria-label="Map showing Springfield Missouri location"
           ></iframe>
-        </figure>
+        </motion.figure>
       </div>
     </article>
   );

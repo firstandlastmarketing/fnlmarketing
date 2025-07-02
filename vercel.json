@@ -25,30 +25,44 @@
       "destination": "/api/server.js"
     },
     {
-      "source": "/blog",
-      "has": [
-        {
-          "type": "header",
-          "key": "user-agent",
-          "value": "(?i)bot|crawler|facebook|messenger|twitter|linkedin|embedly|discord|slack|whatsapp|googlebot|bingbot|pinterest|applebot|telegram|quora|skypeuripreview"
-        }
-      ],
-      "destination": "/prerenders/blog.html"
+      "source": "/services",
+      "has": [{"type": "header", "key": "user-agent", "value": "(?i)bot|crawler|facebook|messenger|twitter|linkedin|embedly|discord|slack|whatsapp|googlebot|bingbot|pinterest|applebot|telegram|quora|skypeuripreview"}],
+      "destination": "/prerenders/services.html"
     },
     {
-      "source": "/blog",
+      "source": "/services",
       "destination": "/index.html"
     },
-
+    {
+      "source": "/portfolio",
+      "has": [{"type": "header", "key": "user-agent", "value": "(?i)bot|crawler|facebook|messenger|twitter|linkedin|embedly|discord|slack|whatsapp|googlebot|bingbot|pinterest|applebot|telegram|quora|skypeuripreview"}],
+      "destination": "/prerenders/portfolio.html"
+    },
+    {
+      "source": "/portfolio",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/about",
+      "has": [{"type": "header", "key": "user-agent", "value": "(?i)bot|crawler|facebook|messenger|twitter|linkedin|embedly|discord|slack|whatsapp|googlebot|bingbot|pinterest|applebot|telegram|quora|skypeuripreview"}],
+      "destination": "/prerenders/about.html"
+    },
+    {
+      "source": "/about",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/contact",
+      "has": [{"type": "header", "key": "user-agent", "value": "(?i)bot|crawler|facebook|messenger|twitter|linkedin|embedly|discord|slack|whatsapp|googlebot|bingbot|pinterest|applebot|telegram|quora|skypeuripreview"}],
+      "destination": "/prerenders/contact.html"
+    },
+    {
+      "source": "/contact",
+      "destination": "/index.html"
+    },
     {
       "source": "/pricing",
-      "has": [
-        {
-          "type": "header",
-          "key": "user-agent",
-          "value": "(?i)bot|crawler|facebook|messenger|twitter|linkedin|embedly|discord|slack|whatsapp|googlebot|bingbot|pinterest|applebot|telegram|quora|skypeuripreview"
-        }
-      ],
+      "has": [{"type": "header", "key": "user-agent", "value": "(?i)bot|crawler|facebook|messenger|twitter|linkedin|embedly|discord|slack|whatsapp|googlebot|bingbot|pinterest|applebot|telegram|quora|skypeuripreview"}],
       "destination": "/prerenders/pricing.html"
     },
     {
@@ -56,7 +70,16 @@
       "destination": "/index.html"
     },
     {
-      "source": "/blog/ultimate-guide-digital-marketing-2025",
+      "source": "/contractors",
+      "has": [{"type": "header", "key": "user-agent", "value": "(?i)bot|crawler|facebook|messenger|twitter|linkedin|embedly|discord|slack|whatsapp|googlebot|bingbot|pinterest|applebot|telegram|quora|skypeuripreview"}],
+      "destination": "/prerenders/contractors.html"
+    },
+    {
+      "source": "/contractors",
+      "destination": "/index.html"
+    },
+        {
+      "source": "/onboarding",
       "has": [
         {
           "type": "header",
@@ -64,150 +87,123 @@
           "value": "(?i)bot|crawler|facebook|messenger|twitter|linkedin|embedly|discord|slack|whatsapp|googlebot|bingbot|pinterest|applebot|telegram|quora|skypeuripreview"
         }
       ],
+      "destination": "/prerenders/onboarding.html"
+    },
+    {
+      "source": "/onboarding",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/privacy-policy",
+      "has": [{"type": "header", "key": "user-agent", "value": "(?i)bot|crawler|facebook|messenger|twitter|linkedin|embedly|discord|slack|whatsapp|googlebot|bingbot|pinterest|applebot|telegram|quora|skypeuripreview"}],
+      "destination": "/prerenders/privacy-policy.html"
+    },
+    {
+      "source": "/privacy-policy",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/terms-of-use",
+      "has": [{"type": "header", "key": "user-agent", "value": "(?i)bot|crawler|facebook|messenger|twitter|linkedin|embedly|discord|slack|whatsapp|googlebot|bingbot|pinterest|applebot|telegram|quora|skypeuripreview"}],
+      "destination": "/prerenders/terms-of-use.html"
+    },
+    {
+      "source": "/terms-of-use",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/blog",
+      "has": [{"type": "header", "key": "user-agent", "value": "(?i)bot|crawler|facebook|messenger|twitter|linkedin|embedly|discord|slack|whatsapp|googlebot|bingbot|pinterest|applebot|telegram|quora|skypeuripreview"}],
+      "destination": "/prerenders/blog.html"
+    },
+    {
+      "source": "/blog",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/blog/ultimate-guide-digital-marketing-2025",
+      "has": [{"type": "header", "key": "user-agent", "value": "(?i)bot|crawler|facebook|messenger|twitter|linkedin|embedly|discord|slack|whatsapp|googlebot|bingbot|pinterest|applebot|telegram|quora|skypeuripreview"}],
       "destination": "/prerenders/ultimate-guide-digital-marketing-2025.html"
     },
     {
       "source": "/blog/ultimate-guide-digital-marketing-2025",
       "destination": "/index.html"
     },
-
     {
       "source": "/blog/top-seo-trends-2025-saas",
-      "has": [
-        {
-          "type": "header",
-          "key": "user-agent",
-          "value": "(?i)bot|crawler|facebook|messenger|twitter|linkedin|embedly|discord|slack|whatsapp|googlebot|bingbot|pinterest|applebot|telegram|quora|skypeuripreview"
-        }
-      ],
+      "has": [{"type": "header", "key": "user-agent", "value": "(?i)bot|crawler|facebook|messenger|twitter|linkedin|embedly|discord|slack|whatsapp|googlebot|bingbot|pinterest|applebot|telegram|quora|skypeuripreview"}],
       "destination": "/prerenders/top-seo-trends-2025-saas.html"
     },
     {
       "source": "/blog/top-seo-trends-2025-saas",
       "destination": "/index.html"
     },
-
     {
       "source": "/blog/seo-content-strategy-saas-2025",
-      "has": [
-        {
-          "type": "header",
-          "key": "user-agent",
-          "value": "(?i)bot|crawler|facebook|messenger|twitter|linkedin|embedly|discord|slack|whatsapp|googlebot|bingbot|pinterest|applebot|telegram|quora|skypeuripreview"
-        }
-      ],
+      "has": [{"type": "header", "key": "user-agent", "value": "(?i)bot|crawler|facebook|messenger|twitter|linkedin|embedly|discord|slack|whatsapp|googlebot|bingbot|pinterest|applebot|telegram|quora|skypeuripreview"}],
       "destination": "/prerenders/seo-content-strategy-saas-2025.html"
     },
     {
       "source": "/blog/seo-content-strategy-saas-2025",
       "destination": "/index.html"
     },
-
     {
       "source": "/blog/top-marketing-automation-tools-2025",
-      "has": [
-        {
-          "type": "header",
-          "key": "user-agent",
-          "value": "(?i)bot|crawler|facebook|messenger|twitter|linkedin|embedly|discord|slack|whatsapp|googlebot|bingbot|pinterest|applebot|telegram|quora|skypeuripreview"
-        }
-      ],
+      "has": [{"type": "header", "key": "user-agent", "value": "(?i)bot|crawler|facebook|messenger|twitter|linkedin|embedly|discord|slack|whatsapp|googlebot|bingbot|pinterest|applebot|telegram|quora|skypeuripreview"}],
       "destination": "/prerenders/top-marketing-automation-tools-2025.html"
     },
     {
       "source": "/blog/top-marketing-automation-tools-2025",
       "destination": "/index.html"
     },
-
     {
       "source": "/blog/reputation-management-saas",
-      "has": [
-        {
-          "type": "header",
-          "key": "user-agent",
-          "value": "(?i)bot|crawler|facebook|messenger|twitter|linkedin|embedly|discord|slack|whatsapp|googlebot|bingbot|pinterest|applebot|telegram|quora|skypeuripreview"
-        }
-      ],
+      "has": [{"type": "header", "key": "user-agent", "value": "(?i)bot|crawler|facebook|messenger|twitter|linkedin|embedly|discord|slack|whatsapp|googlebot|bingbot|pinterest|applebot|telegram|quora|skypeuripreview"}],
       "destination": "/prerenders/reputation-management-saas.html"
     },
     {
       "source": "/blog/reputation-management-saas",
       "destination": "/index.html"
     },
-
     {
       "source": "/blog/turn-visitors-into-leads",
-      "has": [
-        {
-          "type": "header",
-          "key": "user-agent",
-          "value": "(?i)bot|crawler|facebook|messenger|twitter|linkedin|embedly|discord|slack|whatsapp|googlebot|bingbot|pinterest|applebot|telegram|quora|skypeuripreview"
-        }
-      ],
+      "has": [{"type": "header", "key": "user-agent", "value": "(?i)bot|crawler|facebook|messenger|twitter|linkedin|embedly|discord|slack|whatsapp|googlebot|bingbot|pinterest|applebot|telegram|quora|skypeuripreview"}],
       "destination": "/prerenders/turn-visitors-into-leads.html"
     },
     {
       "source": "/blog/turn-visitors-into-leads",
       "destination": "/index.html"
     },
-
     {
       "source": "/blog/chat-automation-human-touch",
-      "has": [
-        {
-          "type": "header",
-          "key": "user-agent",
-          "value": "(?i)bot|crawler|facebook|messenger|twitter|linkedin|embedly|discord|slack|whatsapp|googlebot|bingbot|pinterest|applebot|telegram|quora|skypeuripreview"
-        }
-      ],
+      "has": [{"type": "header", "key": "user-agent", "value": "(?i)bot|crawler|facebook|messenger|twitter|linkedin|embedly|discord|slack|whatsapp|googlebot|bingbot|pinterest|applebot|telegram|quora|skypeuripreview"}],
       "destination": "/prerenders/chat-automation-human-touch.html"
     },
     {
       "source": "/blog/chat-automation-human-touch",
       "destination": "/index.html"
     },
-
     {
       "source": "/blog/landing-page-mistakes-2025",
-      "has": [
-        {
-          "type": "header",
-          "key": "user-agent",
-          "value": "(?i)bot|crawler|facebook|messenger|twitter|linkedin|embedly|discord|slack|whatsapp|googlebot|bingbot|pinterest|applebot|telegram|quora|skypeuripreview"
-        }
-      ],
+      "has": [{"type": "header", "key": "user-agent", "value": "(?i)bot|crawler|facebook|messenger|twitter|linkedin|embedly|discord|slack|whatsapp|googlebot|bingbot|pinterest|applebot|telegram|quora|skypeuripreview"}],
       "destination": "/prerenders/landing-page-mistakes-2025.html"
     },
     {
       "source": "/blog/landing-page-mistakes-2025",
       "destination": "/index.html"
     },
-
     {
       "source": "/blog/ai-in-marketing-2025",
-      "has": [
-        {
-          "type": "header",
-          "key": "user-agent",
-          "value": "(?i)bot|crawler|facebook|messenger|twitter|linkedin|embedly|discord|slack|whatsapp|googlebot|bingbot|pinterest|applebot|telegram|quora|skypeuripreview"
-        }
-      ],
+      "has": [{"type": "header", "key": "user-agent", "value": "(?i)bot|crawler|facebook|messenger|twitter|linkedin|embedly|discord|slack|whatsapp|googlebot|bingbot|pinterest|applebot|telegram|quora|skypeuripreview"}],
       "destination": "/prerenders/ai-in-marketing-2025.html"
     },
     {
       "source": "/blog/ai-in-marketing-2025",
       "destination": "/index.html"
     },
-
     {
       "source": "/blog/web-design-trends-2025",
-      "has": [
-        {
-          "type": "header",
-          "key": "user-agent",
-          "value": "(?i)bot|crawler|facebook|messenger|twitter|linkedin|embedly|discord|slack|whatsapp|googlebot|bingbot|pinterest|applebot|telegram|quora|skypeuripreview"
-        }
-      ],
+      "has": [{"type": "header", "key": "user-agent", "value": "(?i)bot|crawler|facebook|messenger|twitter|linkedin|embedly|discord|slack|whatsapp|googlebot|bingbot|pinterest|applebot|telegram|quora|skypeuripreview"}],
       "destination": "/prerenders/web-design-trends-2025.html"
     },
     {
@@ -215,19 +211,17 @@
       "destination": "/index.html"
     },
     {
-  "source": "/(og-images|screenshots|prerenders)/(.*)",
-  "destination": "/$1/$2"
-},
-{
-  "source": "/(logo\\.png|og-preview\\.jpg|favicon-.*|robots\\.txt|sitemap\\.xml|apple-touch-icon\\.png|.*\\.webmanifest)",
-  "destination": "/$1"
-},
-
-{
-  "source": "/((?!.*\\.(?:png|jpg|jpeg|svg|webp|ico|gif|css|js|json|txt|map|woff|woff2)).*)",
-  "destination": "/index.html"
-}
-
+      "source": "/(og-images|screenshots|prerenders)/(.*)",
+      "destination": "/$1/$2"
+    },
+    {
+      "source": "/(logo\\.png|og-preview\\.jpg|favicon-.*|robots\\.txt|sitemap\\.xml|apple-touch-icon\\.png|.*\\.webmanifest)",
+      "destination": "/$1"
+    },
+    {
+      "source": "/((?!.*\\.(?:png|jpg|jpeg|svg|webp|ico|gif|css|js|json|txt|map|woff|woff2)).*)",
+      "destination": "/index.html"
+    }
   ],
   "installCommand": "npm install --legacy-peer-deps",
   "buildCommand": "npm run build"

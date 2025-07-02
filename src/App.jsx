@@ -1,24 +1,22 @@
 import React, { useEffect, lazy, Suspense } from "react";
-import { Routes, Route } from "react-router-dom";
+// --- UPDATE: Add useLocation to this import ---
+import { Routes, Route, useLocation } from "react-router-dom"; 
 import AOS from "aos";
 import "aos/dist/aos.css";
 
-// Core Components
+// --- All your component imports remain exactly the same ---
 import Header from "./Components/layout/Header.jsx";
-import Hero from "./Components/pages/Hero.jsx";
+import HomePage from "./Components/pages/HomePage.jsx";
 import Services from "./Components/pages/Services.jsx";
 import Portfolio from "./Components/pages/Portfolio.jsx";
 import About from "./Components/pages/About.jsx";
 import Contact from "./Components/pages/Contact.jsx";
 import Footer from "./Components/layout/Footer.jsx";
-import ReviewWidget from "./Components/marketing/ReviewWidget.jsx";
-import PromoBanner from "./Components/layout/PromoBanner.jsx";
 import ScrollToTop from "./Components/layout/ScrollToTop.jsx";
 import DefaultLayout from "./Components/layout/DefaultLayout.jsx";
-// AI Chat Assistant
 import AIChatAssistant from "./Components/ai/AIChatAssistant.jsx";
+import OnboardingForm from "./Components/marketing/OnboardingForm.jsx";
 
-// Lazy-loaded Pages
 const Blog = lazy(() => import("./Components/blog/Blog.jsx"));
 const PostDetail = lazy(() => import("./Components/blog/PostDetail.jsx"));
 const PrivacyPolicy = lazy(() => import("./Components/pages/PrivacyPolicy.jsx"));
@@ -26,8 +24,8 @@ const TermsOfUse = lazy(() => import("./Components/pages/TermsOfUse.jsx"));
 const Pricing = lazy(() => import("./Components/pages/Pricing.jsx"));
 const ContractorLandingPage = lazy(() => import("./Components/pages/ContractorLandingPage.jsx"));
 
-// Scroll helper (scroll to an ID stored in sessionStorage)
 const ScrollToSection = () => {
+  // This component remains unchanged
   useEffect(() => {
     const scrollTo = sessionStorage.getItem("scrollTo");
     if (scrollTo) {
@@ -44,133 +42,41 @@ const ScrollToSection = () => {
 };
 
 const App = () => {
+  // --- NEW: Add this line to get the current location ---
+  const location = useLocation();
+
   useEffect(() => {
     AOS.init({ once: true, duration: 1000 });
   }, []);
 
+  // --- NEW: This useEffect hook tracks page views ---
+  useEffect(() => {
+    // Check if the gtag function exists (it's loaded from index.html)
+    if (window.gtag) {
+      // Send a pageview event to Google Analytics every time the route changes
+      window.gtag('config', 'YOUR_GA_MEASUREMENT_ID', {
+        page_path: location.pathname + location.search,
+      });
+    }
+  }, [location]); // This ensures the effect runs on every navigation change
+
   return (
+    // The rest of your App component remains exactly the same
     <main lang="en" className="bg-white text-gray-900">
+      <ScrollToTop />
       <Routes>
-        {/* Home Page */}
-        <Route
-          path="/"
-          element={
-            <DefaultLayout>
-              <Hero />
-            </DefaultLayout>
-          }
-        />
-
-        {/* Services Page */}
-        <Route
-          path="/services"
-          element={
-            <DefaultLayout>
-              <Services />
-            </DefaultLayout>
-          }
-        />
-
-        {/* Portfolio Page */}
-        <Route
-          path="/portfolio"
-          element={
-            <DefaultLayout>
-              <Portfolio />
-            </DefaultLayout>
-          }
-        />
-
-        {/* About Page */}
-        <Route
-          path="/about"
-          element={
-            <DefaultLayout>
-              <About />
-            </DefaultLayout>
-          }
-        />
-
-        {/* Contact Page */}
-        <Route
-          path="/contact"
-          element={
-            <DefaultLayout>
-              <Contact />
-            </DefaultLayout>
-          }
-        />
-
-        {/* Pricing Page */}
-        <Route
-          path="/pricing"
-          element={
-            <Suspense fallback={<div className="p-6 text-center">Loading pricing...</div>}>
-              <ScrollToTop />
-              <DefaultLayout>
-                <Pricing />
-              </DefaultLayout>
-            </Suspense>
-          }
-        />
-
-        {/* Blog List */}
-        <Route
-          path="/blog"
-          element={
-            <Suspense fallback={<div className="p-6 text-center">Loading blog...</div>}>
-              <ScrollToTop />
-              <Blog />
-              <Footer />
-              <AIChatAssistant />
-            </Suspense>
-          }
-        />
-
-        {/* Blog Detail */}
-        <Route
-          path="/blog/:slug"
-          element={
-            <Suspense fallback={<div className="p-6 text-center">Loading post...</div>}>
-              <ScrollToTop />
-              <Header />
-              <PostDetail />
-              <Footer />
-              <AIChatAssistant />
-            </Suspense>
-          }
-        />
-
-        {/* Static Pages */}
-        <Route
-          path="/privacy-policy"
-          element={
-            <Suspense fallback={<div className="p-6 text-center">Loading policy...</div>}>
-              <ScrollToTop />
-              <PrivacyPolicy />
-            </Suspense>
-          }
-        />
-        <Route
-          path="/terms-of-use"
-          element={
-            <Suspense fallback={<div className="p-6 text-center">Loading terms...</div>}>
-              <ScrollToTop />
-              <TermsOfUse />
-            </Suspense>
-          }
-        />
-
-        {/* Contractor Landing Page */}
-        <Route
-          path="/contractors"
-          element={
-            <Suspense fallback={<div className="p-6 text-center">Loading landing page...</div>}>
-              <ScrollToTop />
-              <ContractorLandingPage />
-            </Suspense>
-          }
-        />
+        <Route path="/" element={<DefaultLayout><HomePage /></DefaultLayout>} />
+        <Route path="/services" element={<DefaultLayout><Services /></DefaultLayout>} />
+        <Route path="/portfolio" element={<DefaultLayout><Portfolio /></DefaultLayout>} />
+        <Route path="/about" element={<DefaultLayout><About /></DefaultLayout>} />
+        <Route path="/contact" element={<DefaultLayout><Contact /></DefaultLayout>} />
+        <Route path="/pricing" element={<Suspense fallback={<div>Loading...</div>}><DefaultLayout><Pricing /></DefaultLayout></Suspense>} />
+        <Route path="/blog" element={<Suspense fallback={<div>Loading...</div>}><Blog /><Footer /><AIChatAssistant /></Suspense>} />
+        <Route path="/blog/:slug" element={<Suspense fallback={<div>Loading...</div>}><Header /><PostDetail /><Footer /><AIChatAssistant /></Suspense>} />
+        <Route path="/privacy-policy" element={<Suspense fallback={<div>Loading...</div>}><PrivacyPolicy /></Suspense>} />
+        <Route path="/terms-of-use" element={<Suspense fallback={<div>Loading...</div>}><TermsOfUse /></Suspense>} />
+        <Route path="/contractors" element={<Suspense fallback={<div>Loading...</div>}><ContractorLandingPage /></Suspense>} />
+        <Route path="/onboarding" element={<DefaultLayout><OnboardingForm /></DefaultLayout>} />
       </Routes>
     </main>
   );

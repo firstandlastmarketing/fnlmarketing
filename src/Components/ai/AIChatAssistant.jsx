@@ -2,8 +2,33 @@ import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Send, Bot, XCircle, User, Sparkles } from "lucide-react";
 import chatSound from "../../assets/chat-open.mp3";
-import ChatLeadCaptureForm from "../marketing/ChatLeadCaptureForm.jsx";
 import ReactMarkdown from "react-markdown";
+
+// This would be your actual component import
+// import ChatLeadCaptureForm from "../marketing/ChatLeadCaptureForm.jsx";
+
+// MOCK FORM COMPONENT FOR DEMONSTRATION - Replace with your actual import
+const ChatLeadCaptureForm = ({ onSubmit }) => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (name && email) {
+      onSubmit({ name, email, message: 'Lead captured from Jacob.' });
+    }
+  };
+  return (
+    <form onSubmit={handleSubmit} className="bg-white p-4 rounded-lg border border-gray-200 text-sm">
+      <p className="font-bold text-gray-800 mb-2">Let's get you a quote. Please provide your details:</p>
+      <div className="space-y-2">
+        <input type="text" placeholder="Your Name" value={name} onChange={e => setName(e.target.value)} required className="w-full p-2 border rounded" />
+        <input type="email" placeholder="Your Email" value={email} onChange={e => setEmail(e.target.value)} required className="w-full p-2 border rounded" />
+        <button type="submit" className="w-full bg-purple-700 text-white font-bold p-2 rounded hover:bg-purple-800">Submit</button>
+      </div>
+    </form>
+  );
+};
+
 
 // ===> ENHANCEMENT: A new, animated "typing" indicator component.
 const TypingIndicator = () => (
@@ -34,7 +59,6 @@ const TypingIndicator = () => (
 );
 
 export default function AIChatAssistant() {
-  // All state and core logic functions are sound. No changes needed here.
   const [messages, setMessages] = useState(() => {
     try {
       const saved = localStorage.getItem("fnl-chat-messages");
@@ -49,15 +73,32 @@ export default function AIChatAssistant() {
   const apiBase = import.meta.env.VITE_API_BASE_URL || "";
   const [showHint, setShowHint] = useState(false);
 
+  // ===> UPGRADE: Logic for the repeating, cycling hint bubble.
   useEffect(() => {
-    const hintTimeout = setTimeout(() => {
-      if (!isOpen) setShowHint(true);
-    }, 5000);
-    return () => clearTimeout(hintTimeout);
-  }, [isOpen]);
+    if (isOpen) {
+      setShowHint(false);
+      return;
+    }
 
-  useEffect(() => {
-    if (isOpen) setShowHint(false);
+    const initialDelay = 5000; // 5 seconds before the first hint
+    const hintVisibleDuration = 6000; // Hint stays visible for 6 seconds
+    const cycleInterval = 20000; // Repeats every 20 seconds (6s visible + 14s hidden)
+
+    let intervalId;
+    const startCycle = () => {
+      setShowHint(true);
+      setTimeout(() => setShowHint(false), hintVisibleDuration);
+    };
+    
+    const initialTimeoutId = setTimeout(() => {
+      startCycle();
+      intervalId = setInterval(startCycle, cycleInterval);
+    }, initialDelay);
+
+    return () => {
+      clearTimeout(initialTimeoutId);
+      if (intervalId) clearInterval(intervalId);
+    };
   }, [isOpen]);
 
   useEffect(() => {
@@ -78,7 +119,7 @@ export default function AIChatAssistant() {
 
   const toggleChat = () => {
     setIsOpen(open => {
-      if (!open && audioRef.current) audioRef.current.play();
+      if (!open && audioRef.current) audioRef.current.play().catch(() => {}); // Play sound, ignore errors
       return !open;
     });
   };
@@ -131,7 +172,6 @@ export default function AIChatAssistant() {
       });
       if (!res.ok) throw new Error("Failed to send lead information.");
       const data = await res.json();
-      // Replace the form in the chat history with the confirmation message
       setMessages(p => {
         const newMessages = p.filter(msg => msg.content !== "FORM_TRIGGER_SIGNAL");
         return [...newMessages, { role: "assistant", content: data.reply }];
@@ -147,17 +187,23 @@ export default function AIChatAssistant() {
     <div className="fixed z-[9999] bottom-4 right-4 sm:bottom-6 sm:right-6">
       <audio ref={audioRef} src={chatSound} preload="auto" />
 
-      {/* ===> UPGRADE 1: The Attention-Grabbing Widget & Hint Bubble */}
+      {/* ===> UPGRADE: The captivating, animated, and cycling hint bubble */}
       <AnimatePresence>
         {showHint && !isOpen && (
           <motion.div
             initial={{ opacity: 0, y: 10, scale: 0.9 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 10, scale: 0.9 }}
-            transition={{ duration: 0.3 }}
-            className="absolute bottom-full right-0 mb-3 w-48 bg-gradient-to-br from-purple-800 via-blue-800 to-purple-900 text-white p-3 rounded-xl shadow-2xl border border-white/20"
+            animate={{ opacity: 1, y: [0, -5, 0], scale: 1 }}
+            exit={{ opacity: 0, y: 10, scale: 0.9, transition: { duration: 0.2 } }}
+            transition={{ 
+              duration: 0.3, 
+              y: { duration: 2, repeat: Infinity, ease: 'easeInOut' }
+            }}
+            className="absolute bottom-full right-0 mb-3 w-52 bg-gradient-to-br from-purple-800 via-blue-800 to-purple-900 text-white p-3 rounded-xl shadow-2xl shadow-purple-500/20 border border-white/20"
           >
-            <p className="text-sm font-semibold leading-tight">Got a question? Ask Jacob!</p>
+            <div className="flex items-center gap-2">
+              <Sparkles className="w-5 h-5 text-yellow-300 flex-shrink-0" />
+              <p className="text-sm font-semibold leading-tight">Got a question? Ask Jacob!</p>
+            </div>
             <div className="absolute right-4 -bottom-2 w-4 h-4 bg-purple-900 transform rotate-45" />
           </motion.div>
         )}
@@ -176,7 +222,7 @@ export default function AIChatAssistant() {
         <Bot className="text-white w-8 h-8" />
       </motion.button>
 
-      {/* ===> UPGRADE 2: The Stunning, Fully Responsive Chat Window */}
+      {/* ===> UPGRADE: The stunning, fully responsive chat window */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -206,7 +252,6 @@ export default function AIChatAssistant() {
             {/* Chat History Area */}
             <div className="flex-1 p-4 flex flex-col gap-y-6 overflow-y-auto">
               {messages.map((msg, i) => (
-                 // ===> FIX: The critical logic to reliably render the form.
                 msg.role === "assistant" && msg.content === "FORM_TRIGGER_SIGNAL" ? (
                   <ChatLeadCaptureForm key={i} onSubmit={handleLeadFormSubmit} />
                 ) : (
@@ -216,7 +261,7 @@ export default function AIChatAssistant() {
                       {msg.role === "user" ? <User className="w-5 h-5 text-white" /> : <Bot className="w-5 h-5 text-yellow-300" />}
                     </div>
 
-                    {/* Message Bubble with Speech-Bubble Tail */}
+                    {/* Message Bubble */}
                     <div className={`max-w-[80%] rounded-2xl px-4 py-2.5 shadow-md text-sm sm:text-base ${msg.role === "user" ? "bg-blue-600 text-white rounded-br-lg" : "bg-white text-gray-800 rounded-bl-lg"}`}>
                       <ReactMarkdown
                         components={{
