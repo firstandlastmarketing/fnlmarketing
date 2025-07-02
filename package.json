@@ -10,7 +10,6 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "postbuild": "node ./scripts/generate-sitemap.js",
     "preview": "vite preview"
   },
   "dependencies": {
