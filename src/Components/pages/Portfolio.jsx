@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import ReactPlayer from "react-player/youtube"; // Optimized import for YouTube
+import ReactPlayer from "react-player/youtube";
 import { Dialog } from "@headlessui/react";
-import { X, Star } from "lucide-react";
+import { X, CheckCircle } from "lucide-react"; // Replaced Star with a more genuine icon
 import ExplorePricingCTA from '../marketing/ExplorePricingCTA.jsx';
 
 // Import your assets
@@ -9,46 +9,61 @@ import ecClinicDesktop from "../../assets/ec-clinic-desktop-website.png";
 import fnlHero from "../../assets/fnlmarketing-hero-section.png";
 import carolinsKitchenScreenshot from "../../assets/carolins-kitchen-screenshot.png";
 
-// --- Data remains the same, no changes needed here ---
-const portfolioProjects = [
+// --- NEW, HONEST & ENHANCED DATA STRUCTURE ---
+// This data is reframed to showcase capabilities, not fabricated client results.
+const projectShowcaseData = [
   {
-    src: ecClinicDesktop,
-    alt: "Springfield Missouri healthcare website design - E&C Clinic desktop layout",
-    title: "E&C Clinic - Website Redesign",
-    description: "A clean, trust-building layout tailored for patient-focused navigation and lead generation.",
-    industry: "Healthcare / Medical",
-    caseStudy: {
-      challenge: "E&C Clinic needed a modern, HIPAA-compliant site to establish digital credibility and allow easy appointment bookings.",
-      solution: "We built a fully responsive, SEO-optimized website using React + Tailwind. The layout is tailored for accessibility and quick patient actions.",
-      result: "Bounce rate dropped by 43% and mobile engagement increased by 71% within 60 days post-launch.",
-    },
-  },
-  {
-    src: carolinsKitchenScreenshot,
-    alt: "Dominican catering website design for Carolin’s Kitchen in Springfield Missouri",
-    title: "Carolin’s Kitchen - Website",
-    description: "Authentic Dominican food site with modern layout, vivid visuals, and SEO-optimized UX.",
-    industry: "Food & Beverage / Catering",
-    caseStudy: {
-      challenge: "Carolin’s Kitchen needed a vibrant online presence that captures cultural authenticity and helps drive catering inquiries.",
-      solution: "We designed a stunning, responsive website using React + Tailwind, featuring bold food imagery, an inviting color palette, and SEO-optimized sections with strong CTAs.",
-      result: "The site consistently receives praise for its professional layout, increases user time-on-site, and actively converts visitors into catering leads.",
-    },
-  },
-  {
+    id: "fnl-marketing",
     src: fnlHero,
     alt: "First and Last Marketing website hero section with strategic branding and conversion UX",
-    title: "First & Last Marketing - Hero Section",
-    description: "Our own site showcases modern design, fast-loading UI, and lead-gen best practices.",
-    industry: "Marketing / Web Design",
-    caseStudy: {
-      challenge: "Our brand needed a site that reflects authority, speed, and conversion mastery.",
-      solution: "We developed a fast, fully SEO-ready homepage featuring interactive CTAs, trust-building stats, and scroll-based engagement.",
-      result: "Average visit duration is over 3 minutes, and our hero converts visitors into leads at 11.4%.",
+    title: "First & Last Marketing - Our Flagship Site",
+    category: "Our Live Production Site",
+    showcaseDetails: {
+      objective: "To build a cutting-edge website that serves as a living demonstration of our capabilities in modern design, high-speed performance, and intelligent lead generation.",
+      features: [
+        "Custom-coded from scratch for peak performance and security.",
+        "Advanced animations and micro-interactions using Framer Motion.",
+        "Integrated with a live AI Assistant (like this one) to showcase our automation skills.",
+        "Conversion-focused UI/UX with high Google PageSpeed scores."
+      ],
+      techStack: ["React", "Vite", "Tailwind CSS", "Framer Motion", "Node.js"],
+    },
+  },
+  {
+    id: "ec-clinic",
+    src: ecClinicDesktop,
+    alt: "Springfield Missouri healthcare website design - E&C Clinic desktop layout",
+    title: "E&C Clinic - Healthcare Web App Concept",
+    category: "Design & Capability Showcase",
+    showcaseDetails: {
+      objective: "To demonstrate our ability to create clean, professional, and trustworthy websites for service-based industries where user confidence is paramount.",
+      features: [
+        "Designed with HIPAA-compliant principles in mind.",
+        "User-centric navigation focused on clear calls-to-action (e.g., booking appointments).",
+        "WCAG accessibility principles applied for a user-friendly experience for all.",
+        "A clean, mobile-first layout that builds patient trust from the first click."
+      ],
+      techStack: ["React", "Vite", "CSS Modules"],
+    },
+  },
+  {
+    id: "carolins-kitchen",
+    src: carolinsKitchenScreenshot,
+    alt: "Dominican catering website design for Carolin’s Kitchen in Springfield Missouri",
+    title: "Carolin’s Kitchen - Visual Brand Showcase",
+    category: "Design & Capability Showcase",
+    showcaseDetails: {
+      objective: "This project was built to showcase our expertise in creating visually rich, vibrant websites for brands where aesthetics and product presentation are key.",
+      features: [
+        "Visually-driven storytelling that makes the product the hero.",
+        "Optimized image loading for a fast yet beautiful experience.",
+        "A simple and effective lead capture form for catering inquiries.",
+        "A warm, inviting color palette and layout to reflect the brand's personality."
+      ],
+      techStack: ["JavaScript (ES6+)", "HTML5", "CSS Grid & Flexbox"],
     },
   },
 ];
-
 
 const Portfolio = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -61,69 +76,79 @@ const Portfolio = () => {
 
   const closeModal = () => {
     setIsOpen(false);
-    // Add a small delay to allow the closing animation to finish before clearing data
     setTimeout(() => setSelected(null), 300);
   };
+
+  // --- Our Genuine Value Propositions (Replaces Fake Testimonials) ---
+  const valuePropositions = [
+    {
+      id: "vp-01",
+      statement: "We Build Assets, Not Expenses.",
+      elaboration: "A website from us is a permanent, high-performance asset that you own completely. It's an investment in your growth, not a recurring rental fee on a generic template."
+    },
+    {
+      id: "vp-02",
+      statement: "Clarity from Code to Conversation.",
+      elaboration: "We believe in transparency. Our code is clean and scalable, our pricing is upfront, and our communication is direct. You will always know what you're getting and why."
+    },
+  ];
 
   return (
     <section
       id="portfolio"
-      className="relative py-16 sm:py-20 text-white isolate" // <-- isolate creates new stacking context
+      className="relative py-16 sm:py-20 text-white isolate"
     >
-      {/* BACKGROUND FIX: This will now render correctly behind the content */}
+      {/* BACKGROUND AND OVERLAY (Unchanged, as requested) */}
       <div className="absolute inset-0 -z-10" aria-hidden="true">
         <div className="absolute inset-0 bg-gradient-to-r from-purple-900 via-blue-900 to-yellow-700" />
         <div className="absolute inset-0 bg-black/50" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
+        {/* HEADER - Reframed for authenticity */}
         <header className="text-center mb-12 md:mb-20" data-aos="fade-up">
           <h1 className="text-4xl md:text-5xl font-extrabold text-yellow-400 mb-4 drop-shadow-lg">
-            Our Work
+            Our Craft & Capabilities
           </h1>
           <p className="text-gray-200 text-lg max-w-3xl mx-auto">
-            We build high-performance websites for small businesses, focusing on speed, SEO, and converting visitors into customers.
+            We don't use templates. We build high-performance, custom-coded websites that are fast, secure, and engineered to convert.
           </p>
         </header>
 
-        {/* --- NEW: ENHANCED FEATURED PROJECT LAYOUT --- */}
+        {/* FEATURED SHOWCASE - Now honest and capability-focused */}
         <article className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center mb-20 md:mb-28" data-aos="fade-up">
-          {/* Video Player */}
           <div className="aspect-video w-full rounded-xl overflow-hidden shadow-2xl border-2 border-purple-600/50">
             <ReactPlayer
               url="https://youtu.be/jKC4e1612eM"
               width="100%"
               height="100%"
               controls
-              light={true} // Shows a preview image for faster load times
+              light={true}
               playing={true}
               volume={0.5}
               title="E&C Clinic Healthcare Website Redesign by First and Last Marketing"
             />
           </div>
-          {/* Case Study Details */}
           <div className="flex flex-col justify-center">
-            <h2 className="text-sm font-bold uppercase tracking-wider text-yellow-400 mb-2">Featured Project</h2>
-            <h3 className="text-3xl lg:text-4xl font-bold text-white mb-3">E&C Clinic Healthcare Site</h3>
+            <h2 className="text-sm font-bold uppercase tracking-wider text-yellow-400 mb-2">Featured Showcase</h2>
+            <h3 className="text-3xl lg:text-4xl font-bold text-white mb-3">Healthcare Web App Concept</h3>
             <p className="text-gray-300 mb-6 lg:text-lg">
-              We transformed a dated medical site into a sleek, HIPAA-compliant lead-generation machine that builds patient trust from the first click.
+              This project demonstrates our ability to create a sleek, professional, and user-friendly interface for the healthcare industry, prioritizing trust and ease-of-use.
             </p>
             <div className="space-y-4 border-l-4 border-purple-500 pl-4">
               <div>
-                <h4 className="font-semibold text-white">Challenge</h4>
-                <p className="text-gray-400 text-sm">Establish digital credibility and streamline appointment booking.</p>
+                <h4 className="font-semibold text-white">Objective</h4>
+                <p className="text-gray-400 text-sm">To showcase a modern, accessible design that establishes digital credibility and streamlines patient interactions.</p>
               </div>
               <div>
-                <h4 className="font-semibold text-white">Result</h4>
-                <p className="text-gray-400 text-sm">43% drop in bounce rate and 71% increase in mobile engagement within 60 days.</p>
+                <h4 className="font-semibold text-white">Demonstrated Skills</h4>
+                <p className="text-gray-400 text-sm">User-centric navigation, responsive design, conversion-focused layout, and an emphasis on accessibility.</p>
               </div>
             </div>
           </div>
         </article>
 
-
-        {/* --- NEW: ENHANCED PROJECT GRID --- */}
+        {/* PROJECT SHOWCASE GRID */}
         <section
           aria-labelledby="more-work"
           className="mb-20 md:mb-28"
@@ -131,12 +156,12 @@ const Portfolio = () => {
           data-aos-delay="100"
         >
           <h2 id="more-work" className="text-3xl font-bold text-white mb-10 text-center">
-            More From Our Portfolio
+            More From Our Showcase
           </h2>
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {portfolioProjects.map((item, index) => (
+            {projectShowcaseData.map((item) => (
               <figure
-                key={index}
+                key={item.id}
                 className="group relative rounded-xl overflow-hidden shadow-lg h-80 cursor-pointer"
                 onClick={() => openModal(item)}
               >
@@ -150,7 +175,7 @@ const Portfolio = () => {
                 <figcaption className="absolute inset-0 flex flex-col justify-end p-6 text-white">
                   <h3 className="text-xl font-bold text-yellow-300 mb-1">{item.title}</h3>
                   <p className="text-sm text-gray-200 opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 ease-in-out">
-                    Click to see the case study
+                    Click to view details
                   </p>
                 </figcaption>
               </figure>
@@ -158,41 +183,27 @@ const Portfolio = () => {
           </div>
         </section>
 
-        {/* --- NEW: CLIENT TESTIMONIALS SECTION (ACTION REQUIRED) --- */}
-        <section aria-labelledby="testimonials-heading" className="mb-20 md:mb-28" data-aos="fade-up">
-            <h2 id="testimonials-heading" className="text-3xl font-bold text-center text-white mb-10">Imagine Your Customers <span className="text-yellow-400">Raving About You...</span></h2>
+        {/* --- NEW: OUR COMMITMENT SECTION (Replaces fake testimonials with genuine promises) --- */}
+        <section aria-labelledby="commitment-heading" className="mb-20 md:mb-28" data-aos="fade-up">
+            <h2 id="commitment-heading" className="text-3xl font-bold text-center text-white mb-10">Our Commitment to <span className="text-yellow-400">Your Success</span></h2>
             <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
-                {/* WHAT TO DO: Replace this placeholder with a real client testimonial */}
-                <figure className="bg-purple-950/60 rounded-lg p-6 flex flex-col">
-                    <div className="flex text-yellow-400 mb-4">
-                        <Star /><Star /><Star /><Star /><Star />
-                    </div>
-                    <blockquote className="text-gray-200 italic flex-grow">
-                        "First and Last Marketing delivered a website that not only looks incredible but also performs. Our online inquiries have doubled since the launch. Their process was seamless and professional."
-                    </blockquote>
-                    <figcaption className="mt-4 pt-4 border-t border-purple-400/20">
-                        <p className="font-semibold text-white">Jane Doe</p>
-                        <p className="text-sm text-gray-400">Owner, Carolin's Kitchen</p>
-                    </figcaption>
-                </figure>
-                {/* WHAT TO DO: You can add a second testimonial here by duplicating the <figure> block above */}
-                 <figure className="bg-purple-950/60 rounded-lg p-6 flex flex-col">
-                    <div className="flex text-yellow-400 mb-4">
-                        <Star /><Star /><Star /><Star /><Star />
-                    </div>
-                    <blockquote className="text-gray-200 italic flex-grow">
-                        "The team is incredibly knowledgeable about SEO and local search. They got us on the map, literally. We've seen a noticeable increase in foot traffic from customers who found us online."
-                    </blockquote>
-                    <figcaption className="mt-4 pt-4 border-t border-purple-400/20">
-                        <p className="font-semibold text-white">Dr. John Smith</p>
-                        <p className="text-sm text-gray-400">E&C Clinic</p>
-                    </figcaption>
-                </figure>
+                {valuePropositions.map((vp) => (
+                    <figure key={vp.id} className="bg-purple-950/60 rounded-lg p-6 flex flex-col border border-purple-400/20">
+                        <div className="text-green-400 mb-4">
+                            <CheckCircle className="w-8 h-8" />
+                        </div>
+                        <blockquote className="text-gray-200 text-lg font-semibold flex-grow">
+                            "{vp.statement}"
+                        </blockquote>
+                        <figcaption className="mt-4 pt-4 border-t border-purple-400/20">
+                            <p className="text-gray-300">{vp.elaboration}</p>
+                        </figcaption>
+                    </figure>
+                ))}
             </div>
         </section>
 
-
-        {/* Modal (Dialog) - Styling improved, logic is the same */}
+        {/* MODAL (DIALOG) - Now displays honest showcase data */}
         <Dialog open={isOpen} onClose={closeModal} className="relative z-50">
           <div className="fixed inset-0 bg-black/70 backdrop-blur-sm" aria-hidden="true" />
           <div className="fixed inset-0 flex w-screen items-center justify-center p-4">
@@ -208,22 +219,27 @@ const Portfolio = () => {
                 <>
                   <img src={selected.src} alt={selected.alt} className="w-full h-auto rounded-md mb-6 shadow-lg"/>
                   <header className="mb-6">
-                    <p className="text-sm font-bold uppercase tracking-wider text-yellow-400 mb-1">{selected.industry}</p>
+                    <p className="text-sm font-bold uppercase tracking-wider text-yellow-400 mb-1">{selected.category}</p>
                     <Dialog.Title as="h3" className="text-3xl font-bold text-white mb-2">{selected.title}</Dialog.Title>
-                    <p className="text-gray-300">{selected.description}</p>
                   </header>
                   <section className="space-y-6 bg-black/20 p-6 rounded-lg">
                     <div>
-                      <h4 className="text-lg font-semibold text-purple-300">Challenge</h4>
-                      <p className="text-gray-300">{selected.caseStudy.challenge}</p>
+                      <h4 className="text-lg font-semibold text-purple-300">Objective</h4>
+                      <p className="text-gray-300">{selected.showcaseDetails.objective}</p>
                     </div>
                     <div>
-                      <h4 className="text-lg font-semibold text-purple-300">Solution</h4>
-                      <p className="text-gray-300">{selected.caseStudy.solution}</p>
+                      <h4 className="text-lg font-semibold text-purple-300">Key Features Demonstrated</h4>
+                      <ul className="list-disc list-inside text-gray-300 space-y-1">
+                        {selected.showcaseDetails.features.map((feature, i) => <li key={i}>{feature}</li>)}
+                      </ul>
                     </div>
-                    <div>
-                      <h4 className="text-lg font-semibold text-purple-300">Results</h4>
-                      <p className="text-gray-300">{selected.caseStudy.result}</p>
+                     <div>
+                      <h4 className="text-lg font-semibold text-purple-300">Technology Stack</h4>
+                      <div className="flex flex-wrap gap-2 mt-2">
+                        {selected.showcaseDetails.techStack.map((tech, i) => (
+                           <span key={i} className="bg-gray-700 text-gray-200 text-xs font-medium px-2.5 py-1 rounded-full">{tech}</span>
+                        ))}
+                      </div>
                     </div>
                   </section>
                 </>
@@ -232,11 +248,11 @@ const Portfolio = () => {
           </div>
         </Dialog>
 
-        {/* Footer CTA */}
+        {/* FOOTER CTA (Unchanged) */}
         <footer className="mt-16 text-center">
           <ExplorePricingCTA
-            label="Ready for Results Like These?"
-            className="text-lg" // Let the component handle its own styling, just pass a size modifier if needed
+            label="Ready to See This Quality in Your Project?"
+            className="text-lg"
           />
         </footer>
       </div>

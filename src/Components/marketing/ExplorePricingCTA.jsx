@@ -7,7 +7,7 @@ const ExplorePricingCTA = ({ className, label = 'Explore Pricing' }) => {
   return (
     <button
       onClick={() => navigate('/pricing')}
-      className={`bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-full transition duration-200 whitespace-nowrap ${className || ''}`}
+      className={`bg-yellow-500 hover:bg-yellow-600 text-white font-extrabold px-4 py-2 rounded-full transition duration-200 whitespace-nowrap ${className || ''}`}
       type="button"
     >
       {label}

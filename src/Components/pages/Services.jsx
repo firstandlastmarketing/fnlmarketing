@@ -32,6 +32,29 @@ const FaqItem = ({ question, answer }) => {
     </div>
   );
 };
+const ScrollIndicator = ({ targetId }) => {
+  const handleScroll = () => {
+    const element = document.getElementById(targetId);
+    if (element) {
+      // Smoothly scrolls the top of the target section to the top of the viewport
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
+  return (
+    <div className="absolute bottom-6 left-1/2 -translate-x-1/2">
+      <button
+        onClick={handleScroll}
+        className="animate-bounce z-40 group"
+        aria-label="Scroll to next section"
+      >
+        <div className="w-8 h-12 rounded-full border-2 border-white/50 flex justify-center items-start pt-2.5 transition-colors group-hover:border-white">
+            <div className="w-1.5 h-1.5 bg-white rounded-full" />
+        </div>
+      </button>
+    </div>
+  );
+};
 
 // --- RESTORED & ENHANCED SERVICE DATA (Unchanged) ---
 const servicesData = [
@@ -169,15 +192,16 @@ const servicesData = [
 // The component is in src/components/Pages, images are in src/assets.
 // The relative path is `../../assets/services_slides/`.
 // We use `new URL(path, import.meta.url).href` to make sure the bundler finds and includes the images correctly.
+// INSERT THIS NEW ARRAY
 const slideData = [
-  { imgSrc: new URL('../../assets/services_slides/web-design-result.png', import.meta.url).href, title: "Web Design", result: "60% Increase in Demo Requests" },
-  { imgSrc: new URL('../../assets/services_slides/web-hosting-result.png', import.meta.url).href, title: "Secure Hosting", result: "80% Faster Load Times" },
-  { imgSrc: new URL('../../assets/services_slides/reputation-management-result.png', import.meta.url).href, title: "Reputation Management", result: "From 3.2 to 4.8 Stars" },
-  { imgSrc: new URL('../../assets/services_slides/database-reactivation-result.png', import.meta.url).href, title: "Database Reactivation", result: "Generated $42k in 1 Month" },
-  { imgSrc: new URL('../../assets/services_slides/email-sms-automation-result.png', import.meta.url).href, title: "Automation", result: "28% Increase in Sales" },
-  { imgSrc: new URL('../../assets/services_slides/ai-chatbots-result.png', import.meta.url).href, title: "AI Chatbots", result: "3x More Leads Captured" },
-  { imgSrc: new URL('../../assets/services_slides/social-schedulers-result.png', import.meta.url).href, title: "Social Scheduling", result: "60% Higher Engagement" },
-  { imgSrc: new URL('../../assets/services_slides/blog-development-result.png', import.meta.url).href, title: "Blog Strategy", result: "150% More Organic Traffic" },
+  { src: "https://res.cloudinary.com/duaxifuiq/image/upload/v1751581365/web-design-result_rdftpa.png", alt: "Stunning web design project screenshot" },
+  { src: "https://res.cloudinary.com/duaxifuiq/image/upload/v1751581367/web-hosting-result_uelteo.png", alt: "Secure web hosting dashboard" },
+  { src: "https://res.cloudinary.com/duaxifuiq/image/upload/v1751581360/reputation-management-result_d2tlpx.png", alt: "Online reputation management results graph" },
+  { src: "https://res.cloudinary.com/duaxifuiq/image/upload/v1751581353/database-reactivation-result_yzs61n.png", alt: "Database reactivation campaign performance" },
+  { src: "https://res.cloudinary.com/duaxifuiq/image/upload/v1751581358/email-sms-automation-result_hpxut9.png", alt: "Email and SMS automation workflow" },
+  { src: "https://res.cloudinary.com/duaxifuiq/image/upload/v1751581376/ai-chatbots-result_yzdkia.png", alt: "AI chatbot conversation interface" },
+  { src: "https://res.cloudinary.com/duaxifuiq/image/upload/v1751581370/social-schedulers-result_j4jlco.png", alt: "Social media scheduling calendar" },
+  { src: "https://res.cloudinary.com/duaxifuiq/image/upload/v1751581373/blog-development-result_ykcxf0.png", alt: "SEO-optimized blog article" }
 ];
 
 const achievementStats = [
@@ -228,134 +252,116 @@ const Services = () => {
         <div className="absolute inset-0 bg-black/40" />
       </div>
 
-      <section className="bg-transparent">
-  {/* -- COMPACT HERO TEXT ABOVE SLIDESHOW -- */}
-  <div className="text-center max-w-xl sm:max-w-2xl lg:max-w-3xl mx-auto px-4 sm:px-6 mb-2 sm:mb-3">
-    <motion.h1
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-className="text-2xl sm:text-3xl md:text-4xl font-black text-white drop-shadow"
-    >
-      Solutions That{" "}
-      <TypeAnimation
-        sequence={[
-          'Drive Growth', 2000,
-          'Convert Leads', 2000,
-          'Elevate Brands', 2000,
-          'Drive Growth', 2000
-        ]}
-        wrapper="span"
-        speed={50}
-        repeat={Infinity}
-        className="text-yellow-400"
-      />
-    </motion.h1>
-    <motion.p
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-      className="text-xs text-gray-300 max-w-md mx-auto my-2"
-    >
-      From stunning websites to intelligent automation, our services are engineered to turn your vision into measurable results.
-    </motion.p>
+                  {/* --- START OF HERO SECTION FIX --- */}
+<section id="services-hero" className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-10 lg:pt-12 pb-24 sm:pb-28 lg:pb-32">
+  {/* FIX: Switched from Flexbox to CSS Grid for precise layout control. */}
+  {/* This creates a single column on mobile, and a 12-column grid on desktop. */}
+  <div className="grid grid-cols-1 lg:grid-cols-12 gap-y-12 lg:gap-x-16 items-center">
+
+    {/* BLOCK 1: Header & Description */}
+    {/* FIX: This is now a standalone grid item. */}
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-      className="flex flex-col sm:flex-row items-center justify-center gap-2"
+      initial="hidden"
+      animate="visible"
+      variants={{ visible: { transition: { staggerChildren: 0.15 } } }}
+      // On mobile: A standard grid item.
+      // On desktop: Spans the first 5 columns of the grid.
+      className="lg:col-span-5 text-center lg:text-left"
     >
-      <button
-        // onClick={() => setShowQuoteModal(true)}
-        className="w-full sm:w-auto bg-yellow-400 text-purple-900 font-bold py-1.5 px-3 text-xs sm:text-sm rounded-full shadow hover:bg-yellow-500 transition-all"
+      <motion.h1
+        variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } } }}
+        className="text-4xl sm:text-5xl font-extrabold text-white [text-wrap:balance] leading-tight"
+      >
+        Solutions That
+        <br />
+        {" "}
+        <TypeAnimation
+          sequence={['Drive Growth.', 2000, 'Convert Leads.', 2000, 'Elevate Brands.', 2000]}
+          wrapper="span" speed={40} repeat={Infinity} className="text-yellow-400"
+        />
+      </motion.h1>
+      <motion.p
+        variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } } }}
+        className="mt-4 max-w-xl mx-auto lg:mx-0 text-lg text-gray-300 [text-wrap:balance]"
+      >
+        From stunning websites to intelligent automation, our services are engineered to turn your vision into measurable results.
+      </motion.p>
+    </motion.div>
+
+    {/* BLOCK 2: Right Visuals Block (Slideshow & Stats) */}
+    {/* FIX: This is a standalone grid item. */}
+    <motion.div
+      initial="hidden"
+      animate="visible"
+      variants={{ visible: { transition: { staggerChildren: 0.15 } } }}
+      // On mobile: Appears after the text block due to source order.
+      // On desktop: Spans columns 6-12 and occupies two vertical rows to align correctly.
+      className="w-full lg:col-span-7 lg:row-span-2"
+    >
+      <motion.div
+        variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } } }}
+        className="relative w-full aspect-video overflow-hidden rounded-xl shadow-2xl"
+      >
+        <AnimatePresence>
+          <motion.img
+            key={activeIndex}
+            src={slideData[activeIndex].src}
+            alt={slideData[activeIndex].alt}
+            className="absolute inset-0 w-full h-full object-cover"
+            initial={{ opacity: 0, scale: 1.05 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.5, ease: 'easeInOut' }}
+          />
+        </AnimatePresence>
+        <div className="absolute inset-0 z-20 flex items-center justify-between px-2">
+          <button onClick={prevSlide} aria-label="Previous slide" className="bg-black/30 text-white p-2 rounded-full hover:bg-black/50 transition focus:outline-none">
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+          <button onClick={nextSlide} aria-label="Next slide" className="bg-black/30 text-white p-2 rounded-full hover:bg-black/50 transition focus:outline-none">
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        </div>
+      </motion.div>
+      <motion.div
+        variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } } }}
+        className="w-full mt-8"
+      >
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center bg-white/5 backdrop-blur-sm p-4 rounded-xl border border-white/10">
+          {achievementStats.map((stat) => (
+            <div key={stat.label}>
+              <p className="text-3xl md:text-4xl font-bold text-yellow-400">{stat.value}</p>
+              <p className="mt-1 text-xs text-gray-300 tracking-wider uppercase">{stat.label}</p>
+            </div>
+          ))}
+        </div>
+      </motion.div>
+    </motion.div>
+    
+    {/* BLOCK 3: CTA Buttons Block */}
+    {/* FIX: This is now a standalone grid item, appearing last on mobile. */}
+    <motion.div
+      variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } } }}
+      // On mobile: Appears third due to source order.
+      // On desktop: Spans the first 5 columns and automatically goes to the second row.
+      className="lg:col-span-5 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 w-full"
+    >
+      <Link
+        to="/contact"
+        className="inline-block w-full sm:w-auto bg-yellow-500 text-black font-bold px-8 py-3 text-center rounded-full shadow-lg transition-transform transform hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-white/50"
       >
         Get Started
-      </button>
-      <button
-        // onClick={() => navigate('/pricing')}
-        className="w-full sm:w-auto bg-white/10 text-white font-medium text-xs sm:text-sm py-1.5 px-3 rounded-full border border-white/20 hover:bg-white/20 transition-all backdrop-blur"
+      </Link>
+      <Link
+        to="/pricing"
+        className="inline-block w-full sm:w-auto border border-white/50 text-white hover:bg-white/10 font-medium px-8 py-3 rounded-full text-center transition-all focus:outline-none focus:ring-4 focus:ring-white/50"
       >
-        View Services
-      </button>
+        Explore Our Prices
+      </Link>
     </motion.div>
+    
   </div>
-
-  {/* -- SLIDESHOW BELOW -- */}
-  <div className="relative w-full mx-auto max-w-4xl aspect-[16/9] overflow-hidden rounded-lg shadow-xl">
-    <AnimatePresence initial={false}>
-      <motion.div
-        key={activeIndex}
-        className="absolute inset-0 w-full h-full"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 1, ease: 'easeInOut' }}
-      >
-        <img
-          src={slideData[activeIndex].imgSrc}
-          alt={slideData[activeIndex].title}
-          className="w-full h-full object-cover"
-        />
-      </motion.div>
-    </AnimatePresence>
-
-    {/* Caption */}
-    <div className="absolute top-2 left-2 sm:top-3 sm:left-3 z-30">
-      <AnimatePresence>
-        <motion.p
-          key={activeIndex}
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 10 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="bg-black/40 text-white text-[10px] sm:text-xs font-semibold py-0.5 px-2 rounded-full backdrop-blur-sm"
-        >
-          {slideData[activeIndex].title}
-        </motion.p>
-      </AnimatePresence>
-    </div>
-
-    {/* Dark Overlay */}
-    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent" />
-
-    {/* Navigation Buttons (INSIDE SLIDE FRAME) */}
-    <div className="absolute inset-0 z-20 flex items-center justify-between px-2">
-      <button
-        onClick={prevSlide}
-        aria-label="Previous slide"
-        className="bg-black/30 text-white p-1 rounded-full hover:bg-black/50 transition focus:outline-none"
-      >
-        <ChevronLeft className="w-5 h-5" />
-      </button>
-      <button
-        onClick={nextSlide}
-        aria-label="Next slide"
-        className="bg-black/30 text-white p-1 rounded-full hover:bg-black/50 transition focus:outline-none"
-      >
-        <ChevronRight className="w-5 h-5" />
-      </button>
-    </div>
-  </div>
-
-  {/* -- ACHIEVEMENT STATS -- */}
-  <div className="max-w-3xl mx-auto px-4 sm:px-6 -mt-6 sm:-mt-8">
-    <div className="bg-gray-800/60 backdrop-blur-lg border border-white/10 rounded-lg shadow-2xl p-3 sm:p-4">
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-y-4 gap-x-2 text-center">
-        {achievementStats.map((stat) => (
-          <motion.div
-            key={stat.label}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-            viewport={{ once: true }}
-          >
-            <p className="text-xl sm:text-2xl font-bold text-yellow-400">{stat.value}</p>
-            <p className="mt-0.5 text-[11px] sm:text-xs text-gray-300">{stat.label}</p>
-          </motion.div>
-        ))}
-      </div>
-    </div>
-  </div>
+  <ScrollIndicator targetId="our-services" />
 </section>
       {/* --- END OF HERO SECTION FIX --- */}
 

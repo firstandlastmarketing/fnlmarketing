@@ -71,19 +71,27 @@ const Header = () => {
               className="hidden [@media(min-width:975px)]:flex items-center space-x-4 xl:space-x-6 flex-grow justify-center"
               aria-label="Main navigation"
             >
-              {navlinks.map((link, index) => (
-                <Link
-                  key={index}
-                  to={link.to}
-                  className={`text-sm xl:text-base ${
-                    link.label === "Pricing"
-                      ? "text-white hover:text-yellow-400 animate-glow-pulse font-semibold"
-                      : "text-white hover:text-yellow-400"
-                  } transition-colors duration-200 whitespace-nowrap`}
-                >
-                  {link.label}
-                </Link>
-              ))}
+              {navlinks.map((link, index) => {
+                const isActive = location.pathname === link.to;
+                return (
+                  <Link
+                    key={index}
+                    to={link.to}
+                    className={`text-sm xl:text-base font-bold tracking-wide px-2 py-1 transition-colors duration-200 whitespace-nowrap
+          ${isActive
+            ? "text-yellow-400"
+            : "text-white hover:text-yellow-400"}
+          ${link.label === "Pricing" ? "animate-glow-pulse" : ""}
+        `}
+                    style={{
+                      borderBottomWidth: isActive ? "2px" : undefined,
+                      borderColor: isActive ? "#f59e42" : undefined, // yellow-500
+                    }}
+                  >
+                    {link.label}
+                  </Link>
+                );
+              })}
             </nav>
 
             {/* Desktop CTA */}
@@ -95,7 +103,7 @@ const Header = () => {
                 Explore Pricing
               </button>
             </div>
-
+            
             {/* Hamburger Button */}
             <button
               className="[@media(min-width:975px)]:hidden p-2 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 rounded"
@@ -131,28 +139,36 @@ const Header = () => {
             <aside className="[@media(min-width:975px)]:hidden relative z-10 shadow-lg p-4">
               <nav aria-label="Mobile menu">
                 <ul className="flex flex-col space-y-4">
-                  {navlinks.map((link, index) => (
-                    <li key={index}>
-                      <Link
-                        to={link.to}
-                        className={`block py-2 transition ${
-                          link.label === "Pricing"
-                            ? "text-white hover:text-yellow-400 font-semibold animate-glow-pulse"
-                            : "text-white hover:text-yellow-400"
-                        }`}
-                        onClick={toggleMenu}
-                      >
-                        {link.label}
-                      </Link>
-                    </li>
-                  ))}
+                  {navlinks.map((link, index) => {
+                    const isActive = location.pathname === link.to;
+                    return (
+                      <li key={index}>
+                        <Link
+                          to={link.to}
+                          className={`block py-2 font-bold tracking-wide transition
+                  ${isActive
+                    ? "text-yellow-400"
+                    : "text-white hover:text-yellow-400"}
+                  ${link.label === "Pricing" ? "animate-glow-pulse" : ""}
+                `}
+                          style={{
+                            borderBottomWidth: isActive ? "2px" : undefined,
+                            borderColor: isActive ? "#f59e42" : undefined, // yellow-500
+                          }}
+                          onClick={toggleMenu}
+                        >
+                          {link.label}
+                        </Link>
+                      </li>
+                    );
+                  })}
                   <li>
                     <button
                       onClick={() => {
                         setIsMenuOpen(false); // close menu on click
                         navigate("/pricing");
                       }}
-                      className="block w-full bg-yellow-500 hover:bg-yellow-600 text-white text-center px-4 py-2 rounded-full transition"
+                      className="block w-auto bg-yellow-500 hover:bg-yellow-600 text-white text-center px-4 py-2 rounded-full transition"
                     >
                       Explore Pricing
                     </button>
