@@ -5,34 +5,30 @@ import { motion, AnimatePresence } from 'framer-motion';
 import ContractorPricingModal from '../modals/ContractorPricingModal.jsx';
 
 // ICONS
-// CORRECT
 import { ArrowRightIcon, CheckCircleIcon, XCircleIcon, ChevronLeftIcon, ChevronRightIcon, StarIcon, ChevronDownIcon } from '@heroicons/react/24/solid';
 import { WrenchScrewdriverIcon, UsersIcon, ChatBubbleLeftRightIcon, ChartBarIcon, ServerStackIcon, SparklesIcon, ShieldCheckIcon, PhoneIcon, BuildingStorefrontIcon, UserGroupIcon } from '@heroicons/react/24/outline';
 
-// LOGO - Ensure you have a version of your logo that works on dark backgrounds (e.g., white or monochrome)
+// LOGO - This import is untouched as it was not part of the build error.
 import logo from '../../assets/logo.png'; 
 
-// ===[ SLIDESHOW IMAGES (ALL 8) ]==============================================
-import hvacImage from '../../assets/landing_page_slides/first-last-marketing-web-design-springfield-mo-hvac-company-website-screenshot.png';
-import plumbingImage from '../../assets/landing_page_slides/first-last-marketing-web-design-springfield-mo-plumbing-service-website-screenshot.png';
-import electricalImage from '../../assets/landing_page_slides/first-last-marketing-web-design-springfield-mo-electrical-website-screenshot.png';
-import roofingImage from '../../assets/landing_page_slides/first-last-marketing-web-design-springfield-mo-roofing-company-website-screenshot.png';
-import pestControlImage from '../../assets/landing_page_slides/first-last-marketing-web-design-springfield-mo-pest-control-website-screenshot.png';
-import landscapingImage from '../../assets/landing_page_slides/first-last-marketing-web-design-springfield-mo-landscaping-website-screenshot.png';
-import cleaningImage from '../../assets/landing_page_slides/first-last-marketing-web-design-springfield-mo-cleaning-service-website-screenshot.png';
-import remodelingImage from '../../assets/landing_page_slides/first-last-marketing-web-design-springfield-mo-home-remodeling-website-screenshot.png';
+// ===[ SLIDESHOW IMAGES ]======================================================
+// FIX: The entire block of local image imports that caused the build error has been removed.
 
 //===[ DATA STRUCTURES ]=========================================================
+
+// FIX: The 'slides' array now uses the correct CDN URLs, resolving the error. Your captions and alt text are preserved.
 const slides = [
-  { src: hvacImage, caption: "For HVAC Specialists", alt: "Desktop screenshot of a modern HVAC company website in Springfield MO, showcasing live chat, online scheduling, and positive customer reviews; designed to convert leads for heating and cooling businesses by First & Last Marketing." },
-  { src: plumbingImage, caption: "For Plumbers", alt: "Screenshot of a high-converting plumbing service website in Springfield MO, featuring emergency contact info, customer testimonials, and an email signup for lead generation by First & Last Marketing." },
-  { src: electricalImage, caption: "For Electricians", alt: "Modern electrical services website screenshot for Springfield MO, highlighting smart home automation, EV charger installation, and online reputation management; built by First & Last Marketing." },
-  { src: remodelingImage, caption: "For Home Remodelers", alt: "Aspirational home remodeling website screenshot for Springfield MO, showcasing a 'Before & After' gallery and clear design consultation prompts; built to inspire and convert new projects by First & Last Marketing." },
-  { src: roofingImage, caption: "For Roofers", alt: "Professional roofing company website screenshot for Springfield MO, displaying a project gallery, warranty information, and a clear call-to-action for free estimates; designed for high-conversion by First & Last Marketing." },
-  { src: pestControlImage, caption: "For Pest Control Experts", alt: "Clean pest control website screenshot for Springfield MO, with a live chat widget, service plan options, and customer testimonials; optimized for lead capture by First & Last Marketing." },
-  { src: landscapingImage, caption: "For Landscapers", alt: "Stunning landscaping and lawn care website screenshot for Springfield MO, featuring a prominent project gallery and intuitive online booking; created to attract and convert clients by First & Last Marketing." },
-  { src: cleaningImage, caption: "For Cleaning Services", alt: "Bright cleaning services website screenshot for Springfield MO, showing an easy online booking system, transparent pricing, and positive customer reviews; developed for recurring revenue by First & Last Marketing." },
+  { src: "https://res.cloudinary.com/duaxifuiq/image/upload/v1751581339/first-last-marketing-web-design-springfield-mo-hvac-company-website-screenshot_baotwk.png", caption: "For HVAC Specialists", alt: "Desktop screenshot of a modern HVAC company website in Springfield MO, showcasing live chat, online scheduling, and positive customer reviews; designed to convert leads for heating and cooling businesses by First & Last Marketing." },
+  { src: "https://res.cloudinary.com/duaxifuiq/image/upload/v1751581346/first-last-marketing-web-design-springfield-mo-plumbing-service-website-screenshot_rtriqc.png", caption: "For Plumbers", alt: "Screenshot of a high-converting plumbing service website in Springfield MO, featuring emergency contact info, customer testimonials, and an email signup for lead generation by First & Last Marketing." },
+  { src: "https://res.cloudinary.com/duaxifuiq/image/upload/v1751581335/first-last-marketing-web-design-springfield-mo-electrical-website-screenshot_v6vvq6.png", caption: "For Electricians", alt: "Modern electrical services website screenshot for Springfield MO, highlighting smart home automation, EV charger installation, and online reputation management; built by First & Last Marketing." },
+  { src: "https://res.cloudinary.com/duaxifuiq/image/upload/v1751581344/first-last-marketing-web-design-springfield-mo-home-remodeling-website-screenshot_o5dpl7.png", caption: "For Home Remodelers", alt: "Aspirational home remodeling website screenshot for Springfield MO, showcasing a 'Before & After' gallery and clear design consultation prompts; built to inspire and convert new projects by First & Last Marketing." },
+  { src: "https://res.cloudinary.com/duaxifuiq/image/upload/v1751581349/first-last-marketing-web-design-springfield-mo-roofing-company-website-screenshot_xqvhsh.png", caption: "For Roofers", alt: "Professional roofing company website screenshot for Springfield MO, displaying a project gallery, warranty information, and a clear call-to-action for free estimates; designed for high-conversion by First & Last Marketing." },
+  { src: "https://res.cloudinary.com/duaxifuiq/image/upload/v1751581342/first-last-marketing-web-design-springfield-mo-pest-control-website-screenshot_pfmqy6.png", caption: "For Pest Control Experts", alt: "Clean pest control website screenshot for Springfield MO, with a live chat widget, service plan options, and customer testimonials; optimized for lead capture by First & Last Marketing." },
+  { src: "https://res.cloudinary.com/duaxifuiq/image/upload/v1751581356/first-last-marketing-web-design-springfield-mo-landscaping-website-screenshot_gthvmz.png", caption: "For Landscapers", alt: "Stunning landscaping and lawn care website screenshot for Springfield MO, featuring a prominent project gallery and intuitive online booking; created to attract and convert clients by First & Last Marketing." },
+  { src: "https://res.cloudinary.com/duaxifuiq/image/upload/v1751581333/first-last-marketing-web-design-springfield-mo-cleaning-service-website-screenshot_eua1pm.png", caption: "For Cleaning Services", alt: "Bright cleaning services website screenshot for Springfield MO, showing an easy online booking system, transparent pricing, and positive customer reviews; developed for recurring revenue by First & Last Marketing." },
 ];
+
+// All other data structures are untouched and preserved.
 const coreServices = [
     { icon: <WrenchScrewdriverIcon />, title: 'Pro Web Design & Dev', description: 'Blazing-fast, mobile-perfect websites designed to convert visitors into paying customers. Your 24/7 digital salesperson.' },
     { icon: <ShieldCheckIcon />, title: '5-Star Reputation Mgmt', description: 'Our system automatically gets reviews from happy customers, building a powerful 5-star reputation that makes you the obvious choice.' },

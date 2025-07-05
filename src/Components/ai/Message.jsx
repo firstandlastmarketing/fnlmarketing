@@ -34,7 +34,7 @@ const Message = ({ msg }) => {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' } },
   };
-
+  
   return (
     <motion.div
       variants={bubbleVariants}
@@ -52,7 +52,7 @@ const Message = ({ msg }) => {
           isUser
             ? 'bg-blue-600 text-white rounded-br-none'
             : 'bg-white text-gray-800 rounded-bl-none'
-        }`}
+        }break-words`}
       >
         <ReactMarkdown components={markdownComponents}>{msg.content || ''}</ReactMarkdown>
       </div>
